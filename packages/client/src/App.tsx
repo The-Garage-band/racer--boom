@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import Button from '@mui/material/Button'
 import './App.css'
 
 function App() {
@@ -12,7 +13,11 @@ function App() {
 
     fetchServerData()
   }, [])
-  return <div className="App">Вот тут будет жить ваше приложение :)</div>
+  return (
+    <div className="App">
+      <Button variant="contained">Hello World</Button>
+    </div>
+  )
 }
 
-export default App
+export default App;
