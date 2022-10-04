@@ -1,4 +1,4 @@
-import {CanvasComponent} from "../../components/CanvasComponent";
+import {CanvasComponent} from "@/components/CanvasComponent";
 import {FC} from "react";
 
 type GamePageProps = {

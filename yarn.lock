@@ -2976,11 +2976,16 @@
   "resolved" "file:packages/client"
   "version" "0.0.0"
   dependencies:
+    "@emotion/react" "^11.10.4"
+    "@emotion/styled" "^11.10.4"
+    "@mui/material" "^5.10.8"
     "dotenv" "^16.0.2"
     "eslint-config-prettier" "^8.5.0"
     "prettier" "^2.7.1"
     "react" "^18.2.0"
     "react-dom" "^18.2.0"
+    "react-router" "^6.4.1"
+    "react-router-dom" "^6.4.1"
 
 "cliui@^7.0.2":
   "integrity" "sha512-OcRE68cOsVMXp1Yvonl/fzkQOyjLSu/8bhPDfQt0e0/Eb283TKP20Fs2MqoPsr9SwA595rRCA+QMzYc9nBP+JQ=="
@@ -5301,6 +5306,11 @@
   "integrity" "sha512-eTIzlVOSUR+JxdDFepEYcBMtZ9Qqdef+rnzWdRZuMbOywu5tO2w2N7rqjoANZ5k9vywhL6Br1VRjUIgTQx4E8w=="
   "resolved" "https://registry.npmjs.org/kleur/-/kleur-3.0.3.tgz"
   "version" "3.0.3"
+
+"lefthook-windows-x64@1.1.1":
+  "integrity" "sha512-zOI1iCnc5U7LS7nHj2raneeviSYHLXzgksrV7Ain+W1F6bYpS+1k5PqCQuLfEspsQYfJGiJo1SeueIcoIzqtiQ=="
+  "resolved" "https://registry.npmjs.org/lefthook-windows-x64/-/lefthook-windows-x64-1.1.1.tgz"
+  "version" "1.1.1"
 
 "lefthook@^1.1.1":
   "integrity" "sha512-IRhJHWEwLlN+FHJnIBamgaIcr53C4iskN+uZ3yzqhoFcaO7kWtmzW3DIPCB48mzlCIOFnjfPvVLX0SyPdkWQCw=="
