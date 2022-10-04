@@ -14,7 +14,12 @@ function App() {
 
     fetchServerData()
   }, [])
-  return <GamePage w={100}/>
+  return (
+      <div className="App">
+        <Button variant="contained">Hello World</Button>
+        <GamePage w={100}/>
+      </div>
+  )
 }
 
 export default App;
