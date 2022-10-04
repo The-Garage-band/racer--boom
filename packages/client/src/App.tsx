@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import Button from '@mui/material/Button'
 import './App.css'
 import {GamePage} from "./pages/GamePage";
 
@@ -16,4 +17,4 @@ function App() {
   return <GamePage w={100}/>
 }
 
-export default App
+export default App;
