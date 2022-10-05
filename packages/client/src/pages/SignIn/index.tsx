@@ -1,6 +1,6 @@
 import { Box, OutlinedInput, InputLabel, InputAdornment, FormControl, Link, Button} from '@mui/material';
 import { EmailOutlined, LockOutlined } from '@mui/icons-material';
-import PageLayout from '@/hocs/page-layout';
+import PageLayout from '../../hocs/page-layout';
 
 const SignInPage = () => {
   return (
