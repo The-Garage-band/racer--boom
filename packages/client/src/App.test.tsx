@@ -2,7 +2,7 @@
 import App from './App'
 import { render, screen } from '@testing-library/react'
 
-const appContent = 'Sign In'
+const appContent = 'Вход'
 
 // @ts-ignore
 global.fetch = jest.fn(() =>
