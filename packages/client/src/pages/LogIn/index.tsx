@@ -12,9 +12,7 @@ const SignInPage = () => {
           label="Логин"
           type="text"
           name="login"
-          icon={
-            <EmailOutlined color="secondary" />
-          }
+          Icon={ EmailOutlined }
           sx={{
             marginBottom: '1rem'
           }}
@@ -23,9 +21,7 @@ const SignInPage = () => {
           label="Пароль"
           type="password"
           name="password"
-          icon={
-            <LockOutlined color="secondary" />
-          }
+          Icon={ LockOutlined }
           sx={{
             marginBottom: '1rem'
           }}

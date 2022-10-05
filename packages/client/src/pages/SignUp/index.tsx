@@ -12,9 +12,7 @@ const SignInPage = () => {
           label="Имя"
           type="text"
           name="first_name"
-          icon={
-            <Person2Outlined color="secondary" />
-          }
+          Icon={ Person2Outlined }
           sx={{
             marginBottom: '1rem'
           }}
@@ -23,9 +21,7 @@ const SignInPage = () => {
           label="Фамилия"
           type="text"
           name="second_name"
-          icon={
-            <Person2Outlined color="secondary" />
-          }
+          Icon={ Person2Outlined }
           sx={{
             marginBottom: '1rem'
           }}
@@ -34,9 +30,7 @@ const SignInPage = () => {
           label="Email"
           type="email"
           name="email"
-          icon={
-            <EmailOutlined color="secondary" />
-          }
+          Icon={ EmailOutlined}
           sx={{
             marginBottom: '1rem'
           }}
@@ -45,9 +39,7 @@ const SignInPage = () => {
           label="Телефон"
           type="text"
           name="phone"
-          icon={
-            <CallOutlined color="secondary" />
-          }
+          Icon={ CallOutlined}
           sx={{
             marginBottom: '1rem'
           }}
@@ -56,9 +48,7 @@ const SignInPage = () => {
           label="Логин"
           type="text"
           name="login"
-          icon={
-            <LoginOutlined color="secondary" />
-          }
+          Icon={ LoginOutlined }
           sx={{
             marginBottom: '1rem'
           }}
@@ -67,9 +57,7 @@ const SignInPage = () => {
           label="Пароль"
           type="password"
           name="password"
-          icon={
-            <PasswordOutlined color="secondary" />
-          }
+          Icon={ PasswordOutlined }
           sx={{
             marginBottom: '1rem'
           }}
