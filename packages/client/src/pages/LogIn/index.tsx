@@ -1,49 +1,40 @@
-import { Box, OutlinedInput, InputLabel, InputAdornment, FormControl, Link, Button} from '@mui/material';
+import { Box, Link, Button} from '@mui/material';
 import { EmailOutlined, LockOutlined } from '@mui/icons-material';
 import PageLayout from '../../hocs/page-layout';
+import Input from '../../components/Input';
 
 const SignInPage = () => {
   return (
     <PageLayout>
       <Box className="form">
-        <h1 className="form__title">Вход</h1>
-        <FormControl variant="outlined" fullWidth focused sx={{
-          marginBottom: '1rem'
-        }}>
-          <InputLabel htmlFor="input-login">
-            Логин
-          </InputLabel>
-          <OutlinedInput
-            id="input-login"
-            type="text"
-            startAdornment={
-              <InputAdornment position="start">
-                <EmailOutlined color="secondary" />
-              </InputAdornment>
-            }
-          />
-        </FormControl>
-        <FormControl variant="outlined" fullWidth focused sx={{
-          marginBottom: '1rem'
-        }}>
-          <InputLabel htmlFor="input-login">
-            Пароль
-          </InputLabel>
-          <OutlinedInput
-            id="input-login"
-            type="password"
-            startAdornment={
-              <InputAdornment position="start">
-                <LockOutlined color="secondary" />
-              </InputAdornment>
-            }
-          />
-        </FormControl>
+        <h1 className="form__title">Авторизация</h1>
+        <Input
+          label="Логин"
+          type="text"
+          name="login"
+          icon={
+            <EmailOutlined color="secondary" />
+          }
+          sx={{
+            marginBottom: '1rem'
+          }}
+        />
+        <Input
+          label="Пароль"
+          type="password"
+          name="password"
+          icon={
+            <LockOutlined color="secondary" />
+          }
+          sx={{
+            marginBottom: '1rem'
+          }}
+        />
         <Box sx={{
           display: 'flex',
           justifyContent: 'flex-end',
           width: '100%',
-          marginBottom: '1rem'
+          marginBottom: '3rem'
         }}>
           <Link href="#" color="secondary">Забыли пароль?</Link>
         </Box>
