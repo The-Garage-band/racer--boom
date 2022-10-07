@@ -1,5 +1,6 @@
 import { Button } from '@mui/material';
 import { EmailOutlined, PasswordOutlined, LoginOutlined, CallOutlined, Person2Outlined } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
 
 import PageLayout from '../../hocs/page-layout';
 import Input from '../../components/Input';
@@ -9,6 +10,8 @@ import { useFormik } from 'formik';
 import { signup, ISignUp } from '../../API/AuthApi';
 
 const SignInPage = () => {
+  const navigate = useNavigate();
+
   const formik = useFormik({
     initialValues: {
       first_name: '',
@@ -19,13 +22,17 @@ const SignInPage = () => {
       phone: '',
     },
     validationSchema,
-    onSubmit: (values: ISignUp) => signup(values).then((payload) => {
-      console.log('payload', payload)
-        // if (payload.status === 200) {
-        //     history.push('/sign_in');
-        // }
-    }),
-});
+    onSubmit: (values: ISignUp) => signup(values)
+      .then((payload) => {
+        console.log('payload', payload)
+        if (payload.status === 200) {
+            navigate('/sign_in');
+        }
+      })
+      .catch((error) => {
+        console.log('error request', error);
+      })
+  });
 
   return (
     <PageLayout>
