@@ -1,0 +1,73 @@
+@import "src/styles/colors";
+
+#game-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background-color: @dark-bg-color;
+  height: 100vh;
+
+  span {
+    font-family: 'Inter', serif;
+    font-style: normal;
+    font-weight: 400;
+    text-align: center;
+    color: #FFFFFF;
+  }
+
+  .header {
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 100vw;
+    top: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    .healths {
+      position: absolute;
+      left: 30px;
+      z-index: 20;
+
+      img {
+        width: 95px;
+        height: 95px;
+      }
+    }
+
+    .timer {
+      .value {
+        font-size: 90px;
+        line-height: 109px;
+      }
+    }
+    .score {
+      position: absolute;
+      right: 30px;
+      .value {
+        font-size: 50px;
+        line-height: 61px;
+      }
+    }
+  }
+
+  .content {
+    flex-grow: 1;
+    width: 800px;
+    border-right: 2px solid #15FFF1;
+    border-left: 2px solid #15FFF1;
+    box-shadow: 0px 4px 53px rgba(60, 193, 193, 0.51), inset 0px 4px 100px rgba(60, 193, 193, 0.2);
+    border-image-source: linear-gradient(0deg, #15FFF1, #15FFF1), linear-gradient(0deg, rgba(60, 193, 193, 0.87), rgba(60, 193, 193, 0.87));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .game-canvas {
+
+    }
+  }
+}
