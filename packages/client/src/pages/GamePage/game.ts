@@ -8,13 +8,7 @@ export function startRacing(){
 		constructor(image: Image, y: number) {
 			this.x = 0;
 			this.y = y;
-			this.isLoaded = false;
-			this.image = new Image();
-			
-			let object = this;
-			this.image.addEventListener("load", function() { 
-				object.isLoaded = true; 
-			});
+			this.image = new Image();			
 			this.image.src = image;
 		}
 
@@ -32,7 +26,6 @@ export function startRacing(){
 		constructor(image: Image, x: number, y: number, isPlayer: boolean, scores: number, isPolice: boolean, lives: number) {
 			this.x = x;
 			this.y = y;
-			this.isLoaded = false;
 			this.needDelete = false;
 			this.isPlayer = isPlayer;
 			this.scores = scores;
@@ -40,13 +33,6 @@ export function startRacing(){
 			this.isPolice = isPolice;
 
 			this.image = new Image();
-
-			let obj = this;
-
-			this.image.addEventListener("load", function() { 
-				obj.isLoaded = true; 
-			});
-
 			this.image.src = image;
 		}
 
@@ -139,11 +125,11 @@ export function startRacing(){
 		roads[1].Update(roads[0]);
 
 		//машинки и монетки
-		let objRandom = gererateRandom(0, 10000);
+		const objRandom = gererateRandom(0, 10000);
 		if (objRandom > 9000) {
 
-			let objX = gererateRandom(30, canvas.width - 50);
-			let objY = - gererateRandom(250, 400);
+			const objX = gererateRandom(30, canvas.width - 50);
+			const objY = - gererateRandom(250, 400);
 			let isPush = true;
 
 			//Проверяем, чтобы не вставали друг на друга
@@ -188,7 +174,7 @@ export function startRacing(){
 			reStartGame();
 		}
 
-		let needDelete: boolean = false; 
+		let needDelete = false; 
 
 		for (let i = 0; i < gameObjects.length; i++) {
 			gameObjects[i].Update();
@@ -202,7 +188,7 @@ export function startRacing(){
 			gameObjects.shift();
 		}
 
-		let isCrash: boolean = false;
+		let isCrash = false;
 
 		for (let i = 0; i < gameObjects.length; i++) {
 			isCrash = playerCar.Crash(gameObjects[i]);
@@ -288,7 +274,7 @@ export function startRacing(){
 
 	function keyDownClick(e: any): void {
 
-		let speedDifferent = 2;
+		const speedDifferent = 2;
 
 		switch(e.keyCode) {
 			case 37: 
@@ -328,7 +314,7 @@ export function startRacing(){
 	}
 
 	function gererateRandom(min: number, max: number): number {
-		let rand = min - 0.5 + Math.random() * (max - min + 1);
+		const rand = min - 0.5 + Math.random() * (max - min + 1);
 		return Math.round(rand);
 	}
 
@@ -341,26 +327,26 @@ export function startRacing(){
 
 	let gameTimer: any = null, gameScoresCounter: any = null;
 
-	let gameScores: number = 0, gameLives: number = 3; //Очки и жизни
+	let gameScores = 0, gameLives = 3; //Очки и жизни
 
-	let canvas: HTMLElement | null = document.getElementById("game-canvas");
+	const canvas: HTMLElement | null = document.getElementById("game-canvas");
 	
 	if (!canvas){
 		return;
 	}
 
-	let canvasContext: any = canvas.getContext("2d");
+	const canvasContext: any = canvas.getContext("2d");
 
-	let objIncrease: number = 0.075; //Размеры
-	let speed: number = 4.2; //Скорость
-	let playerStartPositionYCoeff: number = 1.25;
+	let objIncrease = 0.075; //Размеры
+	const speed = 4.2; //Скорость
+	const playerStartPositionYCoeff = 1.25;
 
 	resizeGameCanvas();
 	window.addEventListener("resize", resizeGameCanvas);
 
-	let canWidth: number = canvas.width;
-	let canHeight: number = canvas.height;
-	let canvasDiagonal: number = (Math.sqrt(canWidth*canWidth + canHeight*canHeight)).toFixed(2);
+	const canWidth: number = canvas.width;
+	const canHeight: number = canvas.height;
+	const canvasDiagonal: number = (Math.sqrt(canWidth*canWidth + canHeight*canHeight)).toFixed(2);
 
 	objIncrease = (canvasDiagonal/9426).toFixed(2);
 	//speed = (canHeight/120).toFixed(2);
@@ -380,13 +366,13 @@ export function startRacing(){
 	if (canHeight > canWidth){
 		roadY = canHeight;
 	}
-	let roads = [
+	const roads = [
 		new Road("public/game/doroga.jpg", 0),
 		new Road("public/game/doroga.jpg", roadY)
 	];
 
 	let playerCar: GameObject = new GameObject("public/game/my-car.png", canWidth / 2, canHeight / playerStartPositionYCoeff, true, 0, false, 0); //Наша машинка
-	console.log(playerCar)
+	//console.log(playerCar)
 	let gameObjects = []; //Прочие объекты
 
 	startGame();
