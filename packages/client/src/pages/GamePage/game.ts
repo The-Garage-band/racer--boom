@@ -1,0 +1,394 @@
+
+//typescript
+
+export function startRacing(){
+
+	//Дорога
+	class Road {
+		constructor(image: Image, y: number) {
+			this.x = 0;
+			this.y = y;
+			this.isLoaded = false;
+			this.image = new Image();
+			
+			let object = this;
+			this.image.addEventListener("load", function() { 
+				object.isLoaded = true; 
+			});
+			this.image.src = image;
+		}
+
+		Update(road: Road): void {
+			this.y += speed;
+
+			if (this.y > window.innerHeight) {
+				this.y = road.y - canvas.width + speed;
+			}
+		}
+	}
+
+	//Авто и прочее
+	class GameObject {
+		constructor(image: Image, x: number, y: number, isPlayer: boolean, scores: number, isPolice: boolean, lives: number) {
+			this.x = x;
+			this.y = y;
+			this.isLoaded = false;
+			this.needDelete = false;
+			this.isPlayer = isPlayer;
+			this.scores = scores;
+			this.lives = lives;
+			this.isPolice = isPolice;
+
+			this.image = new Image();
+
+			let obj = this;
+
+			this.image.addEventListener("load", function() { 
+				obj.isLoaded = true; 
+			});
+
+			this.image.src = image;
+		}
+
+		Update(): void {
+			if (!this.isPlayer) {
+				this.y += speed;
+			}
+
+			if (this.y > canvas.height + 50) {
+				this.needDelete = true;
+			}
+		}
+
+		//Обработка столкновений
+		Crash(car: GameObject): boolean {
+			return checkCarCollision(this, car);
+		}
+
+		//Перемещение
+		Move(v: string, d: string): void  {
+			if (v == "x") {
+				//Горизонталь
+				d *= 5;
+
+				this.x += d;
+
+				if (this.x + this.image.width * objIncrease > canvas.width) {
+					this.x -= d; 
+				}
+		
+				if (this.x < 0) {
+					this.x = 0;
+				}
+			} else {
+				//Вертикаль
+				this.y += d;
+
+				if (this.y + this.image.height * objIncrease > canvas.height) {
+					this.y -= d;
+				}
+
+				if (this.y < 0) {
+					this.y = 0;
+				}
+			}
+			
+		}
+	}
+
+	function checkCarCollision(firstCar: GameObject, secondCar: GameObject): boolean{
+		if (firstCar.y < secondCar.y + secondCar.image.height * objIncrease && firstCar.y + firstCar.image.height * objIncrease > secondCar.y) {
+			//Вертикаль
+			if (firstCar.x + firstCar.image.width * objIncrease > secondCar.x && firstCar.x < secondCar.x + secondCar.image.width * objIncrease) {
+				//Горизонталь
+				return true;
+			}
+		}
+		return false;
+	}
+
+
+	function startGame(): void {
+		if (!playerCar.needDelete) {
+			gameTimer = setInterval(updateGame, UPDATE_TIME);
+			gameScoresCounter = setInterval(updateGameScores, 1000);
+		} else {
+			reStartGame();
+		}
+	}
+
+	function reStartGame(): void {
+		stopGame();
+		playerCar.needDelete = false;
+		gameObjects = [];
+		playerCar = new GameObject("public/game/my-car.png", canvas.width / 2, canvas.height / 1.25, true, 0, false, 0);
+		startGame();
+	}
+
+	function stopGame(): void {
+		clearInterval(gameTimer);
+		clearInterval(gameScoresCounter);
+		gameScores = 0;
+		gameLives = 3;
+		gameTimer = null;
+		gameScoresCounter = null;
+	}
+
+	function updateGame(): void {
+		roads[0].Update(roads[1]);
+		roads[1].Update(roads[0]);
+
+		//машинки и монетки
+		let objRandom = gererateRandom(0, 10000);
+		if (objRandom > 9000) {
+
+			let objX = gererateRandom(30, canvas.width - 50);
+			let objY = - gererateRandom(250, 400);
+			let isPush = true;
+
+			//Проверяем, чтобы не вставали друг на друга
+			gameObjects.forEach(function(item) {
+				if (item.y < objY + item.image.height * objIncrease && item.y + item.image.height * objIncrease > objY) {
+					//Вертикаль
+					if (item.x + item.image.width * objIncrease > objX && item.x < objX + item.image.width * objIncrease) {
+						//Горизонталь
+						isPush = false;
+					}
+				}
+			});
+
+			if (isPush){
+
+				//Монетка
+				if ((objRandom > 9000) && (objRandom < 9600)){
+					gameObjects.push(new GameObject("public/game/coin.png", objX, objY, false, 10, false, 0));
+				}
+
+				//Серая машинка
+				if ((objRandom > 9600) && (objRandom < 9900) ){
+					gameObjects.push(new GameObject("public/game/grey-car.png", objX, objY, false, 0, false, 0));
+				}
+
+				//Полиция
+				if ((objRandom > 9900) && (objRandom < 9970)) {
+					gameObjects.push(new GameObject("public/game/police-car.png", objX, objY, false, 0, true, 0));
+				}
+
+				//Жизнь
+				if ((objRandom > 9970)){
+					gameObjects.push(new GameObject("public/game/live.png", objX, objY, false, 0, false, 1));
+				}
+			}
+		}
+
+		playerCar.Update();
+
+		if (playerCar.needDelete) {
+			alert("Game over!");
+			reStartGame();
+		}
+
+		let needDelete: boolean = false; 
+
+		for (let i = 0; i < gameObjects.length; i++) {
+			gameObjects[i].Update();
+
+			if (gameObjects[i].needDelete) {
+				needDelete = true;
+			}
+		}
+
+		if (needDelete) {
+			gameObjects.shift();
+		}
+
+		let isCrash: boolean = false;
+
+		for (let i = 0; i < gameObjects.length; i++) {
+			isCrash = playerCar.Crash(gameObjects[i]);
+
+			if (isCrash) {
+				//Монетки
+				if (gameObjects[i].scores){
+					gameScores = gameScores + gameObjects[i].scores;
+					gameObjects.splice(i, 1);
+				} else {
+
+					//Жизни
+					if (gameObjects[i].lives){
+						gameLives = gameLives + gameObjects[i].lives;
+						gameObjects.splice(i, 1);
+						break;
+					}
+
+					//Машинки
+					if (gameObjects[i].isPolice || (gameLives <= 0)){
+						gameLives = 0;
+						playerCar.needDelete = true;
+						setLives();
+						alert("Game over!");			
+						reStartGame();
+						break;
+					} else {
+						gameLives--;
+						gameObjects.splice(i, 1);
+					}
+					
+				}
+			}
+		}
+
+		drawGame();
+	}
+
+	function updateGameScores(): void{
+		gameScores++;
+	}
+
+	//Рисуем
+	function drawGame(): void {
+		canvasContext.clearRect(0, 0, canvas.width, canvas.height);
+
+		for (let i = 0; i < roads.length; i++) {
+			canvasContext.drawImage(
+				roads[i].image, //Изображение
+				0, //X
+				0, //Y
+				roads[i].image.width, //Ширина
+				roads[i].image.height, //Высота
+				roads[i].x, //X на канвасе
+				roads[i].y, //Y на канвасе
+				canvas.width, //Ширина
+				canvas.width //Высота
+			);
+		}
+
+		drawCar(playerCar);
+
+		for (let i = 0; i < gameObjects.length; i++) {
+			drawCar(gameObjects[i]);
+		}
+
+		setLives();
+	}
+
+	function drawCar(car: GameObject): void {
+		canvasContext.drawImage(
+			car.image, 
+			0, 
+			0, 
+			car.image.width, 
+			car.image.height, 
+			car.x, 
+			car.y, 
+			car.image.width * objIncrease, 
+			car.image.height * objIncrease 
+		);
+	}
+
+	function keyDownClick(e: any): void {
+
+		let speedDifferent = 2;
+
+		switch(e.keyCode) {
+			case 37: 
+				//Влево
+				playerCar.Move("x", -speed - speedDifferent);
+				break;
+
+			case 39: 
+				//Вправо
+				playerCar.Move("x", speed + speedDifferent);
+				break;
+
+			case 38: 
+				//Вперёд
+				playerCar.Move("y", -speed - speedDifferent);
+				break;
+
+			case 40: 
+				//Назад
+				playerCar.Move("y", speed + speedDifferent);
+				break;
+
+			case 27: 
+				//Esc
+				if (gameTimer == null) {
+					startGame();
+				} else {
+					stopGame();
+				}
+				break;
+		}
+	}
+
+	function resizeGameCanvas(): void {
+		canvas.width = window.innerWidth;
+		canvas.height = window.innerHeight;
+	}
+
+	function gererateRandom(min: number, max: number): number {
+		let rand = min - 0.5 + Math.random() * (max - min + 1);
+		return Math.round(rand);
+	}
+
+	function setLives(): void{
+		canvasContext.font = "30px Courier";
+		canvasContext.fillText("Lives: " + gameLives + " Scores: " + gameScores, 10, 40);
+	}
+
+	const UPDATE_TIME: number = 1000 / 100;
+
+	let gameTimer: any = null, gameScoresCounter: any = null;
+
+	let gameScores: number = 0, gameLives: number = 3; //Очки и жизни
+
+	let canvas: HTMLElement | null = document.getElementById("game-canvas");
+	
+	if (!canvas){
+		return;
+	}
+
+	let canvasContext: any = canvas.getContext("2d");
+
+	let objIncrease: number = 0.075; //Размеры
+	let speed: number = 4.2; //Скорость
+	let playerStartPositionYCoeff: number = 1.25;
+
+	resizeGameCanvas();
+	window.addEventListener("resize", resizeGameCanvas);
+
+	let canWidth: number = canvas.width;
+	let canHeight: number = canvas.height;
+	let canvasDiagonal: number = (Math.sqrt(canWidth*canWidth + canHeight*canHeight)).toFixed(2);
+
+	objIncrease = (canvasDiagonal/9426).toFixed(2);
+	//speed = (canHeight/120).toFixed(2);
+	//playerStartPositionYCoeff = (canHeight/481).toFixed(2);
+
+	canvas.addEventListener("contextmenu", function (e) { 
+		e.preventDefault(); 
+		return false;
+	}); 
+
+	window.addEventListener("keydown", function (e) { 
+		keyDownClick(e);
+	});
+
+	//Фон
+	let roadY: number = canWidth;
+	if (canHeight > canWidth){
+		roadY = canHeight;
+	}
+	let roads = [
+		new Road("public/game/doroga.jpg", 0),
+		new Road("public/game/doroga.jpg", roadY)
+	];
+
+	let playerCar: GameObject = new GameObject("public/game/my-car.png", canWidth / 2, canHeight / playerStartPositionYCoeff, true, 0, false, 0); //Наша машинка
+	console.log(playerCar)
+	let gameObjects = []; //Прочие объекты
+
+	startGame();
+	
+}
