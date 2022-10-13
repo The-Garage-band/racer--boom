@@ -1,5 +1,5 @@
 import {CanvasComponent} from "@/components/CanvasComponent";
-import {FC} from "react";
+import {FC, useEffect} from "react";
 import healthEmpty from 'public/game/health-empty.png';
 import healthFill from 'public/game/health-fill.png';
 
