@@ -9,7 +9,7 @@ import validationSchema from './validation_schema';
 import { useFormik } from 'formik';
 import { signup, ISignUp } from '../../API/AuthApi';
 
-const SignInPage = () => {
+const SignUpPage = () => {
   const navigate = useNavigate();
 
   const formik = useFormik({
@@ -176,4 +176,4 @@ const SignInPage = () => {
   );
 };
 
-export default SignInPage;
+export default SignUpPage;
