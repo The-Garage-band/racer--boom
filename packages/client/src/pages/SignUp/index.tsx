@@ -26,7 +26,7 @@ const SignUpPage = () => {
       .then((payload) => {
         console.log('payload', payload)
         if (payload.status === 200) {
-            navigate('/sign_in');
+            navigate('/game');
         }
       })
       .catch((error) => {
