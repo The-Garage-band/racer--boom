@@ -1,4 +1,4 @@
-import { Box, Link, Button} from '@mui/material';
+import { Button} from '@mui/material';
 import { EmailOutlined, LockOutlined } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 
@@ -14,12 +14,8 @@ const SignInPage = () => {
 
   const formik = useFormik({
     initialValues: {
-      first_name: '',
-      second_name: '',
       login: '',
-      email: '',
       password: '',
-      phone: '',
     },
     validationSchema,
     onSubmit: (values: ILogIn) => login(values)
@@ -77,14 +73,6 @@ const SignInPage = () => {
             marginBottom: '1rem'
           }}
         />
-        <Box sx={{
-          display: 'flex',
-          justifyContent: 'flex-end',
-          width: '100%',
-          marginBottom: '3rem'
-        }}>
-          <Link href="#" color="secondary">Забыли пароль?</Link>
-        </Box>
         <Button
           variant="contained"
           type="submit"
