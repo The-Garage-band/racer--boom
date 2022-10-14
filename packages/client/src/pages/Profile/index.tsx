@@ -18,7 +18,7 @@ const SignUpPage = () => {
     login: 'Login',
     email: 'Email@123.ru',
     phone: '123123123123',
-    avatar: 'https://placekitten.com/200/200',
+    avatar: 'https://placekitten.com/g/92/92',
   }
 
   const formik = useFormik({
