@@ -1,9 +1,9 @@
-import { OutlinedInput, InputLabel, InputAdornment, FormControl, FormHelperText } from '@mui/material';
+import { OutlinedInput, InputLabel, InputAdornment, FormControl, FormHelperText, Avatar } from '@mui/material';
 import { SvgIconComponent } from '@mui/icons-material';
 
 interface InputProps {
   label: string;
-  type: 'text' | 'password' | 'email' | 'tel';
+  type: 'text' | 'password' | 'email' | 'tel' | 'file';
   name: string;
   Icon?: SvgIconComponent;
   sx?: StringObject;
