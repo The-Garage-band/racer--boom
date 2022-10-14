@@ -5,13 +5,12 @@ interface AvatarProps {
   name: string;
   sx?: StringObject;
   value?: string;
-  error?: boolean;
   onChange?: any;
 }
 
-export default function Avatar({name, value, error, onChange, sx}: AvatarProps) {
+export default function Avatar({name, value, onChange, sx}: AvatarProps) {
   return (
-    <Box sx={{ 
+    <Box sx={{
       ...sx,
       position: 'relative',
       display: 'flex',
@@ -22,16 +21,17 @@ export default function Avatar({name, value, error, onChange, sx}: AvatarProps) 
         src={ value }
         sx={{ width: 96, height: 96 }}
       />
-      <IconButton 
-        color="secondary" 
-        aria-label="upload avatar" 
+      <IconButton
+        color="secondary"
+        aria-label="upload avatar"
         component="label"
+        onChange={ onChange }
         sx={{
           position: 'absolute',
           left: 'calc(100% + 15px)'
         }}
       >
-        <input hidden accept="image/*" type="file" />
+        <input hidden accept="image/*" type="file" name={ name } />
         <PhotoCamera />
       </IconButton>
     </Box>
