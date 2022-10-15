@@ -374,10 +374,12 @@ export function startRacing(scope, startGameLives, startGameScores, startAddHeal
 	const myCarSrc = "public/game/my-car.png";
 	const newimage = new Image();
 	newimage.src = myCarSrc;
-
-	let playerCar: GameObject = new GameObject("public/game/my-car.png", canWidth / 2, canHeight - newimage.height * objIncrease - 1, true, 0, false, 0); //Наша машинка
-	//console.log(playerCar)
+	let playerCar: GameObject = new GameObject(myCarSrc, canWidth / 2, canHeight - newimage.height * objIncrease - 1, true, 0, false, 0); //Наша машинка
 	let gameObjects = []; //Прочие объекты
 
-	startGame();
+	newimage.onload = function() {
+		playerCar = new GameObject(myCarSrc, canWidth / 2, canHeight - newimage.height * objIncrease - 1, true, 0, false, 0); //Наша машинка
+		startGame();
+	}
+	
 }
