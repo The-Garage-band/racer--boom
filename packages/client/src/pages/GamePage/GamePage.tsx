@@ -8,10 +8,6 @@ import './GamePage.less';
 
 import {startRacing} from './game';
 
-type GamePageProps = {
-    health: number,
-}
-
 export class GamePage extends React.Component {
     constructor(props) {
         super(props);

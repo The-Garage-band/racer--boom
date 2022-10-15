@@ -9,7 +9,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<SignInPage />} />
-        <Route path="/game" element={<GamePage health={2}/>} />
+        <Route path="/game" element={<GamePage/>} />
       </Routes>
     </Router>
   )
