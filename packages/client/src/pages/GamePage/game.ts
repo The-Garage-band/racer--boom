@@ -1,7 +1,7 @@
 
 //typescript
 
-export function startRacing(){
+export function startRacing(scope, startGameLives, startGameScores, startAddHealth){
 
 	//Дорога
 	class Road {
@@ -14,7 +14,6 @@ export function startRacing(){
 
 		Update(road: Road): void {
 			this.y += speed;
-
 			if (this.y > window.innerHeight) {
 				this.y = road.y - canvas.width + speed;
 			}
@@ -114,8 +113,9 @@ export function startRacing(){
 	function stopGame(): void {
 		clearInterval(gameTimer);
 		clearInterval(gameScoresCounter);
-		gameScores = 0;
-		gameLives = 3;
+		gameScores = startGameScores;
+		gameLives = startGameLives;
+		gameAddHealth = startAddHealth;
 		gameTimer = null;
 		gameScoresCounter = null;
 	}
@@ -216,7 +216,7 @@ export function startRacing(){
 						reStartGame();
 						break;
 					} else {
-						gameLives--;
+						gameLives--;						
 						gameObjects.splice(i, 1);
 					}
 					
@@ -319,15 +319,19 @@ export function startRacing(){
 	}
 
 	function setLives(): void{
-		canvasContext.font = "30px Courier";
-		canvasContext.fillText("Lives: " + gameLives + " Scores: " + gameScores, 10, 40);
+		gameAddHealth = startAddHealth; 
+		if (gameLives > startGameLives){
+			gameAddHealth = "+" + (gameLives - startGameLives).toString();
+		}
+		scope.setState({health: gameLives, score: gameScores, addHealth: gameAddHealth});
 	}
 
+	
 	const UPDATE_TIME: number = 1000 / 100;
 
 	let gameTimer: any = null, gameScoresCounter: any = null;
 
-	let gameScores = 0, gameLives = 3; //Очки и жизни
+	let gameScores = startGameScores, gameLives = startGameLives, gameAddHealth = startAddHealth; //Очки и жизни
 
 	const canvas: HTMLElement | null = document.getElementById("game-canvas");
 	
@@ -337,20 +341,14 @@ export function startRacing(){
 
 	const canvasContext: any = canvas.getContext("2d");
 
-	let objIncrease = 0.075; //Размеры
-	const speed = 4.2; //Скорость
-	const playerStartPositionYCoeff = 1.25;
-
 	resizeGameCanvas();
 	window.addEventListener("resize", resizeGameCanvas);
 
 	const canWidth: number = canvas.width;
 	const canHeight: number = canvas.height;
-	const canvasDiagonal: number = (Math.sqrt(canWidth*canWidth + canHeight*canHeight)).toFixed(2);
-
-	objIncrease = (canvasDiagonal/9426).toFixed(2);
-	//speed = (canHeight/120).toFixed(2);
-	//playerStartPositionYCoeff = (canHeight/481).toFixed(2);
+	
+	const objIncrease = 0.0001*canWidth + 0.003;
+	const speed = 0.005*canHeight + 1;
 
 	canvas.addEventListener("contextmenu", function (e) { 
 		e.preventDefault(); 
@@ -362,19 +360,24 @@ export function startRacing(){
 	});
 
 	//Фон
+	const roadSrc = "public/game/doroga.jpg";
+
 	let roadY: number = canWidth;
 	if (canHeight > canWidth){
 		roadY = canHeight;
 	}
 	const roads = [
-		new Road("public/game/doroga.jpg", 0),
-		new Road("public/game/doroga.jpg", roadY)
+		new Road(roadSrc, 0),
+		new Road(roadSrc, roadY)
 	];
 
-	let playerCar: GameObject = new GameObject("public/game/my-car.png", canWidth / 2, canHeight / playerStartPositionYCoeff, true, 0, false, 0); //Наша машинка
+	const myCarSrc = "public/game/my-car.png";
+	const newimage = new Image();
+	newimage.src = myCarSrc;
+
+	let playerCar: GameObject = new GameObject("public/game/my-car.png", canWidth / 2, canHeight - newimage.height * objIncrease - 1, true, 0, false, 0); //Наша машинка
 	//console.log(playerCar)
 	let gameObjects = []; //Прочие объекты
 
 	startGame();
-	
 }
