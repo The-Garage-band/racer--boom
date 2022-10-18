@@ -1,24 +1,19 @@
-import {
-  Grid,
-  Box,
-  Button,
-  TextField,
-  IconButton,
-} from '@mui/material';
+import {Grid, Box, Button, TextField, IconButton} from '@mui/material';
 import {Link, useLocation} from 'react-router-dom';
 import * as React from 'react';
-import PageLayout from '../../hocs/page-layout';
+import PageLayout from '@/hocs/page-layout';
 import AddReactionIcon from '@mui/icons-material/AddReaction';
+import {FC} from 'react';
 
-import './ForumDialogPage.less';
-import '../../styles/page.less';
+import '@/pages/ForumDialogPage/ForumDialogPage.less';
+import '@/styles/page.less';
 
 function createData(
     id: number, name: string, msg_text = '', time: string) {
   return {id, name, msg_text, time};
 }
 
-const ForumDialogPage = () => {
+const ForumDialogPage:FC = () => {
   const {state} = useLocation();
   const {dialogTitle} = state;
   const emojiRef = React.createRef<HTMLDivElement>();

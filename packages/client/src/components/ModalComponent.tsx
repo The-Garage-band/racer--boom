@@ -1,9 +1,4 @@
-import {
-  Dialog,
-  Button,
-  DialogTitle,
-  DialogActions,
-} from '@mui/material';
+import {Dialog, Button, DialogTitle, DialogActions} from '@mui/material';
 import {FC, ReactElement} from 'react';
 
 type ModalComponentProps = {
@@ -12,14 +7,14 @@ type ModalComponentProps = {
   children?: ReactElement
 };
 
-export const ModalComponent: FC<ModalComponentProps> = (props) => {
+export const ModalComponent: FC<ModalComponentProps> = ({handleClose, children, show}) => {
   return (
-      <Dialog onClose={props.handleClose} open={props.show}>
+      <Dialog onClose={handleClose} open={show}>
         <DialogTitle>Создать новую тему</DialogTitle>
-        {props.children}
+        {children}
         <DialogActions>
-          <Button onClick={props.handleClose}>Назад</Button>
-          <Button onClick={props.handleClose}>Создать</Button>
+          <Button onClick={handleClose}>Назад</Button>
+          <Button onClick={handleClose}>Создать</Button>
         </DialogActions>
       </Dialog>
   );

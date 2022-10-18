@@ -1,26 +1,14 @@
-import {
-  Grid,
-  Box,
-  Button,
-  Table,
-  TableBody,
-  TableCell,
-  TableRow,
-  TableHead,
-  IconButton,
-  DialogContentText,
-  TextField,
-  DialogContent,
-} from '@mui/material';
-import PageLayout from '../../hocs/page-layout';
-import {ModalComponent} from '../../components/ModalComponent';
+import {Grid,  Box,  Button,  Table,  TableBody,  TableCell,  TableRow,  TableHead,  IconButton,  DialogContentText,  TextField,  DialogContent} from '@mui/material';
+import PageLayout from '@/hocs/page-layout';
+import {ModalComponent} from '@/components/ModalComponent';
+import {FC} from 'react';
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import {useNavigate, Link} from 'react-router-dom';
 import * as React from 'react';
 
-import './ForumPage.less';
-import '../../styles/table.less';
-import '../../styles/page.less';
+import '@/pages/ForumPage/ForumPage.less';
+import '@/styles/table.less';
+import '@/styles/page.less';
 
 function createData(
     id: number, title: string, theme: number, answer = 0) {
@@ -45,7 +33,7 @@ const ContentModal = () => {
   );
 };
 
-const ForumPage = () => {
+const ForumPage:FC = () => {
   const navigate = useNavigate();
 
   const rows = [
@@ -61,7 +49,7 @@ const ForumPage = () => {
     setOpen(false);
   };
   const handleNavigateToDialog = (dialogId: number, dialogTitle: string) => {
-    navigate(`/dialog/${dialogId}`, {state: {dialogId, dialogTitle}});
+    navigate(`/forum/${dialogId}`, {state: {dialogId, dialogTitle}});
   };
 
   return (

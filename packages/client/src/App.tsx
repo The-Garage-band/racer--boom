@@ -15,7 +15,7 @@ function App() {
         <Route path="/game" element={<GamePage health={2}/>} />
         <Route path="/leaderboard" element={<LeaderboardPage />} />
         <Route path="/forum" element={<ForumPage />} />
-        <Route path="/dialog/:id" element={<ForumDialogPage />} />
+        <Route path="/forum/:id" element={<ForumDialogPage />} />
       </Routes>
     </Router>
   )
