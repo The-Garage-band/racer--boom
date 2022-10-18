@@ -1,0 +1,50 @@
+#forum-dialog {
+  background-image: url(../public/msg.png);
+}
+
+.msg-list {
+  height: 500px;
+  overflow: hidden;
+  overflow-y: auto;
+  flex: none;
+  margin-bottom: 10px;
+
+  .msg-item {
+    border-bottom: 1px solid #dbdbdb75;
+    padding-bottom: 10px;
+
+    .msg-time {
+      font-size: 10px;
+      font-style: italic;
+      color: #c7c7c7;
+    }
+  }
+}
+
+div.emoji-block {
+  background: rgba(31, 35, 35, 0.55);
+  position: absolute;
+  flex-direction: row;
+  flex-wrap: wrap;
+  bottom: 100px;
+  align-content: center;
+  justify-content: center;
+  box-shadow: 0px 4px 53px rgba(60, 193, 193, 0.51), inset 0px 4px 100px rgba(60, 193, 193, 0.2);
+  width: 20vw;
+  right: 20px;
+  border: 1px solid white;
+  display: none;
+
+  &.show {
+    display: flex;
+
+  }
+
+  .emoji-item {
+    padding: 1rem;
+
+    &:hover {
+      background: rgba(60, 193, 193, 0.51);
+    }
+  }
+}
