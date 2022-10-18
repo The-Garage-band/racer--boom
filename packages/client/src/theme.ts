@@ -1,4 +1,4 @@
-import { createTheme, responsiveFontSizes } from '@mui/material/styles';
+import { createTheme, responsiveFontSizes } from '@mui/material/styles'
 
 export default responsiveFontSizes(
   createTheme({
@@ -23,4 +23,4 @@ export default responsiveFontSizes(
       borderRadius: 8,
     },
   })
-);
+)
