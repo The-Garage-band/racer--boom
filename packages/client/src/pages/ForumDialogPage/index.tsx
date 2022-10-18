@@ -8,9 +8,9 @@ import {FC} from 'react';
 import '@/pages/ForumDialogPage/ForumDialogPage.less';
 import '@/styles/page.less';
 
-function createData(
-    id: number, name: string, msg_text = '', time: string) {
-  return {id, name, msg_text, time};
+type TCreateDataParams = { id: number, name: string, msg_text : string, time: string }
+function createData(params: TCreateDataParams) {
+  return {...params};
 }
 
 const ForumDialogPage:FC = () => {
@@ -19,11 +19,8 @@ const ForumDialogPage:FC = () => {
   const emojiRef = React.createRef<HTMLDivElement>();
 
   const tmpDialogMsg = [
-    createData(0, 'Лена', 'Первое сообщение', '01:00'),
-    createData(0, 'Лена', 'Второе сообщение', '02:00'),
-    createData(0, 'Петя', 'Третье сообщение!', '03:00'),
-    createData(0, 'Ася', 'Четвертое сообщение', '04:00'),
-
+    createData({id:0, name:'Лена', msg_text:'Первое сообщение', time:'01:00'}),
+    createData({id:1, name:'Петя', msg_text:'Второе сообщение', time:'02:00'}),
   ];
   const handleOpenEmoji = () => {
     emojiRef.current?.classList.toggle('show');

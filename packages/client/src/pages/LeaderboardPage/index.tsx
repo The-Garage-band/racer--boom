@@ -7,20 +7,20 @@ import '@/pages/LeaderboardPage/LeaderboardPage.less';
 import '@/styles/table.less';
 import '@/styles/page.less';
 
-function createData(
-    name: string, point: number, avatar = '../public/avatar.png') {
-  return {avatar, name, point};
+interface TCreateDataParams { name: string, point : number, avatar ?:string  }
+function createData(params: TCreateDataParams) {
+  return {...params};
 }
 
 const LeaderboardPage:FC = () => {
   const rows = [
-    createData('username 1', 7000000),
-    createData('username 2', 600000),
-    createData('username 3', 50000),
-    createData('username 4', 4000),
-    createData('username 5', 300),
-    createData('username 6', 20),
-    createData('username 7', 1),
+    createData({name:'username 1', point:7000000}),
+    createData({name:'username 2', point:600000}),
+    createData({name:'username 3', point:50000}),
+    createData({name:'username 4', point:40000}),
+    createData({name:'username 5', point:3000}),
+    createData({name:'username 6', point:200}),
+    createData({name:'username 7', point:10}),
   ];
 
   return (

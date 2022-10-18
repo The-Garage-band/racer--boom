@@ -10,9 +10,9 @@ import '@/pages/ForumPage/ForumPage.less';
 import '@/styles/table.less';
 import '@/styles/page.less';
 
-function createData(
-    id: number, title: string, theme: number, answer = 0) {
-  return {id, title, theme, answer};
+interface TCreateDataParams {id: number, title: string, theme: number, answer :number  }
+function createData(params: TCreateDataParams) {
+  return {...params};
 }
 
 const ContentModal = () => {
@@ -37,8 +37,8 @@ const ForumPage:FC = () => {
   const navigate = useNavigate();
 
   const rows = [
-    createData(0, 'Новые игры', 222, 345),
-    createData(1, 'Технологии', 120, 578),
+    createData({id:0, title:'Новые игры', theme:222, answer:345}),
+    createData({id:1, title:'Технологии', theme:120, answer:578}),
   ];
   const [openModal, setOpen] = React.useState(false);
 
