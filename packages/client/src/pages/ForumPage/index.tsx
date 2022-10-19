@@ -1,44 +1,66 @@
-import {Grid,  Box,  Button,  Table,  TableBody,  TableCell,  TableRow,  TableHead,  IconButton,  DialogContentText,  TextField,  DialogContent} from '@mui/material';
+import {
+  Grid,
+  Box,
+  Button,
+  Table,
+  TableBody,
+  TableCell,
+  TableRow,
+  TableHead,
+  IconButton,
+  DialogContentText,
+  TextField,
+  DialogContent,
+} from '@mui/material';
 import PageLayout from '@/hocs/page-layout';
 import {ModalComponent} from '@/components/ModalComponent';
 import {FC} from 'react';
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import {useNavigate, Link} from 'react-router-dom';
 import * as React from 'react';
+import {ErrorBoundaryComponent} from '@/components/ErrorBoundaryComponent';
 
 import '@/pages/ForumPage/ForumPage.less';
 import '@/styles/table.less';
 import '@/styles/page.less';
 
-interface TCreateDataParams {id: number, title: string, theme: number, answer :number  }
+interface TCreateDataParams {
+  id: number,
+  title: string,
+  theme: number,
+  answer: number
+}
+
 function createData(params: TCreateDataParams) {
   return {...params};
 }
 
-const ContentModal = () => {
-  return (
-      <DialogContent>
-        <DialogContentText>
-          Создадим новую тему, где можно обсудить какие-то проблемы.
-        </DialogContentText>
-        <TextField
-            autoFocus
-            margin="dense"
-            id="dialog_name"
-            label="Название темы"
-            type="text"
-            fullWidth
-            variant="standard"/>
-      </DialogContent>
-  );
+class ContentModal extends React.PureComponent {
+  render() {
+    return (
+        <DialogContent>
+          <DialogContentText>
+            Создадим новую тему, где можно обсудить какие-то проблемы.
+          </DialogContentText>
+          <TextField
+              autoFocus
+              margin="dense"
+              id="dialog_name"
+              label="Название темы"
+              type="text"
+              fullWidth
+              variant="standard"/>
+        </DialogContent>
+    );
+  }
 };
 
-const ForumPage:FC = () => {
+const ForumPage: FC = () => {
   const navigate = useNavigate();
 
   const rows = [
-    createData({id:0, title:'Новые игры', theme:222, answer:345}),
-    createData({id:1, title:'Технологии', theme:120, answer:578}),
+    createData({id: 0, title: 'Новые игры', theme: 222, answer: 345}),
+    createData({id: 1, title: 'Технологии', theme: 120, answer: 578}),
   ];
   const [openModal, setOpen] = React.useState(false);
 
@@ -99,9 +121,12 @@ const ForumPage:FC = () => {
           </Grid>
         </Grid>
         <ModalComponent show={openModal} handleClose={handleClose}>
-          <ContentModal/>
+          <ErrorBoundaryComponent>
+            <ContentModal/>
+          </ErrorBoundaryComponent>
         </ModalComponent>
       </PageLayout>
+
   );
 };
 

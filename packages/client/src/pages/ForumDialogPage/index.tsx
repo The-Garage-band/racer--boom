@@ -15,7 +15,7 @@ function createData(params: TCreateDataParams) {
 
 const ForumDialogPage:FC = () => {
   const {state} = useLocation();
-  const {dialogTitle} = state;
+  const {dialogTitle} = state || 'Без темы';
   const emojiRef = React.createRef<HTMLDivElement>();
 
   const tmpDialogMsg = [
@@ -62,9 +62,9 @@ const ForumDialogPage:FC = () => {
               <Grid container className="msg-list" direction="row"
                     justifyContent="flex-start"
                     alignContent="flex-start" gap="30px">
-                {tmpDialogMsg.map((row) => (
+                {tmpDialogMsg.map((row, index) => (
                     <Grid container item direction="column"
-                          justifyContent="flex-start"
+                          justifyContent="flex-start" key={index}
                           alignItems="stretch" gap="5px" className="msg-item">
                       <span>{row.name}, <span
                           className="msg-time">{row.time}</span> </span>
@@ -89,10 +89,9 @@ const ForumDialogPage:FC = () => {
                   <AddReactionIcon fontSize="large"/>
                 </IconButton>
                 <div className="emoji-block" ref={emojiRef}>
-                  {emojis.map((row) => (
-                      <span className="emoji-item" onClick={handleSendEmoji}>
-                 {row}
-                 </span>
+                  {emojis.map((row, index) => (
+                      <span className="emoji-item" key={index}
+                            onClick={handleSendEmoji}>{row}</span>
                   ))}
                 </div>
               </Grid>
