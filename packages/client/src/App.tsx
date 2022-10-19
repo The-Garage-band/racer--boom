@@ -4,8 +4,11 @@ import LogInPage from './pages/LogIn';
 import LogOutPage from './pages/LogOut';
 import ProfilePage from './pages/Profile';
 import GamePage from "@/pages/GamePage";
+import LeaderboardPage from "@/pages/LeaderboardPage";
+import ForumPage from "@/pages/ForumPage";
+import ForumDialogPage from "@/pages/ForumDialogPage";
 
-import './index.less';
+import './index.less'
 
 function App() {
   return (
@@ -16,10 +19,13 @@ function App() {
         <Route path="/logout" element={<LogOutPage />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/game" element={<GamePage health={2}/>} />
+        <Route path="/leaderboard" element={<LeaderboardPage />} />
+        <Route path="/forum" element={<ForumPage />} />
+        <Route path="/forum/:id" element={<ForumDialogPage />} />
         <Route path="/" element={<LogInPage />} />
       </Routes>
     </Router>
   )
 }
 
-export default App;
+export default App

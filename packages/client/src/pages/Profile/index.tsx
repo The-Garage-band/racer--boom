@@ -9,7 +9,7 @@ import validationSchema from './validation_schema';
 import { useFormik } from 'formik';
 // import { getUser, updateProfile, getProfile, updateAvatar, IProfile, IAvatar } from '../../API/User';
 
-const SignUpPage = () => {
+const ProfilePage = () => {
 
   const data = {
     first_name: 'First',
@@ -191,4 +191,4 @@ const SignUpPage = () => {
   );
 };
 
-export default SignUpPage;
+export default ProfilePage;

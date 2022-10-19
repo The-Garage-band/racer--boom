@@ -1,0 +1,24 @@
+.table {
+  width: 100%;
+
+  th {
+    font-weight: bold;
+    color: #15FFF1;
+  }
+
+  & td, & th {
+    padding: 0.2rem;
+    font-size: 20px;
+    height: 80px;
+  }
+
+  &-unborder {
+    & td, & th {
+      border: 0;
+    }
+  }
+
+  tr.MuiTableRow-hover:hover {
+    background-color: rgb(152 162 163 / 32%);
+  }
+}
