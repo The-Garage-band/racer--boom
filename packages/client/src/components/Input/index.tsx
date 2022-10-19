@@ -1,16 +1,15 @@
 import { OutlinedInput, InputLabel, InputAdornment, FormControl, FormHelperText, Avatar } from '@mui/material';
-import { SvgIconComponent } from '@mui/icons-material';
 
 interface InputProps {
   label: string;
   type: 'text' | 'password' | 'email' | 'tel' | 'file';
   name: string;
-  Icon?: SvgIconComponent;
+  Icon?: any; // надо поправить
   sx?: StringObject;
   value?: string;
   error?: boolean;
-  helperText?: any;
-  onChange?: any;
+  helperText?: any; // надо поправить
+  onChange?: any; // надо поправить
 }
 
 export default function Input({label, type, name, value, error, helperText, onChange, Icon, sx}: InputProps) {
