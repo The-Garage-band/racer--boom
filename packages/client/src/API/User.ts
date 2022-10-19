@@ -26,7 +26,7 @@ const getUser = () => AxiosInstance.get(PATH_GET_USER);
 
 const updateProfile = <T>(data: T) => AxiosInstance.put<string>(PATH_UPDATE_PROFILE, data);
 
-const getProfile = <T>(data: T) => AxiosInstance.get<string>(`${PATH_GET_PROFILE}/${data}`, data);
+const getProfile = <T>(data: T) => AxiosInstance.get<string>(`${PATH_GET_PROFILE}/${data}`);
 
 const updateAvatar = <T>(data: T) => AxiosInstance.put<string>(PATH_AVATAR, data);
 
