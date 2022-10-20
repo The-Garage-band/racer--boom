@@ -1,10 +1,11 @@
+
 import React, { Component } from 'react';
 import {CanvasComponent} from "@/components/CanvasComponent";
 import {FC} from "react";
 import healthEmpty from 'public/game/health-empty.png';
 import healthFill from 'public/game/health-fill.png';
 
-import './GamePage.less';
+import './GamePage.less'
 
 import {startRacing} from './game';
 
