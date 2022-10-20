@@ -18,7 +18,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<SignInPage />} />
-          <Route path="/game" element={<GamePage health={2} />} />
+          <Route path="/game" element={<GamePage/>} />
           <Route path="/leaderboard" element={<LeaderboardPage />} />
           <Route path="/forum" element={<ForumPage />} />
           <Route path="/forum/:id" element={<ForumDialogPage />} />
