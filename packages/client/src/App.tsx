@@ -7,6 +7,7 @@ import GamePage from "./pages/GamePage";
 import LeaderboardPage from "@/pages/LeaderboardPage";
 import ForumPage from "@/pages/ForumPage";
 import ForumDialogPage from "@/pages/ForumDialogPage";
+import { AudioSetup } from '@/components/AudioSetup/AudioSetup'
 
 import './index.less'
 

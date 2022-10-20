@@ -1,5 +1,6 @@
 import { Button } from '@mui/material';
 import { EmailOutlined, LoginOutlined, CallOutlined, Person2Outlined } from '@mui/icons-material';
+import { Link } from 'react-router-dom';
 
 import PageLayout from '../../hocs/page-layout';
 import Input from '../../components/Input';
@@ -181,7 +182,8 @@ const ProfilePage = () => {
         <Button
           variant="outlined"
           fullWidth
-          href="/game"
+          component={Link}
+          to={'/game'}
           sx={{marginBottom: '1rem'}}
         >
           Вернуться к игре
