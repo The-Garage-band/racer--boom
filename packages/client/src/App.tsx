@@ -3,7 +3,7 @@ import SignUpPage from './pages/SignUp';
 import LogInPage from './pages/LogIn';
 import LogOutPage from './pages/LogOut';
 import ProfilePage from './pages/Profile';
-import GamePage from "@/pages/GamePage";
+import GamePage from "./pages/GamePage";
 import LeaderboardPage from "@/pages/LeaderboardPage";
 import ForumPage from "@/pages/ForumPage";
 import ForumDialogPage from "@/pages/ForumDialogPage";
