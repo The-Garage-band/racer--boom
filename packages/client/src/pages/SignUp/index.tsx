@@ -1,6 +1,6 @@
 import { Button } from '@mui/material';
 import { EmailOutlined, PasswordOutlined, LoginOutlined, CallOutlined, Person2Outlined } from '@mui/icons-material';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 import PageLayout from '../../hocs/page-layout';
 import Input from '../../components/Input';
@@ -166,7 +166,8 @@ const SignUpPage = () => {
         <Button
           variant="outlined"
           fullWidth
-          href="/log_in"
+          component={Link}
+          to={'/log_in'}
           sx={{marginBottom: '1rem'}}
         >
           Авторизация

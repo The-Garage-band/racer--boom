@@ -1,6 +1,6 @@
 import { Button} from '@mui/material';
 import { EmailOutlined, LockOutlined } from '@mui/icons-material';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 import PageLayout from '../../hocs/page-layout';
 import Input from '../../components/Input';
@@ -86,7 +86,8 @@ const SignInPage = () => {
         </Button>
         <Button
           variant="outlined"
-          href="/sign_up"
+          component={Link}
+          to={'/sign_up'}
           fullWidth
           sx={{marginBottom: '1rem'}}
         >
