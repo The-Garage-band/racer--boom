@@ -1,6 +1,8 @@
 
 //typescript
 
+import random from 'utils.random';
+
 export function startRacing(scope, startGameLives, startGameScores, startAddHealth){
 
 	//Дорога
@@ -12,7 +14,7 @@ export function startRacing(scope, startGameLives, startGameScores, startAddHeal
 			this.image.src = image;
 		}
 
-		Update(road: Road): void {
+		update(road: Road): void {
 			this.y += speed;
 			if (this.y > window.innerHeight) {
 				this.y = road.y - canvas.width + speed;
@@ -35,23 +37,23 @@ export function startRacing(scope, startGameLives, startGameScores, startAddHeal
 			this.image.src = image;
 		}
 
-		Update(): void {
+		update(): void {
 			if (!this.isPlayer) {
 				this.y += speed;
 			}
 
-			if (this.y > canvas.height + 50) {
+			if (this.y > canvas.height + 150) {
 				this.needDelete = true;
 			}
 		}
 
 		//Обработка столкновений
-		Crash(car: GameObject): boolean {
+		crash(car: GameObject): boolean {
 			return checkCarCollision(this, car);
 		}
 
 		//Перемещение
-		Move(v: string, d: string): void  {
+		move(v: string, d: string): void  {
 			if (v == "x") {
 				//Горизонталь
 				d *= 5;
@@ -97,6 +99,7 @@ export function startRacing(scope, startGameLives, startGameScores, startAddHeal
 		if (!playerCar.needDelete) {
 			gameTimer = setInterval(updateGame, UPDATE_TIME);
 			gameScoresCounter = setInterval(updateGameScores, 1000);
+			speedUpdater = setInterval(updateSpeed, 100*timeToChangeSpeed); //Каждые 100 секунд
 		} else {
 			reStartGame();
 		}
@@ -113,23 +116,27 @@ export function startRacing(scope, startGameLives, startGameScores, startAddHeal
 	function stopGame(): void {
 		clearInterval(gameTimer);
 		clearInterval(gameScoresCounter);
+		clearInterval(speedUpdater);
 		gameScores = startGameScores;
 		gameLives = startGameLives;
+		speed = startSpeed;
 		gameAddHealth = startAddHealth;
 		gameTimer = null;
 		gameScoresCounter = null;
+		speedUpdater = null;
 	}
 
 	function updateGame(): void {
-		roads[0].Update(roads[1]);
-		roads[1].Update(roads[0]);
+		roads[0].update(roads[1]);
+		roads[1].update(roads[0]);
 
 		//машинки и монетки
-		const objRandom = gererateRandom(0, 10000);
-		if (objRandom > 9000) {
+		const objRandom = gererateRandom(0, maxRandom);
+		const objRandomByNum = objRandom/maxRandom;
+		if (objRandomByNum > coinProb) {
 
 			const objX = gererateRandom(30, canvas.width - 50);
-			const objY = - gererateRandom(250, 400);
+			const objY = - gererateRandom(250, 500);
 			let isPush = true;
 
 			//Проверяем, чтобы не вставали друг на друга
@@ -146,29 +153,32 @@ export function startRacing(scope, startGameLives, startGameScores, startAddHeal
 			if (isPush){
 
 				//Монетка
-				if ((objRandom > 9000) && (objRandom < 9600)){
+				if ((objRandomByNum > coinProb) && (objRandomByNum < carProb)){
 					gameObjects.push(new GameObject("public/game/coin.png", objX, objY, false, 10, false, 0));
 				}
 
 				//Серая машинка
-				if ((objRandom > 9600) && (objRandom < 9900) ){
+				if ((objRandomByNum > carProb) && (objRandomByNum < truckProb) ){
 					gameObjects.push(new GameObject("public/game/grey-car.png", objX, objY, false, 0, false, 0));
 				}
 
+				//Грузовик
+				if ((objRandomByNum > truckProb) && (objRandomByNum < policeProb) ){
+					gameObjects.push(new GameObject("public/game/truck.png", objX, objY, false, 0, false, 0));
+				}
+
 				//Полиция
-				if ((objRandom > 9900) && (objRandom < 9970)) {
+				if ((objRandomByNum > policeProb) && (objRandomByNum < liveProb)) {
 					gameObjects.push(new GameObject("public/game/police-car.png", objX, objY, false, 0, true, 0));
 				}
 
 				//Жизнь
-				if ((objRandom > 9970)){
+				if ((objRandomByNum > liveProb)){
 					gameObjects.push(new GameObject("public/game/live.png", objX, objY, false, 0, false, 1));
 				}
 			}
 		}
-
-		playerCar.Update();
-
+		
 		if (playerCar.needDelete) {
 			alert("Game over!");
 			reStartGame();
@@ -177,7 +187,7 @@ export function startRacing(scope, startGameLives, startGameScores, startAddHeal
 		let needDelete = false; 
 
 		for (let i = 0; i < gameObjects.length; i++) {
-			gameObjects[i].Update();
+			gameObjects[i].update();
 
 			if (gameObjects[i].needDelete) {
 				needDelete = true;
@@ -191,7 +201,7 @@ export function startRacing(scope, startGameLives, startGameScores, startAddHeal
 		let isCrash = false;
 
 		for (let i = 0; i < gameObjects.length; i++) {
-			isCrash = playerCar.Crash(gameObjects[i]);
+			isCrash = playerCar.crash(gameObjects[i]);
 
 			if (isCrash) {
 				//Монетки
@@ -224,11 +234,17 @@ export function startRacing(scope, startGameLives, startGameScores, startAddHeal
 			}
 		}
 
+		playerCar.update();
+
 		drawGame();
 	}
 
 	function updateGameScores(): void{
 		gameScores++;
+	}
+
+	function updateSpeed(): void{
+		speed = speed + changeSpeedBy;
 	}
 
 	//Рисуем
@@ -279,22 +295,22 @@ export function startRacing(scope, startGameLives, startGameScores, startAddHeal
 		switch(e.keyCode) {
 			case 37: 
 				//Влево
-				playerCar.Move("x", -speed - speedDifferent);
+				playerCar.move("x", -speed - speedDifferent);
 				break;
 
 			case 39: 
 				//Вправо
-				playerCar.Move("x", speed + speedDifferent);
+				playerCar.move("x", speed + speedDifferent);
 				break;
 
 			case 38: 
 				//Вперёд
-				playerCar.Move("y", -speed - speedDifferent);
+				playerCar.move("y", -speed - speedDifferent);
 				break;
 
 			case 40: 
 				//Назад
-				playerCar.Move("y", speed + speedDifferent);
+				playerCar.move("y", speed + speedDifferent);
 				break;
 
 			case 27: 
@@ -314,8 +330,7 @@ export function startRacing(scope, startGameLives, startGameScores, startAddHeal
 	}
 
 	function gererateRandom(min: number, max: number): number {
-		const rand = min - 0.5 + Math.random() * (max - min + 1);
-		return Math.round(rand);
+		return random(min, max);
 	}
 
 	function setLives(): void{
@@ -329,7 +344,7 @@ export function startRacing(scope, startGameLives, startGameScores, startAddHeal
 	
 	const UPDATE_TIME: number = 1000 / 100;
 
-	let gameTimer: any = null, gameScoresCounter: any = null;
+	let gameTimer: any = null, gameScoresCounter: any = null, speedUpdater: any = null;
 
 	let gameScores = startGameScores, gameLives = startGameLives, gameAddHealth = startAddHealth; //Очки и жизни
 
@@ -339,7 +354,7 @@ export function startRacing(scope, startGameLives, startGameScores, startAddHeal
 		return;
 	}
 
-	const canvasContext: any = canvas.getContext("2d");
+	const canvasContext: CanvasRenderingContext2D = canvas.getContext("2d");
 
 	resizeGameCanvas();
 	window.addEventListener("resize", resizeGameCanvas);
@@ -348,7 +363,18 @@ export function startRacing(scope, startGameLives, startGameScores, startAddHeal
 	const canHeight: number = canvas.height;
 	
 	const objIncrease = 0.0001*canWidth + 0.003;
-	const speed = 0.005*canHeight + 1;
+	const startSpeed = 0.005*canHeight;
+	const timeToChangeSpeed = 100; 
+	const changeSpeedBy = 0.1; //Увеличивать скорость на changeSpeedBy каждые timeToChangeSpeed секунд
+	let speed = startSpeed;
+
+	//Вероятности появления для всех
+	const maxRandom = 10000;
+	const coinProb = 0.91; //Монетка
+	const carProb = 0.966; //Машинка
+	const truckProb = 0.988; //Грузовик
+	const policeProb = 0.994; //Полиция
+	const liveProb = 0.998; //Жизнь
 
 	canvas.addEventListener("contextmenu", function (e) { 
 		e.preventDefault(); 
