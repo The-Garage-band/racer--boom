@@ -1,24 +1,10 @@
-import {
-  Grid,
-  Box,
-  Button,
-  Table,
-  TableBody,
-  TableCell,
-  TableRow,
-  TableHead,
-  IconButton,
-  DialogContentText,
-  TextField,
-  DialogContent,
-} from '@mui/material';
+import {  Grid,  Box,  Button,  Table,  TableBody, TableCell,  TableRow,  TableHead,  IconButton,  DialogContentText,  TextField,  DialogContent} from '@mui/material';
 import PageLayout from '@/hocs/page-layout';
 import {ModalComponent} from '@/components/ModalComponent';
 import {FC} from 'react';
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import {useNavigate, Link} from 'react-router-dom';
 import * as React from 'react';
-import {ErrorBoundaryComponent} from '@/components/ErrorBoundaryComponent';
 
 import '@/pages/ForumPage/ForumPage.less';
 import '@/styles/table.less';
@@ -121,9 +107,7 @@ const ForumPage: FC = () => {
           </Grid>
         </Grid>
         <ModalComponent show={openModal} handleClose={handleClose}>
-          <ErrorBoundaryComponent>
-            <ContentModal/>
-          </ErrorBoundaryComponent>
+          <ContentModal/>
         </ModalComponent>
       </PageLayout>
 
