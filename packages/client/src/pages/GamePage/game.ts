@@ -3,7 +3,10 @@
 
 import {GamePage} from "@/pages/GamePage/GamePage";
 
+let started = false;
 export function startRacing(scope: GamePage, startGameLives: number, startGameScores: number, startAddHealth: string){
+  if (started) return;
+  started = true;
 
   const UPDATE_TIME: number = 1000 / 100;
 
