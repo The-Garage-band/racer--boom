@@ -25,6 +25,7 @@
     "react-dom": "^18.2.0",
     "react-router": "^6.4.1",
     "react-router-dom": "^6.4.1",
+    "redaxios": "^0.5.1",
     "yup": "^0.32.11"
   },
   "devDependencies": {

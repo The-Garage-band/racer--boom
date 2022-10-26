@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from 'redaxios'
 import { URL_API } from '../constants'
 
 export const AxiosInstance = axios?.create({
