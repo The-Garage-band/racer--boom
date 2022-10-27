@@ -1,4 +1,4 @@
-import { OutlinedInput, InputLabel, InputAdornment, FormControl, FormHelperText, Avatar } from '@mui/material';
+import { OutlinedInput, InputLabel, InputAdornment, FormControl, FormHelperText } from '@mui/material';
 
 interface InputProps {
   label: string;

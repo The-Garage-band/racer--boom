@@ -87,7 +87,7 @@ const SignInPage = () => {
         <Button
           variant="outlined"
           component={Link}
-          to={'/sign_up'}
+          to={'/home'}
           fullWidth
           sx={{marginBottom: '1rem'}}
         >

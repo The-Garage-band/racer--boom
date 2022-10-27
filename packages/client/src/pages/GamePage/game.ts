@@ -1,11 +1,40 @@
 
 //typescript
 
-export function startRacing(scope, startGameLives, startGameScores, startAddHealth){
+import {GamePage} from "@/pages/GamePage/GamePage";
+
+import coinImage from 'public/game/coin.png';
+import dorogaImage from 'public/game/doroga.jpg';
+import grayCarImage from 'public/game/grey-car.png';
+import myCarImage from 'public/game/my-car.png';
+import policeCarImage from 'public/game/police-car.png';
+import liveImage from 'public/game/live.png';
+
+let started = false;
+export function startRacing(scope: GamePage, startGameLives: number, startGameScores: number, startAddHealth: string){
+  if (started) return;
+  started = true;
+
+  const UPDATE_TIME: number = 1000 / 100;
+
+  let gameTimer: any = null, gameScoresCounter: any = null;
+
+  let gameScores = startGameScores, gameLives = startGameLives; //Очки и жизни
+  let gameAddHealth = startAddHealth;
+
+  const canvas = document.getElementById("game-canvas") as HTMLCanvasElement;
+  if (!canvas) {
+    return;
+  }
+  let gameObjects: GameObject[] = []; //Прочие объекты
 
 	//Дорога
 	class Road {
-		constructor(image: Image, y: number) {
+    x: number;
+    y: number;
+    image: HTMLImageElement;
+
+		constructor(image: string, y: number) {
 			this.x = 0;
 			this.y = y;
 			this.image = new Image();			
@@ -22,7 +51,16 @@ export function startRacing(scope, startGameLives, startGameScores, startAddHeal
 
 	//Авто и прочее
 	class GameObject {
-		constructor(image: Image, x: number, y: number, isPlayer: boolean, scores: number, isPolice: boolean, lives: number) {
+    x: number;
+    y: number;
+    needDelete: boolean;
+    isPlayer: boolean;
+    scores: number;
+    lives: number;
+    isPolice: boolean;
+    image: HTMLImageElement;
+
+		constructor(image: string, x: number, y: number, isPlayer: boolean, scores: number, isPolice: boolean, lives: number) {
 			this.x = x;
 			this.y = y;
 			this.needDelete = false;
@@ -51,7 +89,7 @@ export function startRacing(scope, startGameLives, startGameScores, startAddHeal
 		}
 
 		//Перемещение
-		Move(v: string, d: string): void  {
+		Move(v: string, d: number): void  {
 			if (v == "x") {
 				//Горизонталь
 				d *= 5;
@@ -59,7 +97,7 @@ export function startRacing(scope, startGameLives, startGameScores, startAddHeal
 				this.x += d;
 
 				if (this.x + this.image.width * objIncrease > canvas.width) {
-					this.x -= d; 
+					this.x -= d;
 				}
 		
 				if (this.x < 0) {
@@ -106,7 +144,7 @@ export function startRacing(scope, startGameLives, startGameScores, startAddHeal
 		stopGame();
 		playerCar.needDelete = false;
 		gameObjects = [];
-		playerCar = new GameObject("public/game/my-car.png", canvas.width / 2, canvas.height / 1.25, true, 0, false, 0);
+		playerCar = new GameObject(myCarImage, canvas.width / 2, canvas.height / 1.25, true, 0, false, 0);
 		startGame();
 	}
 
@@ -147,22 +185,22 @@ export function startRacing(scope, startGameLives, startGameScores, startAddHeal
 
 				//Монетка
 				if ((objRandom > 9000) && (objRandom < 9600)){
-					gameObjects.push(new GameObject("public/game/coin.png", objX, objY, false, 10, false, 0));
+					gameObjects.push(new GameObject(coinImage, objX, objY, false, 10, false, 0));
 				}
 
 				//Серая машинка
 				if ((objRandom > 9600) && (objRandom < 9900) ){
-					gameObjects.push(new GameObject("public/game/grey-car.png", objX, objY, false, 0, false, 0));
+					gameObjects.push(new GameObject(grayCarImage, objX, objY, false, 0, false, 0));
 				}
 
 				//Полиция
 				if ((objRandom > 9900) && (objRandom < 9970)) {
-					gameObjects.push(new GameObject("public/game/police-car.png", objX, objY, false, 0, true, 0));
+					gameObjects.push(new GameObject(policeCarImage, objX, objY, false, 0, true, 0));
 				}
 
 				//Жизнь
 				if ((objRandom > 9970)){
-					gameObjects.push(new GameObject("public/game/live.png", objX, objY, false, 0, false, 1));
+					gameObjects.push(new GameObject(liveImage, objX, objY, false, 0, false, 1));
 				}
 			}
 		}
@@ -319,21 +357,12 @@ export function startRacing(scope, startGameLives, startGameScores, startAddHeal
 	}
 
 	function setLives(): void{
-		gameAddHealth = startAddHealth; 
+		gameAddHealth = startAddHealth;
 		if (gameLives > startGameLives){
 			gameAddHealth = "+" + (gameLives - startGameLives).toString();
 		}
 		scope.setState({health: gameLives, score: gameScores, addHealth: gameAddHealth});
 	}
-
-	
-	const UPDATE_TIME: number = 1000 / 100;
-
-	let gameTimer: any = null, gameScoresCounter: any = null;
-
-	let gameScores = startGameScores, gameLives = startGameLives, gameAddHealth = startAddHealth; //Очки и жизни
-
-	const canvas: HTMLElement | null = document.getElementById("game-canvas");
 	
 	if (!canvas){
 		return;
@@ -360,7 +389,7 @@ export function startRacing(scope, startGameLives, startGameScores, startAddHeal
 	});
 
 	//Фон
-	const roadSrc = "public/game/doroga.jpg";
+	const roadSrc = dorogaImage;
 
 	let roadY: number = canWidth;
 	if (canHeight > canWidth){
@@ -371,14 +400,13 @@ export function startRacing(scope, startGameLives, startGameScores, startAddHeal
 		new Road(roadSrc, roadY)
 	];
 
-	const myCarSrc = "public/game/my-car.png";
-	const newimage = new Image();
-	newimage.src = myCarSrc;
-	let playerCar: GameObject = new GameObject(myCarSrc, canWidth / 2, canHeight - newimage.height * objIncrease - 1, true, 0, false, 0); //Наша машинка
-	let gameObjects = []; //Прочие объекты
+	const myCarSrc = myCarImage;
+	const newImage = new Image();
+	newImage.src = myCarSrc;
+	let playerCar: GameObject = new GameObject(myCarSrc, canWidth / 2, canHeight - newImage.height * objIncrease - 1, true, 0, false, 0); //Наша машинка
 
-	newimage.onload = function() {
-		playerCar = new GameObject(myCarSrc, canWidth / 2, canHeight - newimage.height * objIncrease - 1, true, 0, false, 0); //Наша машинка
+	newImage.onload = function() {
+		playerCar = new GameObject(myCarSrc, canWidth / 2, canHeight - newImage.height * objIncrease - 1, true, 0, false, 0); //Наша машинка
 		startGame();
 	}
 	

@@ -5,6 +5,9 @@ import {
   ReactPortal,
 } from 'react'
 
+import bgCar from 'public/bg-car.png';
+import logo from 'public/logo.png';
+
 export default function PageLayout(props: {
   children:
     | string
@@ -19,17 +22,17 @@ export default function PageLayout(props: {
   return (
     <div className="page">
       <div className="page__logo">
-        <img src="../public/logo.png" alt="" />
+        <img src={ logo } alt="" />
       </div>
       <div className="page__decoration page-decoration">
         <img
           className="page-decoration__left"
-          src="../public/bg-car.png"
+          src={ bgCar }
           alt=""
         />
         <img
           className="page-decoration__right"
-          src="../public/bg-car.png"
+          src={ bgCar }
           alt=""
         />
       </div>

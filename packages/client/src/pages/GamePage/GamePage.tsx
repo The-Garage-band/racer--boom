@@ -1,7 +1,5 @@
-
-import React, { Component } from 'react';
+import React, {Component}  from 'react';
 import {CanvasComponent} from "@/components/CanvasComponent";
-import {FC} from "react";
 import healthEmpty from 'public/game/health-empty.png';
 import healthFill from 'public/game/health-fill.png';
 
@@ -9,21 +7,31 @@ import './GamePage.less'
 
 import {startRacing} from './game';
 
-export class GamePage extends React.Component {
-    constructor(props) {
+type TGamePageState = {
+    health: number,
+    score: number,
+    addHealth: string,
+}
+
+type TGamePageProps = {
+    health: number,
+}
+
+export class GamePage extends Component<TGamePageProps, TGamePageState> {
+    constructor(props: TGamePageProps) {
         super(props);
         this.state = {
-            health: 3,
+            health: this.props.health,
             score: 0,
             addHealth: ""
         };
     }
 
-    render() {
-        window.onload  = () => {
-            startRacing(this, this.state.health, this.state.score, this.state.addHealth);
-        }
+    componentDidMount() {
+        startRacing(this, this.state.health, this.state.score, this.state.addHealth);
+    }
 
+    render() {
         return (
             <div id="game-page">
                 <div className="header">

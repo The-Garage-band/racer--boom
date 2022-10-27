@@ -132,6 +132,6 @@ export class AudioService {
   }
 
   private _play = () => {
-    this._audio.play().catch(() => setTimeout(this._play, 100))
+    this._audio.play()?.catch(() => setTimeout(this._play, 100))
   }
 }
