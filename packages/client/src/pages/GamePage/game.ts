@@ -3,6 +3,13 @@
 
 import {GamePage} from "@/pages/GamePage/GamePage";
 
+import coinImage from 'public/game/coin.png';
+import dorogaImage from 'public/game/doroga.jpg';
+import grayCarImage from 'public/game/grey-car.png';
+import myCarImage from 'public/game/my-car.png';
+import policeCarImage from 'public/game/police-car.png';
+import liveImage from 'public/game/live.png';
+
 let started = false;
 export function startRacing(scope: GamePage, startGameLives: number, startGameScores: number, startAddHealth: string){
   if (started) return;
@@ -137,7 +144,7 @@ export function startRacing(scope: GamePage, startGameLives: number, startGameSc
 		stopGame();
 		playerCar.needDelete = false;
 		gameObjects = [];
-		playerCar = new GameObject("public/game/my-car.png", canvas.width / 2, canvas.height / 1.25, true, 0, false, 0);
+		playerCar = new GameObject(myCarImage, canvas.width / 2, canvas.height / 1.25, true, 0, false, 0);
 		startGame();
 	}
 
@@ -178,22 +185,22 @@ export function startRacing(scope: GamePage, startGameLives: number, startGameSc
 
 				//Монетка
 				if ((objRandom > 9000) && (objRandom < 9600)){
-					gameObjects.push(new GameObject("public/game/coin.png", objX, objY, false, 10, false, 0));
+					gameObjects.push(new GameObject(coinImage, objX, objY, false, 10, false, 0));
 				}
 
 				//Серая машинка
 				if ((objRandom > 9600) && (objRandom < 9900) ){
-					gameObjects.push(new GameObject("public/game/grey-car.png", objX, objY, false, 0, false, 0));
+					gameObjects.push(new GameObject(grayCarImage, objX, objY, false, 0, false, 0));
 				}
 
 				//Полиция
 				if ((objRandom > 9900) && (objRandom < 9970)) {
-					gameObjects.push(new GameObject("public/game/police-car.png", objX, objY, false, 0, true, 0));
+					gameObjects.push(new GameObject(policeCarImage, objX, objY, false, 0, true, 0));
 				}
 
 				//Жизнь
 				if ((objRandom > 9970)){
-					gameObjects.push(new GameObject("public/game/live.png", objX, objY, false, 0, false, 1));
+					gameObjects.push(new GameObject(liveImage, objX, objY, false, 0, false, 1));
 				}
 			}
 		}
@@ -382,7 +389,7 @@ export function startRacing(scope: GamePage, startGameLives: number, startGameSc
 	});
 
 	//Фон
-	const roadSrc = "public/game/doroga.jpg";
+	const roadSrc = dorogaImage;
 
 	let roadY: number = canWidth;
 	if (canHeight > canWidth){
@@ -393,7 +400,7 @@ export function startRacing(scope: GamePage, startGameLives: number, startGameSc
 		new Road(roadSrc, roadY)
 	];
 
-	const myCarSrc = "public/game/my-car.png";
+	const myCarSrc = myCarImage;
 	const newImage = new Image();
 	newImage.src = myCarSrc;
 	let playerCar: GameObject = new GameObject(myCarSrc, canWidth / 2, canHeight - newImage.height * objIncrease - 1, true, 0, false, 0); //Наша машинка
