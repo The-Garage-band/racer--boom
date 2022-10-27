@@ -7,7 +7,7 @@ export default {
   //testMatch: ['<rootDir>/src/**/?(*.)test.{ts,tsx}'],
   modulePaths: ["src"],
   moduleNameMapper: {
-    '\\.(css|less|png)$': 'identity-obj-proxy',
+    '\\.(css|less|png|jpg)$': 'identity-obj-proxy',
 
     "^@\/(.*)$": "<rootDir>/src/$1",
     "^public\/(.*)$": "<rootDir>/public/$1",
