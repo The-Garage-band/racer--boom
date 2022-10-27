@@ -1,7 +1,7 @@
 
 //typescript
 
-import random from 'utils.random';
+//import random from 'utils.random';
 
 import {GamePage} from "@/pages/GamePage/GamePage";
 
@@ -368,7 +368,9 @@ export function startRacing(scope: GamePage, startGameLives: number, startGameSc
 	}
 
 	function gererateRandom(min: number, max: number): number {
-		return random(min, max);
+		const rand = min - 0.5 + Math.random() * (max - min + 1);
+		return Math.round(rand);
+		//return random(min, max);
 	}
 
 	function setLives(): void{
