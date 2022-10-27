@@ -167,7 +167,7 @@ const SignUpPage = () => {
           variant="outlined"
           fullWidth
           component={Link}
-          to={'/log_in'}
+          to={'/home'}
           sx={{marginBottom: '1rem'}}
         >
           Авторизация
