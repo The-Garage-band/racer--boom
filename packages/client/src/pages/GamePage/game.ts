@@ -233,7 +233,7 @@ export function startRacing(scope, startGameLives, startGameScores, startAddHeal
 				}
 			}
 		}
-
+		
 		playerCar.update();
 
 		drawGame();
