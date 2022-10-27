@@ -22,7 +22,7 @@ export default function PageLayout(props: {
   return (
     <div className="page">
       <div className="page__logo">
-        <img src={ bgCar } alt="" />
+        <img src={ logo } alt="" />
       </div>
       <div className="page__decoration page-decoration">
         <img
