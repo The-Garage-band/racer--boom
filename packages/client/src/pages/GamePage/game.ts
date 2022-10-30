@@ -469,10 +469,10 @@ export function startRacing(scope: GamePage, startGameLives: number, startGameSc
 	let playerCar: GameObject = new GameObject(myCarSrc, canWidth / 2, canHeight - newImage.height * objIncrease - 1, true, 0, false, 0); //Наша машинка
 
 	//Звуки
-	var crushAudio = new Audio(crushSound); //Столкновение
-	var gameOverAudio = new Audio(gameOverSound); //Завершение игры
-	var collectCoinAudio = new Audio(collectCoinSound); //Сбор монеток
-	var repareAudio = new Audio(repareSound); //Ремонт (+ жизнь)
+	const crushAudio = new Audio(crushSound); //Столкновение
+	const gameOverAudio = new Audio(gameOverSound); //Завершение игры
+	const collectCoinAudio = new Audio(collectCoinSound); //Сбор монеток
+	const repareAudio = new Audio(repareSound); //Ремонт (+ жизнь)
 
 	newImage.onload = function() {
 		playerCar = new GameObject(myCarSrc, canWidth / 2, canHeight - newImage.height * objIncrease - 1, true, 0, false, 0); //Наша машинка
