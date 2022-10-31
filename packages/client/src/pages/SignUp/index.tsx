@@ -2,12 +2,12 @@ import { Button } from '@mui/material';
 import { EmailOutlined, PasswordOutlined, LoginOutlined, CallOutlined, Person2Outlined } from '@mui/icons-material';
 import { useNavigate, Link } from 'react-router-dom';
 
-import PageLayout from '../../hocs/page-layout';
-import Input from '../../components/Input';
+import PageLayout from '@/hocs/page-layout';
+import Input from '@/components/Input';
 
 import validationSchema from './validation_schema';
 import { useFormik } from 'formik';
-import { signup, ISignUp } from '../../API/AuthApi';
+import { signup, ISignUp } from '@/API/AuthApi';
 
 const SignUpPage = () => {
   const navigate = useNavigate();

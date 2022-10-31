@@ -4,9 +4,9 @@ import { Button } from '@mui/material';
 import { EmailOutlined, LockOutlined } from '@mui/icons-material';
 import { useNavigate, Link } from 'react-router-dom';
 
-import PageLayout from '../../hocs/page-layout';
-import Input from '../../components/Input';
-import { login, ILogIn } from '../../API/AuthApi';
+import PageLayout from '@/hocs/page-layout';
+import Input from '@/components/Input';
+import { login, ILogIn } from '@/API/AuthApi';
 import fetchUser, { getUserData } from '@/store/slices/GetUserSlice';
 import { useAppDispatch, useAppSelector } from '@/hooks';
 

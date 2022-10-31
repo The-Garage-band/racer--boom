@@ -2,13 +2,13 @@ import { Button } from '@mui/material';
 import { EmailOutlined, LoginOutlined, CallOutlined, Person2Outlined } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 
-import PageLayout from '../../hocs/page-layout';
-import Input from '../../components/Input';
-import Avatar from '../../components/Avatar';
+import PageLayout from '@/hocs/page-layout';
+import Input from '@/components/Input';
+import Avatar from '@/components/Avatar';
 
 import validationSchema from './validation_schema';
 import { useFormik } from 'formik';
-// import { getUser, updateProfile, getProfile, updateAvatar, IProfile, IAvatar } from '../../API/User';
+// import { getUser, updateProfile, getProfile, updateAvatar, IProfile, IAvatar } from '@/API/User';
 
 const ProfilePage = () => {
 

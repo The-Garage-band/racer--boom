@@ -1,10 +1,10 @@
 import { Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
-import PageLayout from '../../hocs/page-layout';
+import PageLayout from '@/hocs/page-layout';
 
 import { useFormik } from 'formik';
-import { logout } from '../../API/AuthApi';
+import { logout } from '@/API/AuthApi';
 
 const LogOutPage = () => {
   const navigate = useNavigate();

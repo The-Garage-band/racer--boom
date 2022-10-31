@@ -9,7 +9,7 @@ import {
     REGEX_TEL,
     MSG_TEL,
     MSG_REQUIRED,
-} from '../../constants';
+} from '@/constants';
 
 export default yup.object({
     first_name: yup
