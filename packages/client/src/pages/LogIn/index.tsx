@@ -1,16 +1,29 @@
-import { Button} from '@mui/material';
+import React, { useEffect } from 'react';
+import { useFormik } from 'formik';
+import { Button } from '@mui/material';
 import { EmailOutlined, LockOutlined } from '@mui/icons-material';
 import { useNavigate, Link } from 'react-router-dom';
 
 import PageLayout from '../../hocs/page-layout';
 import Input from '../../components/Input';
+import { login, ILogIn } from '../../API/AuthApi';
+import fetchUser, { getUserData } from '@/store/slices/GetUserSlice';
+import { useAppDispatch, useAppSelector } from '@/hooks';
 
 import validationSchema from './validation_schema';
-import { useFormik } from 'formik';
-import { login, ILogIn } from '../../API/AuthApi';
 
 const SignInPage = () => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const { data } = useAppSelector(getUserData);
+
+  useEffect(() => {
+    dispatch(fetchUser()).then(({ payload }) => {
+      if (payload.id) {
+        navigate('/home');
+      }
+    });
+  }, [data.id]);
 
   const formik = useFormik({
     initialValues: {
