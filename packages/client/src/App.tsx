@@ -8,6 +8,7 @@ import LeaderboardPage from "@/pages/LeaderboardPage";
 import ForumPage from "@/pages/ForumPage";
 import HomePage from "@/pages/HomePage";
 import ForumDialogPage from "@/pages/ForumDialogPage";
+import PageNotFound from "@/pages/PageNotFound";
 import { AudioSetup } from '@/components/AudioSetup/AudioSetup'
 import {ErrorBoundaryComponent} from '@/components/ErrorBoundaryComponent';
 
@@ -32,6 +33,7 @@ function App() {
               <Route path="/forum" element={<ForumPage />} />
               <Route path="/forum/:id" element={<ForumDialogPage />} />
               <Route path="/" element={<LogInPage />} />
+              <Route path="*" element={<PageNotFound />} />
             </Routes>
           </Router>
         </ErrorBoundaryComponent>
