@@ -14,7 +14,7 @@ interface DocumentElementWithFullscreen extends HTMLElement {
 }
 
 export function isFullScreen(): boolean {
-  let doc: DocumentWithFullscreen = document;
+  const doc: DocumentWithFullscreen = document;
   return !!((doc.fullScreenElement && doc.fullScreenElement !== null)
       || doc.mozFullScreen
       || doc.webkitIsFullScreen);
@@ -33,7 +33,7 @@ export function requestFullScreen(element: DocumentElementWithFullscreen) {
 }
 
 export function exitFullScreen() {
-  let doc: DocumentWithFullscreen = document;
+  const doc: DocumentWithFullscreen = document;
   if (doc.exitFullscreen) {
     doc.exitFullscreen();
   } else if (doc.msExitFullscreen) {
