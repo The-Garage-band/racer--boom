@@ -13,6 +13,13 @@ import myCarImage from 'public/game/my-car.png';
 import policeCarImage from 'public/game/police-car.png';
 import liveImage from 'public/game/live.png';
 
+import crushSound from 'public/game/crush.mp3';
+import repareSound from 'public/game/repare.mp3';
+import gameOverSound from 'public/game/gameover.mp3';
+import collectCoinSound from 'public/game/collectcoin.mp3';
+
+import { AudioService } from '@/services';
+
 let started = false;
 export function startRacing(scope: GamePage, startGameLives: number, startGameScores: number, startAddHealth: string){
   if (started) return;
@@ -247,12 +254,14 @@ export function startRacing(scope: GamePage, startGameLives: number, startGameSc
 				if (gameObjects[i].scores){
 					gameScores = gameScores + gameObjects[i].scores;
 					gameObjects.splice(i, 1);
+					collectCoinAudioPlay();
 				} else {
 
 					//Жизни
 					if (gameObjects[i].lives){
 						gameLives = gameLives + gameObjects[i].lives;
 						gameObjects.splice(i, 1);
+						repareAudioPlay();
 						break;
 					}
 
@@ -260,6 +269,7 @@ export function startRacing(scope: GamePage, startGameLives: number, startGameSc
 					if (gameObjects[i].isPolice || (gameLives <= 0)){
 						gameLives = 0;
 						playerCar.needDelete = true;
+						gameOverAudioPlay();
 						setLives();
 						alert("Game over!");			
 						reStartGame();
@@ -267,6 +277,7 @@ export function startRacing(scope: GamePage, startGameLives: number, startGameSc
 					} else {
 						gameLives--;						
 						gameObjects.splice(i, 1);
+						crushAudioPlay();
 					}
 					
 				}
@@ -373,12 +384,36 @@ export function startRacing(scope: GamePage, startGameLives: number, startGameSc
 		//return random(min, max);
 	}
 
-	function setLives(): void{
+	function setLives(): void {
 		gameAddHealth = startAddHealth;
 		if (gameLives > startGameLives){
 			gameAddHealth = "+" + (gameLives - startGameLives).toString();
 		}
 		scope.setState({health: gameLives, score: gameScores, addHealth: gameAddHealth});
+	}
+
+	function crushAudioPlay(): void {
+		if (AudioService.getInstance().isEnabled()){
+			crushAudio.play();
+		}
+	}
+
+	function gameOverAudioPlay(): void {
+		if (AudioService.getInstance().isEnabled()){
+			gameOverAudio.play();
+		}
+	}
+
+	function repareAudioPlay(): void {
+		if (AudioService.getInstance().isEnabled()){
+			repareAudio.play();
+		}
+	}
+
+	function collectCoinAudioPlay(): void {
+		if (AudioService.getInstance().isEnabled()){
+			collectCoinAudio.play();
+		}
 	}
 	
 	if (!canvas){
@@ -433,9 +468,14 @@ export function startRacing(scope: GamePage, startGameLives: number, startGameSc
 	newImage.src = myCarSrc;
 	let playerCar: GameObject = new GameObject(myCarSrc, canWidth / 2, canHeight - newImage.height * objIncrease - 1, true, 0, false, 0); //Наша машинка
 
+	//Звуки
+	const crushAudio = new Audio(crushSound); //Столкновение
+	const gameOverAudio = new Audio(gameOverSound); //Завершение игры
+	const collectCoinAudio = new Audio(collectCoinSound); //Сбор монеток
+	const repareAudio = new Audio(repareSound); //Ремонт (+ жизнь)
+
 	newImage.onload = function() {
 		playerCar = new GameObject(myCarSrc, canWidth / 2, canHeight - newImage.height * objIncrease - 1, true, 0, false, 0); //Наша машинка
 		startGame();
 	}
-	
 }
