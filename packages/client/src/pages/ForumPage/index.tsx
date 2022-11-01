@@ -65,7 +65,7 @@ const ForumPage: FC = () => {
         <Grid container direction="column" justifyContent="center"
               alignItems="stretch" className="page__content-img" id="forum">
           <Grid container item direction="row" justifyContent="flex-end">
-            <Link to="/"><Button variant="contained">Назад</Button></Link>
+            <Link to="/home"><Button variant="contained">Назад</Button></Link>
           </Grid>
           <Grid item sx={{flex: 1}}>
             <Box className="form form__full-size form__transparent">
