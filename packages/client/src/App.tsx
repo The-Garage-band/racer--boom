@@ -10,6 +10,7 @@ import HomePage from "@/pages/HomePage";
 import ForumDialogPage from "@/pages/ForumDialogPage";
 import { AudioSetup } from '@/components/AudioSetup/AudioSetup'
 import {ErrorBoundaryComponent} from '@/components/ErrorBoundaryComponent';
+import { FullscreenButtonComponent } from '@/components/FullscreenButtonComponent/FullscreenButtonComponent'
 
 import './index.less'
 
@@ -35,6 +36,9 @@ function App() {
             </Routes>
           </Router>
         </ErrorBoundaryComponent>
+        <footer>
+          <FullscreenButtonComponent/>
+        </footer>
       </>
   )
 }

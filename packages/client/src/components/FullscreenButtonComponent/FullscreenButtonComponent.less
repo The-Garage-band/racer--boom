@@ -1,0 +1,46 @@
+:-webkit-full-screen {
+  /* properties */
+}
+
+:-moz-full-screen {
+  /* properties */
+}
+
+:-ms-fullscreen {
+  /* properties */
+}
+
+:full-screen { /*pre-spec */
+  /* properties */
+}
+
+:fullscreen { /* spec */
+  /* properties */
+}
+
+/* deeper elements */
+:-webkit-full-screen video {
+  width: 100%;
+  height: 100%;
+}
+
+/* styling the backdrop*/
+::backdrop {
+  /* properties */
+}
+::-ms-backdrop {
+  /* properties */
+}
+
+.fullscreen-block {
+  position: absolute;
+  right: 50px;
+  bottom: 20px;
+  z-index: 1000;
+
+  img {
+    height: 60px;
+    width: 60px;
+    object-fit: cover;
+  }
+}
