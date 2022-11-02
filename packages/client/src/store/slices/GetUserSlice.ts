@@ -12,7 +12,7 @@ export interface IGetUserState {
 }
 
 const initialState: IGetUserState = {
-    isLoading: false,
+    isLoading: true,
     data: {
         id: 0,
         display_name: '',

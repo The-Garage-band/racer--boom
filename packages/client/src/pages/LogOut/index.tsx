@@ -1,3 +1,4 @@
+import React, { useEffect } from 'react';
 import { Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
@@ -5,9 +6,16 @@ import PageLayout from '@/hocs/page-layout';
 
 import { useFormik } from 'formik';
 import { logout } from '@/API/AuthApi';
+import { getUserData } from '@/store/slices/GetUserSlice';
+import { useAppSelector } from '@/hooks';
 
 const LogOutPage = () => {
   const navigate = useNavigate();
+
+  const { data, isLoading } = useAppSelector(getUserData);
+  if (!data.id && !isLoading) {
+    navigate('/log_in');
+  }
 
   const formik = useFormik({
     initialValues: [],

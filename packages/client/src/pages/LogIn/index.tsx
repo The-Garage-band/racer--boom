@@ -7,23 +7,18 @@ import { useNavigate, Link } from 'react-router-dom';
 import PageLayout from '@/hocs/page-layout';
 import Input from '@/components/Input';
 import { login, ILogIn } from '@/API/AuthApi';
-import fetchUser, { getUserData } from '@/store/slices/GetUserSlice';
-import { useAppDispatch, useAppSelector } from '@/hooks';
+import { getUserData } from '@/store/slices/GetUserSlice';
+import { useAppSelector } from '@/hooks';
 
 import validationSchema from './validation_schema';
 
-const SignInPage = () => {
+const LoginPage = () => {
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
-  const { data } = useAppSelector(getUserData);
+  const { data, isLoading } = useAppSelector(getUserData);
 
-  useEffect(() => {
-    dispatch(fetchUser()).then(({ payload }) => {
-      if (payload.id) {
-        navigate('/home');
-      }
-    });
-  }, [data.id]);
+  if (data.id && !isLoading) {
+    navigate('/home');
+  }
 
   const formik = useFormik({
     initialValues: {
@@ -111,4 +106,4 @@ const SignInPage = () => {
   );
 };
 
-export default SignInPage;
+export default LoginPage;
