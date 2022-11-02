@@ -9,6 +9,7 @@ import ForumPage from "@/pages/ForumPage";
 import HomePage from "@/pages/HomePage";
 import ForumDialogPage from "@/pages/ForumDialogPage";
 import PageNotFound from "@/pages/PageNotFound";
+import ErrorPage from "@/pages/ErrorPage";
 import { AudioSetup } from '@/components/AudioSetup/AudioSetup'
 import {ErrorBoundaryComponent} from '@/components/ErrorBoundaryComponent';
 
