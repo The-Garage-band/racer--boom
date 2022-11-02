@@ -1,66 +1,82 @@
-import React, { Component } from 'react'
-import { CanvasComponent } from '@/components/CanvasComponent'
-import healthEmpty from 'public/game/health-empty.png'
-import healthFill from 'public/game/health-fill.png'
+import React, {FC, useContext, useEffect, useRef, useState} from 'react';
+import {useNavigate} from "react-router-dom";
+import healthEmpty from 'public/game/health-empty.png';
+import healthFill from 'public/game/health-fill.png';
 
 import './GamePage.less'
 
-import { startRacing } from './game'
-
-type TGamePageState = {
-  health: number
-  score: number
-  addHealth: string
-}
+import {Game, GameEvents} from "./game";
+import {GameContext} from "@/hocs";
 
 type TGamePageProps = {
-  health: number
+    health: number,
 }
 
-export class GamePage extends Component<TGamePageProps, TGamePageState> {
-  constructor(props: TGamePageProps) {
-    super(props)
-    this.state = {
-      health: this.props.health,
-      score: 0,
-      addHealth: '',
-    }
-  }
+export const GamePage: FC<TGamePageProps> = (props) => {
+    const [health, setHealth] = useState(props.health);
+    const [score, setScore] = useState(0);
+    const [coins, setCoins] = useState(0);
+    const canvas = useRef<HTMLCanvasElement>(null);
+    const navigate = useNavigate();
+    const gameContext = useContext(GameContext);
 
-  componentDidMount() {
-    startRacing(this, this.state.health, this.state.score, this.state.addHealth)
-  }
+    const onGameOver = () => navigate('/end-game');
 
-  render() {
+    useEffect(() => {
+        const game = new Game();
+
+        if (canvas.current) {
+            game.events.on(GameEvents.updateScore, setScore);
+            game.events.on(GameEvents.updateLives, setHealth);
+            game.events.on(GameEvents.updateCoins, setCoins);
+            game.events.once(GameEvents.gameOver, onGameOver);
+            game.lives = health;
+            gameContext.data.healthCollected = 0;
+            game.start(canvas.current);
+        }
+
+        return () => {
+            if (!canvas.current) {
+                return;
+            }
+            game.events.removeListener(GameEvents.updateScore, setScore);
+            game.events.removeListener(GameEvents.updateLives, setHealth);
+            game.events.removeListener(GameEvents.updateCoins, setCoins);
+            game.events.removeListener(GameEvents.gameOver, onGameOver);
+            game.stop();
+        }
+    }, []);
+
+    useEffect(() => {
+        gameContext.update({ score });
+    }, [score]);
+    useEffect(() => {
+        gameContext.update({ coins });
+    }, [coins]);
+    useEffect(() => {
+        gameContext.update({ healthCollected: gameContext.data.healthCollected + 1});
+    }, [health]);
+
     return (
-      <div id="game-page">
-        <div className="header">
-          <div className="healths">
-            <img
-              src={this.state.health >= 1 ? healthFill : healthEmpty}
-              alt="<3"
-            />
-            <img
-              src={this.state.health >= 2 ? healthFill : healthEmpty}
-              alt="<3"
-            />
-            <img
-              src={this.state.health >= 3 ? healthFill : healthEmpty}
-              alt="<3"
-            />
-            <span className="value">{this.state.addHealth}</span>
-          </div>
-          <div className="timer">
-            <span className="value">{this.state.score}</span>
-          </div>
-          <div className="score" style={{ display: 'none' }}>
-            <span className="value"></span>
-          </div>
+        <div id="game-page">
+            <div className="header">
+                <div className="healths" >
+                    <img src={health >= 1 ? healthFill : healthEmpty} alt="<3"/>
+                    <img src={health >= 2 ? healthFill : healthEmpty} alt="<3"/>
+                    <img src={health >= 3 ? healthFill : healthEmpty} alt="<3"/>
+                    <span className="value">{health > 3 ? (health - 3) : ''}</span>
+                </div>
+                <div className="timer" >
+                    <span className="value">{score}</span>
+                </div>
+                <div className="score"  style={{ display: 'none' }}>
+                    <span className="value">{score}</span>
+                </div>
+            </div>
+            <div className="content">
+                <canvas ref={canvas} width={500} height={500} id="game-canvas" />
+            </div>
+
         </div>
-        <div className="content">
-          <CanvasComponent id="game-canvas" width={500} height={500} />
-        </div>
-      </div>
     )
-  }
 }
