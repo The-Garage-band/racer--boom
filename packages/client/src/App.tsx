@@ -9,7 +9,7 @@ import ForumPage from "@/pages/ForumPage";
 import HomePage from "@/pages/HomePage";
 import ForumDialogPage from "@/pages/ForumDialogPage";
 import PageNotFound from "@/pages/PageNotFound";
-//import ErrorPage from "@/pages/ErrorPage";
+import EndGamePage from "@/pages/EndGamePage";
 import { AudioSetup } from '@/components/AudioSetup/AudioSetup'
 import {ErrorBoundaryComponent} from '@/components/ErrorBoundaryComponent';
 
@@ -30,6 +30,7 @@ function App() {
               <Route path="/profile" element={<ProfilePage />} />
               <Route path="/game" element={<GamePage health={3}/>} />
               <Route path="/home" element={<HomePage/>} />
+              <Route path="/end-game" element={<EndGamePage/>} />
               <Route path="/leaderboard" element={<LeaderboardPage />} />
               <Route path="/forum" element={<ForumPage />} />
               <Route path="/forum/:id" element={<ForumDialogPage />} />

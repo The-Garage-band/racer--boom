@@ -18,5 +18,6 @@ module.exports = {
     '@typescript-eslint/ban-ts-comment': 1,
     '@typescript-eslint/no-explicit-any': 0,
     'no-useless-escape': 0,
+    'no-dupe-else-if': 0,
   },
 }
