@@ -9,7 +9,7 @@ type ErrorPageProps = {
     description: string,
 }
 
-export const ErrorPage: FC = ({caption = '500', description = 'Что-то пошло не так :('}) => {
+export const ErrorPage: FC<ErrorPageProps> = ({caption = '500', description = 'Что-то пошло не так :('}) => {
 
     return (<div id="error-page">
         <img src="public/game/my-car.png" alt="" className="car-animation" id="car-animation-left"/>
