@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react';
 import { useFormik } from 'formik';
 import { Button } from '@mui/material';
 import { EmailOutlined, LockOutlined } from '@mui/icons-material';
@@ -7,21 +6,11 @@ import { useNavigate, Link } from 'react-router-dom';
 import PageLayout from '@/hocs/page-layout';
 import Input from '@/components/Input';
 import { login, ILogIn } from '@/API/AuthApi';
-import { getUserData } from '@/store/slices/GetUserSlice';
-import { useAppSelector } from '@/hooks';
 
 import validationSchema from './validation_schema';
 
 const LoginPage = () => {
   const navigate = useNavigate();
-  // const { data, isLoading } = useAppSelector(getUserData);
-
-  // useEffect(() => {
-  //   console.log(data.id, isLoading)
-  //   if (data.id && !isLoading) {
-  //     navigate('/home');
-  //   }
-  // }, []);
 
   const formik = useFormik({
     initialValues: {

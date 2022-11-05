@@ -183,7 +183,7 @@ const ProfilePage = () => {
           variant="outlined"
           fullWidth
           component={Link}
-          to={'/game'}
+          to={'/home'}
           sx={{marginBottom: '1rem'}}
         >
           Вернуться к игре
