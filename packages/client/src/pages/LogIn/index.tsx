@@ -14,11 +14,14 @@ import validationSchema from './validation_schema';
 
 const LoginPage = () => {
   const navigate = useNavigate();
-  const { data, isLoading } = useAppSelector(getUserData);
+  // const { data, isLoading } = useAppSelector(getUserData);
 
-  if (data.id && !isLoading) {
-    navigate('/home');
-  }
+  // useEffect(() => {
+  //   console.log(data.id, isLoading)
+  //   if (data.id && !isLoading) {
+  //     navigate('/home');
+  //   }
+  // }, []);
 
   const formik = useFormik({
     initialValues: {

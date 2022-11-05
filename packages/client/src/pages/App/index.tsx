@@ -12,6 +12,7 @@ import HomePage from "@/pages/HomePage";
 import ForumDialogPage from "@/pages/ForumDialogPage";
 import { AudioSetup } from '@/components/AudioSetup/AudioSetup';
 import {ErrorBoundaryComponent} from '@/components/ErrorBoundaryComponent';
+import ProtectedRoute from '@/components/ProtectedRoute';
 
 import fetchUser, { getUserData } from '@/store/slices/GetUserSlice';
 import { useAppDispatch, useAppSelector } from '@/hooks';
@@ -28,7 +29,7 @@ const App = () => {
         navigate('/log_in');
       }
     });
-  }, [data.id]);
+  }, []);
 
   return (
     <ErrorBoundaryComponent>
@@ -37,7 +38,18 @@ const App = () => {
       </header>
       <Routes>
         <Route path="/sign_up" element={<SignUpPage />} />
-        <Route path="/log_in" element={<LogInPage />} />
+        {/* <Route path="/log_in" element={<LogInPage />} /> */}
+        <Route
+          path="log_in"
+          element={
+            <ProtectedRoute
+              redirectPath="/home"
+              isAllowed={ !data.id }
+            >
+              <LogInPage />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/logout" element={<LogOutPage />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/game" element={<GamePage health={3}/>} />
