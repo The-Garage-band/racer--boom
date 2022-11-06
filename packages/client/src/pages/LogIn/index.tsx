@@ -20,7 +20,6 @@ const LoginPage = () => {
     validationSchema,
     onSubmit: (values: ILogIn) => login(values)
       .then((payload) => {
-        console.log('payload', payload)
         if (payload.status === 200) {
             navigate('/game');
         }
