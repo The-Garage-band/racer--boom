@@ -1,5 +1,5 @@
 import { Navigate, Outlet } from 'react-router-dom';
-import ForumPage from "@/pages/ForumPage";
+import Loader from "@/pages/Loader";
 
 interface ProtectedRouteProps {
   isAllowed: boolean;
@@ -16,7 +16,7 @@ const ProtectedRoute = ({
 }: ProtectedRouteProps): any => {
 
   if (isLoading) {
-    return <ForumPage />;
+    return <Loader />;
   }
 
   if (!isAllowed) {
