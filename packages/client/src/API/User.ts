@@ -14,7 +14,7 @@ interface IProfile {
   avatar: string;
 }
 
-type IAvatar = {
+type TAvatar = {
   name: string;
   size: number;
   type: string;
@@ -26,9 +26,7 @@ const getUser = () => AxiosInstance.get(PATH_GET_USER);
 
 const updateProfile = <T>(data: T) => AxiosInstance.put<string>(PATH_UPDATE_PROFILE, data);
 
-const getProfile = <T>(data: T) => AxiosInstance.get<string>(`${PATH_GET_PROFILE}/${data}`);
-
 const updateAvatar = <T>(data: T) => AxiosInstance.put<string>(PATH_AVATAR, data);
 
-export { getUser, updateProfile, getProfile, updateAvatar };
-export type { IProfile, IAvatar };
+export { getUser, updateProfile, updateAvatar };
+export type { IProfile, TAvatar };
