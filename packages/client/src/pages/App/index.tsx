@@ -10,6 +10,7 @@ import LeaderboardPage from "@/pages/LeaderboardPage";
 import ForumPage from "@/pages/ForumPage";
 import HomePage from "@/pages/HomePage";
 import ForumDialogPage from "@/pages/ForumDialogPage";
+import Loader from "@/pages/Loader";
 import { AudioSetup } from '@/components/AudioSetup/AudioSetup';
 import {ErrorBoundaryComponent} from '@/components/ErrorBoundaryComponent';
 import ProtectedRoute from '@/components/ProtectedRoute';
@@ -50,7 +51,7 @@ const App = () => {
             <Route path="/forum" element={<ForumPage />} />
             <Route path="/forum/:id" element={<ForumDialogPage />} />
           </Route>
-          <Route path="*" element={<ForumPage />} />
+          <Route path="*" element={<Loader />} />
         </Routes>
     </ErrorBoundaryComponent>
   );
