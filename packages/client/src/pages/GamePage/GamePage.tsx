@@ -41,11 +41,11 @@ export class GamePage extends Component<TGamePageProps, TGamePageState> {
                         <img src={this.state.health >= 3 ? healthFill : healthEmpty} alt="<3"/>
                         <span className="value">{this.state.addHealth}</span>
                     </div>
-                    <div className="timer" style={{ display: 'none' }} >
-                        <span className="value">00:10</span>
-                    </div>
-                    <div className="score" >
+                    <div className="timer" >
                         <span className="value">{this.state.score}</span>
+                    </div>
+                    <div className="score"  style={{ display: 'none' }}>
+                        <span className="value"></span>
                     </div>
                 </div>
                 <div className="content">

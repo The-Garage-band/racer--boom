@@ -29,7 +29,7 @@ const LeaderboardPage:FC = () => {
               alignItems="stretch" id="leaderboard"
               className="page__content-img">
           <Grid container item direction="row" justifyContent="flex-end">
-            <Link to="/"><Button variant="contained">Назад</Button></Link>
+            <Link to="/home"><Button variant="contained">Назад</Button></Link>
           </Grid>
           <Grid item>
             <Box className="form form__full-size form__transparent">
