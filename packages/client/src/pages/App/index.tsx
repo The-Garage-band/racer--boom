@@ -46,7 +46,8 @@ const App = () => {
             <Route path="/logout" element={ <LogOutPage /> } />
             <Route path="/profile" element={ <ProfilePage /> } />
             <Route path="/game" element={<GamePage health={3}/>} />
-            <Route path="/home" element={<HomePage/>} />
+            <Route path="/" element={<HomePage />} />
+            <Route path="/home" element={<HomePage />} />
             <Route path="/leaderboard" element={<LeaderboardPage />} />
             <Route path="/forum" element={<ForumPage />} />
             <Route path="/forum/:id" element={<ForumDialogPage />} />
