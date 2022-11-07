@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { StrictMode } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { setupStore } from '@/store/store';
@@ -12,13 +12,13 @@ const store = setupStore();
 function Root() {
 
   return (
-    <React.StrictMode>
+    <StrictMode>
       <Router>
         <Provider store={store}>
           <App />
         </Provider>
       </Router>
-    </React.StrictMode>
+    </StrictMode>
   )
 }
 
