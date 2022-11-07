@@ -1,4 +1,4 @@
-import { PATH_GET_USER, PATH_UPDATE_PROFILE, PATH_GET_PROFILE, PATH_AVATAR} from '../constants';
+import { PATH_GET_USER, PATH_UPDATE_PROFILE, PATH_AVATAR} from '../constants';
 import { AxiosInstance } from './AxiosInstance';
 
 interface IProfile {

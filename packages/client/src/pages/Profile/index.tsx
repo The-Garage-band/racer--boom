@@ -1,5 +1,3 @@
-import React, { useState, useEffect } from 'react';
-
 import { Button } from '@mui/material';
 import { EmailOutlined, LoginOutlined, CallOutlined, Person2Outlined } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
@@ -10,7 +8,7 @@ import Avatar from '@/components/Avatar';
 
 import validationSchema from './validation_schema';
 import { useFormik } from 'formik';
-import { updateProfile, updateAvatar, IProfile, TAvatar } from '@/API/User';
+import { updateProfile, updateAvatar, IProfile } from '@/API/User';
 
 import fetchUser, { getUserData } from '@/store/slices/GetUserSlice';
 import { useAppDispatch, useAppSelector } from '@/hooks';
