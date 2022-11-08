@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import PageLayout from '@/hocs/page-layout';
 
 import { useFormik } from 'formik';
-import { logout } from '@/API/AuthApi';
+import { logout } from '@/API/Auth';
 import { getUserData } from '@/store/slices/GetUserSlice';
 import { useAppSelector } from '@/hooks';
 

@@ -5,7 +5,7 @@ import { useNavigate, Link } from 'react-router-dom';
 
 import PageLayout from '@/hocs/page-layout';
 import Input from '@/components/Input';
-import { login, ILogIn } from '@/API/AuthApi';
+import { login, ILogIn } from '@/API/Auth';
 
 import validationSchema from './validation_schema';
 

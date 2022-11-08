@@ -7,7 +7,7 @@ import Input from '@/components/Input';
 
 import validationSchema from './validation_schema';
 import { useFormik } from 'formik';
-import { signup, ISignUp } from '@/API/AuthApi';
+import { signup, ISignUp } from '@/API/Auth';
 
 const SignUpPage = () => {
   const navigate = useNavigate();
