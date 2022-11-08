@@ -1,15 +1,17 @@
 import React, { useEffect } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 
-import SignUpPage from '@/pages/SignUp';
-import LogInPage from '@/pages/LogIn';
-import LogOutPage from '@/pages/LogOut';
-import ProfilePage from '@/pages/Profile';
+import SignUpPage from '@/pages/SignUpPage';
+import LogInPage from '@/pages/LogInPage';
+import LogOutPage from '@/pages/LogOutPage';
+import ProfilePage from '@/pages/ProfilePage';
 import GamePage from "@/pages/GamePage";
 import LeaderboardPage from "@/pages/LeaderboardPage";
 import ForumPage from "@/pages/ForumPage";
 import HomePage from "@/pages/HomePage";
 import ForumDialogPage from "@/pages/ForumDialogPage";
+import NotFoundPage from '@/pages/NotFoundPage';
+
 import Loader from "@/pages/Loader";
 import { AudioSetup } from '@/components/AudioSetup/AudioSetup';
 import {ErrorBoundaryComponent} from '@/components/ErrorBoundaryComponent';
@@ -17,6 +19,7 @@ import ProtectedRoute from '@/components/ProtectedRoute';
 
 import fetchUser, { getUserData } from '@/store/slices/GetUserSlice';
 import { useAppDispatch, useAppSelector } from '@/hooks';
+
 
 const App = () => {
 
@@ -52,7 +55,8 @@ const App = () => {
             <Route path="/forum" element={<ForumPage />} />
             <Route path="/forum/:id" element={<ForumDialogPage />} />
           </Route>
-          <Route path="*" element={<Loader />} />
+          <Route path="/" element={<Loader />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
     </ErrorBoundaryComponent>
   );

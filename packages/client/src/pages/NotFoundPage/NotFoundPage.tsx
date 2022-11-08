@@ -2,9 +2,9 @@ import {FC} from 'react';
 import {Link} from "react-router-dom";
 import { Button } from '@mui/material';
 
-import './PageNotFound.less';
+import './NotFoundPage.less';
 
-export const PageNotFound: FC = () => {
+const NotFoundPage: FC = () => {
 
     return (<div id="page-not-found">
         <img src="public/game/my-car.png" alt="" className="car-animation" id="car-animation-left"/>
@@ -21,3 +21,5 @@ export const PageNotFound: FC = () => {
 
     </div>)
 }
+
+export default NotFoundPage;
