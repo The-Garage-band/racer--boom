@@ -1,3 +1,3 @@
-import LogOutPage from "./LogOutPage";
+import LogOutPage from './LogOutPage'
 
-export default LogOutPage;
+export default LogOutPage

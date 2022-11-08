@@ -1,3 +1,3 @@
-import ForumDialogPage from './ForumDialogPage';
+import ForumDialogPage from './ForumDialogPage'
 
-export default ForumDialogPage;
+export default ForumDialogPage

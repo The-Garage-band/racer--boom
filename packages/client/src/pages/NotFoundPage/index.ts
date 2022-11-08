@@ -1,3 +1,3 @@
 import PageNotFound from './NotFoundPage'
 
-export default PageNotFound;
+export default PageNotFound

@@ -1,16 +1,17 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import { loginSlice } from './slices/GetLoginStatusSlice';
-import { userSlice } from './slices/GetUserSlice';
+import { combineReducers, configureStore } from '@reduxjs/toolkit'
+import { loginSlice } from './slices/GetLoginStatusSlice'
+import { userSlice } from './slices/GetUserSlice'
 
 const rootReducer = combineReducers({
-    login: loginSlice.reducer,
-    user: userSlice.reducer,
-});
+  login: loginSlice.reducer,
+  user: userSlice.reducer,
+})
 
-export const setupStore = () => configureStore({
+export const setupStore = () =>
+  configureStore({
     reducer: rootReducer,
-});
+  })
 
-export type RootState = ReturnType<typeof rootReducer>;
-export type AppStore = ReturnType<typeof setupStore>;
-export type AppDispatch = AppStore['dispatch'];
+export type RootState = ReturnType<typeof rootReducer>
+export type AppStore = ReturnType<typeof setupStore>
+export type AppDispatch = AppStore['dispatch']

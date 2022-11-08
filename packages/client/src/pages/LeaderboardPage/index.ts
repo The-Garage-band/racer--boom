@@ -1,3 +1,3 @@
-import LeaderboardPage from "./LeaderboardPage";
+import LeaderboardPage from './LeaderboardPage'
 
-export default LeaderboardPage;
+export default LeaderboardPage

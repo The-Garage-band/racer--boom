@@ -5,12 +5,12 @@ export default {
   preset: 'ts-jest',
   testEnvironment: 'jsdom',
   //testMatch: ['<rootDir>/src/**/?(*.)test.{ts,tsx}'],
-  modulePaths: ["src"],
+  modulePaths: ['src'],
   moduleNameMapper: {
     '\\.(css|less|png|jpg|mp3)$': 'identity-obj-proxy',
 
-    "^@\/(.*)$": "<rootDir>/src/$1",
-    "^public\/(.*)$": "<rootDir>/public/$1",
+    '^@/(.*)$': '<rootDir>/src/$1',
+    '^public/(.*)$': '<rootDir>/public/$1',
   },
   globals: {
     __SERVER_PORT__: process.env.SERVER_PORT,

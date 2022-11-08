@@ -1,3 +1,3 @@
-import ForumPage from './ForumPage';
+import ForumPage from './ForumPage'
 
-export default ForumPage;
+export default ForumPage

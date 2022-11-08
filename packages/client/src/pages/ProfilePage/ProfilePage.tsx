@@ -1,22 +1,26 @@
-import { Button } from '@mui/material';
-import { EmailOutlined, LoginOutlined, CallOutlined, Person2Outlined } from '@mui/icons-material';
-import { Link } from 'react-router-dom';
+import { Button } from '@mui/material'
+import {
+  EmailOutlined,
+  LoginOutlined,
+  CallOutlined,
+  Person2Outlined,
+} from '@mui/icons-material'
+import { Link } from 'react-router-dom'
 
-import PageLayout from '@/hocs/page-layout';
-import Input from '@/components/Input';
-import Avatar from '@/components/Avatar';
+import PageLayout from '@/hocs/page-layout'
+import Input from '@/components/Input'
+import Avatar from '@/components/Avatar'
 
-import validationSchema from './validation_schema';
-import { useFormik } from 'formik';
-import { updateProfile, updateAvatar, IProfile } from '@/API/User';
+import validationSchema from './validation_schema'
+import { useFormik } from 'formik'
+import { updateProfile, updateAvatar, IProfile } from '@/API/User'
 
-import fetchUser, { getUserData } from '@/store/slices/GetUserSlice';
-import { useAppDispatch, useAppSelector } from '@/hooks';
+import fetchUser, { getUserData } from '@/store/slices/GetUserSlice'
+import { useAppDispatch, useAppSelector } from '@/hooks'
 
 const ProfilePage = () => {
-
-  const dispatch = useAppDispatch();
-  const { data } = useAppSelector(getUserData);
+  const dispatch = useAppDispatch()
+  const { data } = useAppSelector(getUserData)
 
   const formik = useFormik({
     initialValues: {
@@ -30,17 +34,17 @@ const ProfilePage = () => {
     },
     validationSchema,
     onSubmit: (values: IProfile, { setSubmitting }) => {
-      const formData = new FormData();
+      const formData = new FormData()
       updateProfile(values)
         .then(() => updateAvatar(formData))
         .then(() => dispatch(fetchUser()))
         .then(() => setSubmitting(false))
-    }
-  });
+    },
+  })
 
   const avatarHandler = (file: any) => {
-    formik.setFieldValue('avatar', file);
-  };
+    formik.setFieldValue('avatar', file)
+  }
 
   return (
     <PageLayout>
@@ -48,135 +52,105 @@ const ProfilePage = () => {
         <h1 className="form__title">Профиль</h1>
         <Avatar
           name="avatar"
-          value={ '' }
-          onChange={ avatarHandler }
+          value={''}
+          onChange={avatarHandler}
           sx={{
-            marginBottom: '2rem'
+            marginBottom: '2rem',
           }}
         />
         <Input
           label="Имя"
           type="text"
           name="first_name"
-          value={ formik.values.first_name }
+          value={formik.values.first_name}
           error={
-            Boolean(formik.touched.first_name)
-            && Boolean(formik.errors.first_name)
+            Boolean(formik.touched.first_name) &&
+            Boolean(formik.errors.first_name)
           }
-          helperText={
-            formik.touched.first_name
-            && formik.errors.first_name
-          }
-          onChange={ formik.handleChange }
-          Icon={ Person2Outlined }
+          helperText={formik.touched.first_name && formik.errors.first_name}
+          onChange={formik.handleChange}
+          Icon={Person2Outlined}
           sx={{
-            marginBottom: '1rem'
+            marginBottom: '1rem',
           }}
         />
         <Input
           label="Фамилия"
           type="text"
           name="second_name"
-          value={ formik.values.second_name }
+          value={formik.values.second_name}
           error={
-            Boolean(formik.touched.second_name)
-            && Boolean(formik.errors.second_name)
+            Boolean(formik.touched.second_name) &&
+            Boolean(formik.errors.second_name)
           }
-          helperText={
-            formik.touched.second_name
-            && formik.errors.second_name
-          }
-          onChange={ formik.handleChange }
-          Icon={ Person2Outlined }
+          helperText={formik.touched.second_name && formik.errors.second_name}
+          onChange={formik.handleChange}
+          Icon={Person2Outlined}
           sx={{
-            marginBottom: '1rem'
+            marginBottom: '1rem',
           }}
         />
         <Input
           label="Отображаемое имя"
           type="text"
           name="display_name"
-          value={ formik.values.display_name }
+          value={formik.values.display_name}
           error={
-            Boolean(formik.touched.display_name)
-            && Boolean(formik.errors.display_name)
+            Boolean(formik.touched.display_name) &&
+            Boolean(formik.errors.display_name)
           }
-          helperText={
-            formik.touched.display_name
-            && formik.errors.display_name
-          }
-          onChange={ formik.handleChange }
-          Icon={ Person2Outlined }
+          helperText={formik.touched.display_name && formik.errors.display_name}
+          onChange={formik.handleChange}
+          Icon={Person2Outlined}
           sx={{
-            marginBottom: '1rem'
+            marginBottom: '1rem',
           }}
         />
         <Input
           label="Email"
           type="email"
           name="email"
-          value={ formik.values.email }
-          error={
-            Boolean(formik.touched.email)
-            && Boolean(formik.errors.email)
-          }
-          helperText={
-            formik.touched.email
-            && formik.errors.email
-          }
-          onChange={ formik.handleChange }
-          Icon={ EmailOutlined}
+          value={formik.values.email}
+          error={Boolean(formik.touched.email) && Boolean(formik.errors.email)}
+          helperText={formik.touched.email && formik.errors.email}
+          onChange={formik.handleChange}
+          Icon={EmailOutlined}
           sx={{
-            marginBottom: '1rem'
+            marginBottom: '1rem',
           }}
         />
         <Input
           label="Телефон"
           type="text"
           name="phone"
-          value={ formik.values.phone }
-          error={
-            Boolean(formik.touched.phone)
-            && Boolean(formik.errors.phone)
-          }
-          helperText={
-            formik.touched.phone
-            && formik.errors.phone
-          }
-          onChange={ formik.handleChange }
-          Icon={ CallOutlined}
+          value={formik.values.phone}
+          error={Boolean(formik.touched.phone) && Boolean(formik.errors.phone)}
+          helperText={formik.touched.phone && formik.errors.phone}
+          onChange={formik.handleChange}
+          Icon={CallOutlined}
           sx={{
-            marginBottom: '1rem'
+            marginBottom: '1rem',
           }}
         />
         <Input
           label="Логин"
           type="text"
           name="login"
-          value={ formik.values.login }
-          error={
-            Boolean(formik.touched.login)
-            && Boolean(formik.errors.login)
-          }
-          helperText={
-            formik.touched.login
-            && formik.errors.login
-          }
-          onChange={ formik.handleChange }
-          Icon={ LoginOutlined }
+          value={formik.values.login}
+          error={Boolean(formik.touched.login) && Boolean(formik.errors.login)}
+          helperText={formik.touched.login && formik.errors.login}
+          onChange={formik.handleChange}
+          Icon={LoginOutlined}
           sx={{
-            marginBottom: '1rem'
+            marginBottom: '1rem',
           }}
         />
         <Button
           variant="contained"
           type="submit"
-          disabled={
-            formik.isSubmitting || !formik.dirty
-          }
+          disabled={formik.isSubmitting || !formik.dirty}
           fullWidth
-          sx={{marginBottom: '1rem'}}
-        >
+          sx={{ marginBottom: '1rem' }}>
           Сохранить
         </Button>
         <Button
@@ -184,13 +158,12 @@ const ProfilePage = () => {
           fullWidth
           component={Link}
           to={'/home'}
-          sx={{marginBottom: '1rem'}}
-        >
+          sx={{ marginBottom: '1rem' }}>
           Вернуться к игре
         </Button>
       </form>
     </PageLayout>
-  );
-};
+  )
+}
 
-export default ProfilePage;
+export default ProfilePage
