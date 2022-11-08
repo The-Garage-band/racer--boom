@@ -74,9 +74,9 @@ export class GameObject {
 
   public containPoint (x: number, y: number, offset: number): boolean {
     return x >= this.x - offset
-      && x <= this.x + this.image.width + offset
+      && x <= this.x + this.image.width * GameObject.getObjectIncrease() + offset
       && y >= this.y - offset
-      && y <= this.y + this.image.height + offset;
+      && y <= this.y + this.image.height * GameObject.getObjectIncrease() + offset;
   }
 }
 

@@ -102,7 +102,7 @@ export class Game {
     const x = Random.randomInt(30, this._getCanvasWidth() - 60);
     const y = Random.randomInt(-600, -100);
 
-    if (this._gameObjects.some(gameObject => gameObject.containPoint(x, y, 60))) {
+    if (this._gameObjects.some(gameObject => gameObject.containPoint(x, y, 120))) {
       return;
     }
 
@@ -115,9 +115,9 @@ export class Game {
 
     if (Random.probability(0.002 * hardLevel)) {
       this._gameObjects.push(this._factory.createCoin(x, y));
-    } else if (Random.probability(0.0002 * hardLevel)) {
+    } else if (Random.probability(0.0001 * hardLevel)) {
       this._gameObjects.push(this._factory.createLive(x, y));
-    } else if (Random.probability(0.0008 * hardLevel)) {
+    } else if (Random.probability(0.0009 * hardLevel)) {
       this._gameObjects.push(this._factory.createGrayCar(x, y));
     } else if (Random.probability(0.0004 * hardLevel)) {
       this._gameObjects.push(this._factory.createTrack(x, y));

@@ -64,7 +64,7 @@ export const GamePage: FC<TGamePageProps> = (props) => {
                     <img src={health >= 1 ? healthFill : healthEmpty} alt="<3"/>
                     <img src={health >= 2 ? healthFill : healthEmpty} alt="<3"/>
                     <img src={health >= 3 ? healthFill : healthEmpty} alt="<3"/>
-                    <span className="value">{health > 3 ? (health - 3) : ''}</span>
+                    <span className="value">+{health > 3 ? (health - 3) : ''}</span>
                 </div>
                 <div className="timer" >
                     <span className="value">{score}</span>
