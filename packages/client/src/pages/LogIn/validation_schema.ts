@@ -6,7 +6,7 @@ import {
     REGEX_LOGIN,
     REGEX_PASSWORD,
     MSG_REQUIRED,
-} from '../../constants';
+} from '@/constants';
 
 export default yup.object({
     login: yup

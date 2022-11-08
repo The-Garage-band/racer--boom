@@ -1,15 +1,15 @@
-import { Button} from '@mui/material';
+import { useFormik } from 'formik';
+import { Button } from '@mui/material';
 import { EmailOutlined, LockOutlined } from '@mui/icons-material';
 import { useNavigate, Link } from 'react-router-dom';
 
-import PageLayout from '../../hocs/page-layout';
-import Input from '../../components/Input';
+import PageLayout from '@/hocs/page-layout';
+import Input from '@/components/Input';
+import { login, ILogIn } from '@/API/AuthApi';
 
 import validationSchema from './validation_schema';
-import { useFormik } from 'formik';
-import { login, ILogIn } from '../../API/AuthApi';
 
-const SignInPage = () => {
+const LoginPage = () => {
   const navigate = useNavigate();
 
   const formik = useFormik({
@@ -20,7 +20,6 @@ const SignInPage = () => {
     validationSchema,
     onSubmit: (values: ILogIn) => login(values)
       .then((payload) => {
-        console.log('payload', payload)
         if (payload.status === 200) {
             navigate('/game');
         }
@@ -98,4 +97,4 @@ const SignInPage = () => {
   );
 };
 
-export default SignInPage;
+export default LoginPage;

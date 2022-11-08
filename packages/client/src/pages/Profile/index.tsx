@@ -2,45 +2,45 @@ import { Button } from '@mui/material';
 import { EmailOutlined, LoginOutlined, CallOutlined, Person2Outlined } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 
-import PageLayout from '../../hocs/page-layout';
-import Input from '../../components/Input';
-import Avatar from '../../components/Avatar';
+import PageLayout from '@/hocs/page-layout';
+import Input from '@/components/Input';
+import Avatar from '@/components/Avatar';
 
 import validationSchema from './validation_schema';
 import { useFormik } from 'formik';
-// import { getUser, updateProfile, getProfile, updateAvatar, IProfile, IAvatar } from '../../API/User';
+import { updateProfile, updateAvatar, IProfile } from '@/API/User';
+
+import fetchUser, { getUserData } from '@/store/slices/GetUserSlice';
+import { useAppDispatch, useAppSelector } from '@/hooks';
 
 const ProfilePage = () => {
 
-  const data = {
-    first_name: 'First',
-    second_name: 'Second',
-    display_name: 'Display',
-    login: 'Login',
-    email: 'Email@123.ru',
-    phone: '123123123123',
-    avatar: 'https://placekitten.com/g/92/92',
-  }
+  const dispatch = useAppDispatch();
+  const { data } = useAppSelector(getUserData);
 
   const formik = useFormik({
     initialValues: {
       first_name: data.first_name,
       second_name: data.second_name,
-      display_name: data.display_name,
+      display_name: data.display_name || '',
       login: data.login,
       email: data.email,
       phone: data.phone,
       avatar: data.avatar,
     },
     validationSchema,
-    onSubmit: () => {
-      console.log('submit')
-      // const formData = new FormData();
-      // formData.append('avatar', values.avatar);
-
-      // console.log('submit', formData)
-    },
+    onSubmit: (values: IProfile, { setSubmitting }) => {
+      const formData = new FormData();
+      updateProfile(values)
+        .then(() => updateAvatar(formData))
+        .then(() => dispatch(fetchUser()))
+        .then(() => setSubmitting(false))
+    }
   });
+
+  const avatarHandler = (file: any) => {
+    formik.setFieldValue('avatar', file);
+  };
 
   return (
     <PageLayout>
@@ -48,8 +48,8 @@ const ProfilePage = () => {
         <h1 className="form__title">Профиль</h1>
         <Avatar
           name="avatar"
-          value={ formik.values.avatar }
-          onChange={ formik.handleChange }
+          value={ '' }
+          onChange={ avatarHandler }
           sx={{
             marginBottom: '2rem'
           }}
@@ -183,7 +183,7 @@ const ProfilePage = () => {
           variant="outlined"
           fullWidth
           component={Link}
-          to={'/game'}
+          to={'/home'}
           sx={{marginBottom: '1rem'}}
         >
           Вернуться к игре
