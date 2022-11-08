@@ -2,19 +2,11 @@ import { FC } from 'react'
 import { Link } from 'react-router-dom'
 import { Button } from '@mui/material'
 
-import './ErrorPage.less'
+import './NotFoundPage.less'
 
-type ErrorPageProps = {
-  caption: string
-  description: string
-}
-
-const ErrorPage: FC<ErrorPageProps> = ({
-  caption = '500',
-  description = 'Что-то пошло не так :(',
-}) => {
+const NotFoundPage: FC = () => {
   return (
-    <div id="error-page">
+    <div id="page-not-found">
       <img
         src="public/game/my-car.png"
         alt=""
@@ -28,9 +20,9 @@ const ErrorPage: FC<ErrorPageProps> = ({
         id="car-animation-right"
       />
 
-      <h1>{caption}</h1>
+      <h1>404</h1>
 
-      <h2>{description}</h2>
+      <h2>Страница не найдена</h2>
 
       <Button
         component={Link}
@@ -47,4 +39,4 @@ const ErrorPage: FC<ErrorPageProps> = ({
   )
 }
 
-export default ErrorPage
+export default NotFoundPage

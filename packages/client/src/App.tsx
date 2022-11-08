@@ -1,16 +1,15 @@
-import React, { StrictMode } from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import { setupStore } from '@/store/store';
+import React, { StrictMode } from 'react'
+import { BrowserRouter as Router } from 'react-router-dom'
+import { Provider } from 'react-redux'
+import { setupStore } from '@/store/store'
 
-import App from '@/pages/App';
+import App from '@/pages/App'
 
 import './index.less'
 
-const store = setupStore();
+const store = setupStore()
 
 function Root() {
-
   return (
     <StrictMode>
       <Router>
@@ -22,4 +21,4 @@ function Root() {
   )
 }
 
-export default Root;
+export default Root
