@@ -13,7 +13,7 @@ import Avatar from '@/components/Avatar'
 
 import validationSchema from './validation_schema'
 import { useFormik } from 'formik'
-import { updateProfile, updateAvatar, IProfile } from '@/API/User'
+import { updateProfile, updateAvatar, IProfile, TAvatar } from '@/API/User'
 
 import fetchUser, { getUserData } from '@/store/slices/GetUserSlice'
 import { useAppDispatch, useAppSelector } from '@/hooks'
@@ -35,6 +35,8 @@ const ProfilePage = () => {
     validationSchema,
     onSubmit: (values: IProfile, { setSubmitting }) => {
       const formData = new FormData()
+      formData.append('avatar', values.avatar)
+
       updateProfile(values)
         .then(() => updateAvatar(formData))
         .then(() => dispatch(fetchUser()))
@@ -52,7 +54,7 @@ const ProfilePage = () => {
         <h1 className="form__title">Профиль</h1>
         <Avatar
           name="avatar"
-          value={''}
+          value={formik.values.avatar}
           onChange={avatarHandler}
           sx={{
             marginBottom: '2rem',

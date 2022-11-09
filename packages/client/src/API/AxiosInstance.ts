@@ -9,3 +9,11 @@ export const AxiosInstance = axios?.create({
   },
   withCredentials: true,
 })
+
+export const AxiosInstanceFile = axios?.create({
+  baseURL: URL_API,
+  headers: {
+    'Access-Control-Allow-Origin': '*',
+  },
+  withCredentials: true,
+})

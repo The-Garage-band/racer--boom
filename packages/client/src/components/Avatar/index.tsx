@@ -1,4 +1,5 @@
 import { useState, useEffect, ChangeEvent } from 'react'
+import { URL_API, PATH_GET_AVATAR } from '@/constants';
 
 import { Box, Avatar as MuiAvatar, IconButton } from '@mui/material'
 import PhotoCamera from '@mui/icons-material/PhotoCamera'
@@ -23,8 +24,6 @@ export default function Avatar({ name, value, onChange, sx }: AvatarProps) {
     const objectUrl = URL.createObjectURL(selectedFile)
     setPreview(objectUrl)
 
-    console.log('selected file', objectUrl)
-
     // eslint-disable-next-line consistent-return
     return () => URL.revokeObjectURL(objectUrl)
   }, [selectedFile])
@@ -37,6 +36,8 @@ export default function Avatar({ name, value, onChange, sx }: AvatarProps) {
       }
   };
 
+  const avatarImage = `${URL_API}${PATH_GET_AVATAR}${value}`;
+
   return (
     <Box
       sx={{
@@ -47,7 +48,7 @@ export default function Avatar({ name, value, onChange, sx }: AvatarProps) {
       }}>
       <MuiAvatar
         alt="Remy Sharp"
-        src={preview ?? value}
+        src={preview ?? avatarImage}
         sx={{ width: 96, height: 96 }}
       />
       <IconButton
