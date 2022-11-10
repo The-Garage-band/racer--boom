@@ -1,6 +1,7 @@
 import { FC } from 'react'
 import { Link } from 'react-router-dom'
 import { Button } from '@mui/material'
+import myCar from 'public/game/my-car.png';
 
 import './HomePage.less'
 
@@ -8,13 +9,13 @@ export const HomePage: FC = () => {
   return (
     <div id="home-page">
       <img
-        src="public/game/my-car.png"
+        src={myCar}
         alt=""
         className="car-animation"
         id="car-animation-left"
       />
       <img
-        src="public/game/my-car.png"
+        src={myCar}
         alt=""
         className="car-animation"
         id="car-animation-right"
