@@ -8,13 +8,13 @@ const NotFoundPage: FC = () => {
   return (
     <div id="page-not-found">
       <img
-        src="public/game/my-car.png"
+        src="/game/my-car.png"
         alt=""
         className="car-animation"
         id="car-animation-left"
       />
       <img
-        src="public/game/my-car.png"
+        src="/game/my-car.png"
         alt=""
         className="car-animation"
         id="car-animation-right"
