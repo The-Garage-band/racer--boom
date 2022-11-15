@@ -8,7 +8,7 @@ export type TGameContextData = {
 
 export type TGameContext = {
   data: TGameContextData
-  update: (data: Partial<TGameContextData>) => any,
+  update: (data: Partial<TGameContextData>) => void,
 }
 
 const source = {
@@ -16,7 +16,9 @@ const source = {
   healthCollected: 0,
   coins: 0,
 }
-const update = (data: Partial<TGameContextData>) => Object.assign(source, data);
+const update = (data: Partial<TGameContextData>) => {
+  Object.assign(source, data);
+}
 
 export const GameContext: Context<TGameContext> = createContext({
   data: source,

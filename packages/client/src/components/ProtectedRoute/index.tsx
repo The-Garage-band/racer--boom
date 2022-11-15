@@ -1,11 +1,12 @@
 import { Navigate, Outlet } from 'react-router-dom'
 import Loader from '@/pages/Loader'
+import {ReactElement} from "react";
 
 interface ProtectedRouteProps {
   isAllowed: boolean
   isLoading: boolean
   redirectPath: string
-  children?: any
+  children?: ReactElement
 }
 
 const ProtectedRoute = ({
@@ -13,7 +14,7 @@ const ProtectedRoute = ({
   isLoading,
   redirectPath = '/home',
   children,
-}: ProtectedRouteProps): any => {
+}: ProtectedRouteProps): ReactElement => {
   if (isLoading) {
     return <Loader />
   }
