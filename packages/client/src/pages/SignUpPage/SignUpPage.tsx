@@ -54,7 +54,7 @@ const SignUpPage = () => {
             Boolean(formik.touched.first_name) &&
             Boolean(formik.errors.first_name)
           }
-          helperText={formik.touched.first_name && formik.errors.first_name}
+          helperText={formik.touched.first_name ? formik.errors.first_name : ''}
           onChange={formik.handleChange}
           Icon={Person2Outlined}
           sx={{
@@ -70,7 +70,7 @@ const SignUpPage = () => {
             Boolean(formik.touched.second_name) &&
             Boolean(formik.errors.second_name)
           }
-          helperText={formik.touched.second_name && formik.errors.second_name}
+          helperText={formik.touched.second_name ? formik.errors.second_name : ''}
           onChange={formik.handleChange}
           Icon={Person2Outlined}
           sx={{
@@ -83,7 +83,7 @@ const SignUpPage = () => {
           name="email"
           value={formik.values.email}
           error={Boolean(formik.touched.email) && Boolean(formik.errors.email)}
-          helperText={formik.touched.email && formik.errors.email}
+          helperText={formik.touched.email ? formik.errors.email : ''}
           onChange={formik.handleChange}
           Icon={EmailOutlined}
           sx={{
@@ -96,7 +96,7 @@ const SignUpPage = () => {
           name="phone"
           value={formik.values.phone}
           error={Boolean(formik.touched.phone) && Boolean(formik.errors.phone)}
-          helperText={formik.touched.phone && formik.errors.phone}
+          helperText={formik.touched.phone ? formik.errors.phone : ''}
           onChange={formik.handleChange}
           Icon={CallOutlined}
           sx={{
@@ -109,7 +109,7 @@ const SignUpPage = () => {
           name="login"
           value={formik.values.login}
           error={Boolean(formik.touched.login) && Boolean(formik.errors.login)}
-          helperText={formik.touched.login && formik.errors.login}
+          helperText={formik.touched.login ? formik.errors.login : ''}
           onChange={formik.handleChange}
           Icon={LoginOutlined}
           sx={{
@@ -124,7 +124,7 @@ const SignUpPage = () => {
           error={
             Boolean(formik.touched.password) && Boolean(formik.errors.password)
           }
-          helperText={formik.touched.password && formik.errors.password}
+          helperText={formik.touched.password ? formik.errors.password : ''}
           onChange={formik.handleChange}
           Icon={PasswordOutlined}
           sx={{
