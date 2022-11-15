@@ -22,7 +22,7 @@ export class DataStorage<T extends Record<string, any>> {
     }
   }
 
-  private _setToStorage(key: keyof T, value: any) {
+  private _setToStorage(key: keyof T, value: unknown) {
     localStorage.setItem(
       `${this._namespace}.${key.toString()}`,
       JSON.stringify(value)

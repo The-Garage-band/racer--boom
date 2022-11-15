@@ -28,11 +28,11 @@ export class GameObjectFactory {
     return Promise.all(resourcesForLoad.map(this._loadResource));
   }
 
-  private _loadResource: (resource: string) => Promise<any> = (resource) => {
+  private _loadResource: (resource: string) => Promise<void> = (resource) => {
     return new Promise(resolve => {
       const image = new Image();
       this._resources.set(resource, image);
-      image.addEventListener('load', resolve);
+      image.addEventListener('load', () => resolve());
       image.src = resource;
     });
   }

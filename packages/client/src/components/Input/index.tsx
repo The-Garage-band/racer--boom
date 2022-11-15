@@ -5,17 +5,19 @@ import {
   FormControl,
   FormHelperText,
 } from '@mui/material'
+import {ChangeEvent} from "react";
+import {SvgIconComponent} from "@mui/icons-material";
 
 interface InputProps {
   label: string
   type: 'text' | 'password' | 'email' | 'tel' | 'file'
   name: string
-  Icon?: any // надо поправить
+  Icon: SvgIconComponent,
   sx?: StringObject
   value?: string
   error?: boolean
-  helperText?: any // надо поправить
-  onChange?: any // надо поправить
+  helperText?: string
+  onChange?: (event: ChangeEvent) => void,
 }
 
 export default function Input({

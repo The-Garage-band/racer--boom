@@ -1,4 +1,4 @@
-import React, { Component, ErrorInfo, ReactNode } from 'react'
+import React, { Component, ReactNode } from 'react'
 
 type TProps = {
   children: ReactNode
@@ -6,7 +6,6 @@ type TProps = {
 type TState = {
   hasError: boolean
   error?: Error
-  errorInfo?: any
 }
 
 export class ErrorBoundaryComponent extends Component<TProps, TState> {
@@ -14,9 +13,9 @@ export class ErrorBoundaryComponent extends Component<TProps, TState> {
     hasError: false,
   }
 
-  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.error('Uncaught error:', error, errorInfo)
-    this.setState({ hasError: true, error, errorInfo })
+  componentDidCatch(error: Error) {
+    console.error('Uncaught error:', error)
+    this.setState({ hasError: true, error })
   }
 
   render() {

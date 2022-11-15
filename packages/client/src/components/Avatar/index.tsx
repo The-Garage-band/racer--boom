@@ -7,7 +7,7 @@ interface AvatarProps {
   name: string
   sx?: StringObject
   value?: string
-  onChange?: any
+  onChange: (file: File) => void,
 }
 
 export default function Avatar({ name, value, onChange, sx }: AvatarProps) {
@@ -31,9 +31,11 @@ export default function Avatar({ name, value, onChange, sx }: AvatarProps) {
 
   const inputHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0] || null
-    setSelectedFile(file)
-    onChange(file)
-  }
+      if (file) {
+          setSelectedFile(file);
+          onChange(file);
+      }
+  };
 
   return (
     <Box

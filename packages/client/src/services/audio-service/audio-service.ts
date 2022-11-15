@@ -139,7 +139,7 @@ export class AudioService {
     this._audio.play()?.catch(() => setTimeout(this._play, 100))
   }
 
-  public playEffect (source: any) {
+  public playEffect (source: string) {
     if (this.isEnabled()) {
       const audio = new Audio(source);
       audio.play()
