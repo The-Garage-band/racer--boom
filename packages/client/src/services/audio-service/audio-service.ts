@@ -1,10 +1,10 @@
 import { Random } from '@/utils'
 import { SOUNDS } from '@/services/audio-service/sounds'
 import { DataStorage } from '@/utils/data-storage'
-import crushSound from 'public/game/crush.mp3';
-import repareSound from 'public/game/repare.mp3';
-import gameOverSound from 'public/game/gameover.mp3';
-import collectCoinSound from 'public/game/collectcoin.mp3';
+import crushSound from '/game/crush.mp3';
+import repareSound from '/game/repare.mp3';
+import gameOverSound from '/game/gameover.mp3';
+import collectCoinSound from '/game/collectcoin.mp3';
 
 const AUDIO_ELEMENT_ID = 'audio-service-element-tag'
 
@@ -51,6 +51,7 @@ export class AudioService {
     if (!audio) {
       audio = new Audio()
       audio.id = AUDIO_ELEMENT_ID
+      audio.crossOrigin = "anonymous"
       audio.onended = this.next
       document.head.appendChild(audio)
     }
