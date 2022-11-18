@@ -17,8 +17,10 @@ import { AudioSetup } from '@/components/AudioSetup/AudioSetup'
 import { ErrorBoundaryComponent } from '@/components/ErrorBoundaryComponent'
 import ProtectedRoute from '@/components/ProtectedRoute'
 import { FullscreenButtonComponent } from '@/components/FullscreenButtonComponent/FullscreenButtonComponent'
+import AlertStack from '@/components/AlertStack'
 
 import fetchUser, { getUserData } from '@/store/slices/GetUserSlice'
+
 import { useAppDispatch, useAppSelector } from '@/hooks'
 
 const App = () => {
@@ -74,6 +76,7 @@ const App = () => {
       <footer>
         <FullscreenButtonComponent/>
       </footer>
+      <AlertStack />
     </ErrorBoundaryComponent>
 
   )
