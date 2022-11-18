@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Button } from '@mui/material'
 import {
   EmailOutlined,
@@ -13,14 +14,17 @@ import Avatar from '@/components/Avatar'
 
 import validationSchema from './validation_schema'
 import { useFormik } from 'formik'
-import { updateProfile, updateAvatar, IProfile } from '@/API/User'
+import { updateProfile, updateAvatar, IProfile, TAvatar } from '@/API/User'
 
 import fetchUser, { getUserData } from '@/store/slices/GetUserSlice'
+import { addAlert } from '@/store/slices/GetAlertSlice'
 import { useAppDispatch, useAppSelector } from '@/hooks'
 
 const ProfilePage = () => {
   const dispatch = useAppDispatch()
   const { data } = useAppSelector(getUserData)
+
+  const [fileAttached, setFileAttached] = useState(false);
 
   const formik = useFormik({
     initialValues: {
@@ -33,17 +37,30 @@ const ProfilePage = () => {
       avatar: data.avatar,
     },
     validationSchema,
-    onSubmit: (values: IProfile, { setSubmitting }) => {
+    onSubmit: (values: IProfile) => {
       const formData = new FormData()
+      formData.append('avatar', values.avatar)
+
       updateProfile(values)
-        .then(() => updateAvatar(formData))
+        .then(() => { fileAttached ? updateAvatar(formData) : false })
+        .then(() => {
+          dispatch(addAlert({
+            message: 'Ваш профиль успешно обновлен'
+          }))
+        })
+        .catch(() => {
+          dispatch(addAlert({
+            message: 'Произошла ошибка, мы уже вызвали фиксиков',
+            type: 'error'
+          }))
+        })
         .then(() => dispatch(fetchUser()))
-        .then(() => setSubmitting(false))
     },
   })
 
   const avatarHandler = (file: File) => {
     formik.setFieldValue('avatar', file)
+    setFileAttached(true)
   }
 
   return (
@@ -52,7 +69,7 @@ const ProfilePage = () => {
         <h1 className="form__title">Профиль</h1>
         <Avatar
           name="avatar"
-          value={''}
+          value={formik.values.avatar}
           onChange={avatarHandler}
           sx={{
             marginBottom: '2rem',

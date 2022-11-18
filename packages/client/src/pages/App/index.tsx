@@ -16,9 +16,11 @@ import Loader from '@/pages/Loader'
 import { AudioSetup } from '@/components/AudioSetup/AudioSetup'
 import { ErrorBoundaryComponent } from '@/components/ErrorBoundaryComponent'
 import ProtectedRoute from '@/components/ProtectedRoute'
+import AlertStack from '@/components/AlertStack'
 import { FullscreenButtonComponent } from '@/components/FullscreenButtonComponent/FullscreenButtonComponent'
 
 import fetchUser, { getUserData } from '@/store/slices/GetUserSlice'
+
 import { useAppDispatch, useAppSelector } from '@/hooks'
 
 const App = () => {
@@ -36,6 +38,7 @@ const App = () => {
 
   return (
     <ErrorBoundaryComponent>
+      <AlertStack />
       <header>
         <AudioSetup />
       </header>
@@ -74,6 +77,7 @@ const App = () => {
       <footer>
         <FullscreenButtonComponent/>
       </footer>
+      <AlertStack />
     </ErrorBoundaryComponent>
 
   )
