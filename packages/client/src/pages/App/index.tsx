@@ -17,6 +17,7 @@ import { AudioSetup } from '@/components/AudioSetup/AudioSetup'
 import { ErrorBoundaryComponent } from '@/components/ErrorBoundaryComponent'
 import ProtectedRoute from '@/components/ProtectedRoute'
 import AlertStack from '@/components/AlertStack'
+import { FullscreenButtonComponent } from '@/components/FullscreenButtonComponent/FullscreenButtonComponent'
 
 import fetchUser, { getUserData } from '@/store/slices/GetUserSlice'
 
@@ -37,6 +38,7 @@ const App = () => {
 
   return (
     <ErrorBoundaryComponent>
+      <AlertStack />
       <header>
         <AudioSetup />
       </header>
@@ -72,8 +74,11 @@ const App = () => {
         <Route path="/" element={<Loader />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
-      <AlertStack />
+      <footer>
+        <FullscreenButtonComponent/>
+      </footer>
     </ErrorBoundaryComponent>
+
   )
 }
 

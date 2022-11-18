@@ -1,6 +1,10 @@
 import { Random } from '@/utils'
 import { SOUNDS } from '@/services/audio-service/sounds'
 import { DataStorage } from '@/utils/data-storage'
+import crushSound from '/game/crush.mp3';
+import repareSound from '/game/repare.mp3';
+import gameOverSound from '/game/gameover.mp3';
+import collectCoinSound from '/game/collectcoin.mp3';
 
 const AUDIO_ELEMENT_ID = 'audio-service-element-tag'
 
@@ -47,6 +51,7 @@ export class AudioService {
     if (!audio) {
       audio = new Audio()
       audio.id = AUDIO_ELEMENT_ID
+      audio.crossOrigin = "anonymous"
       audio.onended = this.next
       document.head.appendChild(audio)
     }
@@ -133,5 +138,29 @@ export class AudioService {
 
   private _play = () => {
     this._audio.play()?.catch(() => setTimeout(this._play, 100))
+  }
+
+  public playEffect (source: string) {
+    if (this.isEnabled()) {
+      const audio = new Audio(source);
+      audio.play()
+        .then(() => audio.remove());
+    }
+  }
+
+  public playCoinEffect () {
+    this.playEffect(collectCoinSound);
+  }
+
+  public playRepairEffect () {
+    this.playEffect(repareSound);
+  }
+
+  public playGameOverEffect () {
+    this.playEffect(gameOverSound);
+  }
+
+  public playCrushEffect () {
+    this.playEffect(crushSound);
   }
 }

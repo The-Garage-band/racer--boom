@@ -41,7 +41,7 @@ const LoginPage = () => {
           name="login"
           value={formik.values.login}
           error={Boolean(formik.touched.login) && Boolean(formik.errors.login)}
-          helperText={formik.touched.login && formik.errors.login}
+          helperText={formik.touched.login ? formik.errors.login : ''}
           onChange={formik.handleChange}
           Icon={EmailOutlined}
           sx={{
@@ -56,7 +56,7 @@ const LoginPage = () => {
           error={
             Boolean(formik.touched.password) && Boolean(formik.errors.password)
           }
-          helperText={formik.touched.password && formik.errors.password}
+          helperText={formik.touched.password ? formik.errors.password : ''}
           onChange={formik.handleChange}
           Icon={LockOutlined}
           sx={{
