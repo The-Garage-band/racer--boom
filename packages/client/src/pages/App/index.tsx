@@ -16,8 +16,10 @@ import Loader from '@/pages/Loader'
 import { AudioSetup } from '@/components/AudioSetup/AudioSetup'
 import { ErrorBoundaryComponent } from '@/components/ErrorBoundaryComponent'
 import ProtectedRoute from '@/components/ProtectedRoute'
+import AlertStack from '@/components/AlertStack'
 
 import fetchUser, { getUserData } from '@/store/slices/GetUserSlice'
+
 import { useAppDispatch, useAppSelector } from '@/hooks'
 
 const App = () => {
@@ -70,6 +72,7 @@ const App = () => {
         <Route path="/" element={<Loader />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
+      <AlertStack />
     </ErrorBoundaryComponent>
   )
 }
