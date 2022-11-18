@@ -46,6 +46,13 @@ export const HomePage: FC = () => {
           className="button">
           Профиль
         </Button>
+        <Button
+          component={Link}
+          to="/logout"
+          id="logout-button"
+          className="button">
+          Выйти
+        </Button>
       </footer>
     </div>
   )

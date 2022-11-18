@@ -1,6 +1,6 @@
-import React  from 'react'
+import React from 'react'
 import { Button } from '@mui/material'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 
 import PageLayout from '@/hocs/page-layout'
 
@@ -42,6 +42,13 @@ const LogOutPage = () => {
           fullWidth
           sx={{ marginBottom: '1rem' }}>
           Да, уверен
+        </Button>
+        <Button
+          component={Link}
+          to="/home"
+          fullWidth
+          className="button">
+          Вернуться в игру
         </Button>
       </form>
     </PageLayout>
