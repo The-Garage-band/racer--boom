@@ -18,7 +18,6 @@ import { ErrorBoundaryComponent } from '@/components/ErrorBoundaryComponent'
 import ProtectedRoute from '@/components/ProtectedRoute'
 import AlertStack from '@/components/AlertStack'
 import { FullscreenButtonComponent } from '@/components/FullscreenButtonComponent/FullscreenButtonComponent'
-import AlertStack from '@/components/AlertStack'
 
 import fetchUser, { getUserData } from '@/store/slices/GetUserSlice'
 
