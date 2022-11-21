@@ -1,0 +1,26 @@
+.select-theme{
+  position: absolute;
+  right: 50px;
+  top: 10px;
+  z-index: 1000;
+  border: none;
+  background: none;
+  color: magenta;
+  cursor: pointer;
+  outline: none;
+
+  &:hover{
+    text-shadow: 1px 0px 14px;
+  }
+
+  &.light{
+    color: #ffffff;
+  }
+}
+
+:root[data-theme="light"] {
+
+  tr.MuiTableRow-hover:hover {
+    background-color: rgb(73 70 70 / 32%);
+  }
+}

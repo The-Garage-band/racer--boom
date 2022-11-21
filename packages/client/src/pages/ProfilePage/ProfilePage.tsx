@@ -15,6 +15,8 @@ import validationSchema from './validation_schema'
 import { useFormik } from 'formik'
 import { updateProfile, updateAvatar, IProfile } from '@/API/User'
 
+import { useTheme } from '@mui/material/styles';
+
 import fetchUser, { getUserData } from '@/store/slices/GetUserSlice'
 import { useAppDispatch, useAppSelector } from '@/hooks'
 
@@ -46,9 +48,16 @@ const ProfilePage = () => {
     formik.setFieldValue('avatar', file)
   }
 
+  const theme = useTheme();
+
   return (
     <PageLayout>
-      <form className="form" onSubmit={formik.handleSubmit} autoComplete="off">
+      <form className="form" onSubmit={formik.handleSubmit} autoComplete="off"  style={{
+            backgroundColor: theme.palette.background.opacity, 
+            borderColor: theme.shape.borderColor, 
+            borderWidth: theme.shape.borderWidht, 
+            borderStyle: theme.shape.borderStyle, 
+            boxShadow: theme.shape.boxShadow}}>
         <h1 className="form__title">Профиль</h1>
         <Avatar
           name="avatar"

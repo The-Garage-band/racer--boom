@@ -27,9 +27,9 @@ export class GameObject {
     this.image = image;
   }
 
-  Update(): void {
+  Update(speed: float): void {
     if (!this.isPlayer) {
-      this.y += GameObject.getSpeed();
+      this.y += speed;
     }
 
     if (this.y > GameObject.getCanvasHeight() + 250) {

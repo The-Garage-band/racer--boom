@@ -5,8 +5,7 @@ import {
   ReactPortal,
 } from 'react'
 
-import bgCar from 'public/bg-car.png'
-import logo from 'public/logo.png'
+import { useTheme } from '@mui/material/styles';
 
 export default function PageLayout(props: {
   children:
@@ -19,14 +18,17 @@ export default function PageLayout(props: {
     | null
     | undefined
 }) {
+
+  const theme = useTheme();
+
   return (
-    <div className="page">
+    <div className="page" style={{backgroundColor: theme.palette.background.default}}>
       <div className="page__logo">
-        <img src={logo} alt="" />
+        <img src={theme.logo} alt="" />
       </div>
       <div className="page__decoration page-decoration">
-        <img className="page-decoration__left" src={bgCar} alt="" />
-        <img className="page-decoration__right" src={bgCar} alt="" />
+        <img className="page-decoration__left" src={theme.bgCar} alt="" />
+        <img className="page-decoration__right" src={theme.bgCar} alt="" />
       </div>
       <div className="page__content">{props.children}</div>
     </div>

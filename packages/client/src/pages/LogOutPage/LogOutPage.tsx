@@ -9,6 +9,8 @@ import { logout } from '@/API/Auth'
 import { getUserData } from '@/store/slices/GetUserSlice'
 import { useAppSelector } from '@/hooks'
 
+import { useTheme } from '@mui/material/styles';
+
 const LogOutPage = () => {
   const navigate = useNavigate()
 
@@ -32,9 +34,16 @@ const LogOutPage = () => {
         }),
   })
 
+  const theme = useTheme();
+
   return (
     <PageLayout>
-      <form className="form" onSubmit={formik.handleSubmit} autoComplete="off">
+      <form className="form" onSubmit={formik.handleSubmit} autoComplete="off" style={{
+            backgroundColor: theme.palette.background.opacity, 
+            borderColor: theme.shape.borderColor, 
+            borderWidth: theme.shape.borderWidht, 
+            borderStyle: theme.shape.borderStyle, 
+            boxShadow: theme.shape.boxShadow}}>
         <h1 className="form__title">Вы уверены, что хотите выйти?</h1>
         <Button
           variant="contained"

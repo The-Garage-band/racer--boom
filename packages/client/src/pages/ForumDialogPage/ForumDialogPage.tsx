@@ -5,6 +5,8 @@ import PageLayout from '@/hocs/page-layout'
 import AddReactionIcon from '@mui/icons-material/AddReaction'
 import { FC } from 'react'
 
+import { useTheme } from '@mui/material/styles';
+
 import '@/pages/ForumDialogPage/ForumDialogPage.less'
 import '@/styles/page.less'
 
@@ -64,6 +66,8 @@ const ForumDialogPage: FC = () => {
     '🐶',
   ]
 
+  const theme = useTheme();
+
   return (
     <PageLayout>
       <Grid
@@ -79,7 +83,12 @@ const ForumDialogPage: FC = () => {
           </Link>
         </Grid>
         <Grid item sx={{ flex: 1 }}>
-          <Box className="form form__full-size form__transparent">
+          <Box className="form form__full-size form__transparent" style={{
+            backgroundColor: theme.palette.background.opacity, 
+            borderColor: theme.shape.borderColor, 
+            borderWidth: theme.shape.borderWidht, 
+            borderStyle: theme.shape.borderStyle, 
+            boxShadow: theme.shape.boxShadow}}>
             <h1 className="form__title">{dialogTitle}</h1>
             <Grid
               container

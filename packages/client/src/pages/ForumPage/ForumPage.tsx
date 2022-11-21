@@ -23,6 +23,8 @@ import '@/pages/ForumPage/ForumPage.less'
 import '@/styles/table.less'
 import '@/styles/page.less'
 
+import { useTheme } from '@mui/material/styles';
+
 interface TCreateDataParams {
   id: number
   title: string
@@ -74,6 +76,8 @@ const ForumPage: FC = () => {
     navigate(`/forum/${dialogId}`, { state: { dialogId, dialogTitle } })
   }
 
+  const theme = useTheme();
+
   return (
     <PageLayout>
       <Grid
@@ -89,7 +93,12 @@ const ForumPage: FC = () => {
           </Link>
         </Grid>
         <Grid item sx={{ flex: 1 }}>
-          <Box className="form form__full-size form__transparent">
+          <Box className="form form__full-size form__transparent" style={{
+            backgroundColor: theme.palette.background.opacity, 
+            borderColor: theme.shape.borderColor, 
+            borderWidth: theme.shape.borderWidht, 
+            borderStyle: theme.shape.borderStyle, 
+            boxShadow: theme.shape.boxShadow}}>
             <Grid
               container
               direction="row"
@@ -107,11 +116,11 @@ const ForumPage: FC = () => {
             <Table className="table table-unborder">
               <TableHead>
                 <TableRow>
-                  <TableCell align="left" sx={{ width: '70%' }}>
+                  <TableCell align="left" sx={{ width: '70%' }}  style={{color: theme.palette.text.secondary}} >
                     Форумы
                   </TableCell>
-                  <TableCell align="center">Темы</TableCell>
-                  <TableCell align="center">Ответы</TableCell>
+                  <TableCell align="center"  style={{color: theme.palette.text.secondary}} >Темы</TableCell>
+                  <TableCell align="center"  style={{color: theme.palette.text.secondary}} >Ответы</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>

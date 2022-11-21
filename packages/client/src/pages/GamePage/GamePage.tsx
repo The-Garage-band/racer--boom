@@ -8,9 +8,20 @@ import './GamePage.less'
 import {Game, GameEvents} from "./game";
 import {GameContext} from "@/hocs";
 
+import { useTheme } from '@mui/material/styles';
+
 type TGamePageProps = {
     health: number,
 }
+
+let game: Game;
+let gameTheme = {};
+
+const themeObserver = new MutationObserver(mutationList => {
+    if (game && gameTheme){
+        game.changeTheme(gameTheme);
+    }
+});
 
 export const GamePage: FC<TGamePageProps> = (props) => {
     const [health, setHealth] = useState(props.health);
@@ -22,8 +33,11 @@ export const GamePage: FC<TGamePageProps> = (props) => {
 
     const onGameOver = () => navigate('/end-game');
 
+    const theme = useTheme();  
+    gameTheme = theme;  
+
     useEffect(() => {
-        const game = new Game();
+        game = new Game();
 
         if (canvas.current) {
             game.events.on(GameEvents.updateScore, setScore);
@@ -32,11 +46,22 @@ export const GamePage: FC<TGamePageProps> = (props) => {
             game.events.once(GameEvents.gameOver, onGameOver);
             game.lives = health;
             gameContext.data.healthCollected = 0;
+            game.gameTheme = theme;
             game.start(canvas.current);
+
+            themeObserver.observe(document.documentElement, { attributes: true })
         }
 
         return () => {
             if (!canvas.current) {
+                game.events.removeListener(GameEvents.updateScore, setScore);
+                game.events.removeListener(GameEvents.updateLives, setHealth);
+                game.events.removeListener(GameEvents.updateCoins, setCoins);
+                game.events.removeListener(GameEvents.gameOver, onGameOver);
+                if (themeObserver){
+                    themeObserver.disconnect();
+                }
+                game.stop();
                 return;
             }
             game.events.removeListener(GameEvents.updateScore, setScore);
@@ -56,7 +81,7 @@ export const GamePage: FC<TGamePageProps> = (props) => {
     useEffect(() => {
         gameContext.update({ healthCollected: gameContext.data.healthCollected + 1});
     }, [health]);
-
+    
     return (
         <div id="game-page">
             <div className="header">

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState  } from 'react'
 import { Route, Routes, useNavigate } from 'react-router-dom'
 
 import SignUpPage from '@/pages/SignUpPage'
@@ -21,25 +21,77 @@ import { FullscreenButtonComponent } from '@/components/FullscreenButtonComponen
 import fetchUser, { getUserData } from '@/store/slices/GetUserSlice'
 import { useAppDispatch, useAppSelector } from '@/hooks'
 
+import { themeDefault, lightTheme } from '@/theme'
+import { ThemeProvider } from '@mui/material/styles'
+
+import EndGamePage from '@/pages/EndGamePage' //Конец игры
+
+import '@/styles/themes.less'
+
 const App = () => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
-  const { data, isLoading } = useAppSelector(getUserData)
+  const { data, isLoading } = useAppSelector(getUserData);
+
+  const defaultTheme = localStorage.getItem("racer--boom-theme");
+  const [theme, setTheme] = useState(defaultTheme);
+  
+  setDataTheme(theme);
+  const toggleTheme = () => {
+    if (theme === 'light') {
+      setTheme('dark');
+    } else {
+      setTheme('light');
+    }
+    setDataTheme(theme);
+  }
+
+  function setDataTheme(theme){
+    document.documentElement.dataset.theme = theme;
+    localStorage.setItem("racer--boom-theme", theme);
+  }
 
   useEffect(() => {
     dispatch(fetchUser()).then(({ payload }) => {
       if (!payload.id) {
-        navigate('/log_in')
+        //navigate('/log_in')
       }
     })
   }, [data.id])
 
   return (
-    <ErrorBoundaryComponent>
-      <header>
-        <AudioSetup />
-      </header>
-      <Routes>
+    <ThemeProvider theme={theme === 'light' ? lightTheme : themeDefault}>
+      <ErrorBoundaryComponent>
+        <header>
+          <AudioSetup />
+          <button className={'select-theme ' + theme} onClick={toggleTheme}>Переключить тему</button>
+        </header>
+        <Routes>
+          <Route path="/sign_up" element={<SignUpPage />} />
+          <Route path="/log_in" element={<LogInPage />} />
+          <Route path="/logout" element={<LogOutPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/game" element={<GamePage health={3}/>} />
+          <Route path="/home" element={<HomePage/>} />
+          <Route path="/leaderboard" element={<LeaderboardPage />} />
+          <Route path="/forum" element={<ForumPage />} />
+          <Route path="/forum/:id" element={<ForumDialogPage />} />
+          <Route path="/" element={<LogInPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+
+          <Route path="/end-game" element={<EndGamePage />} />
+           
+
+          
+        </Routes>
+        <footer>
+          <FullscreenButtonComponent/>
+        </footer>
+      </ErrorBoundaryComponent>
+    </ThemeProvider>
+  )
+
+  /*<Routes>
         <Route
           element={
             <ProtectedRoute
@@ -70,13 +122,7 @@ const App = () => {
         </Route>
         <Route path="/" element={<Loader />} />
         <Route path="*" element={<NotFoundPage />} />
-      </Routes>
-      <footer>
-        <FullscreenButtonComponent/>
-      </footer>
-    </ErrorBoundaryComponent>
-
-  )
+      </Routes>*/
 }
 
 export default App

@@ -35,15 +35,18 @@ export class Game {
   public coins = 0;
   private _speedAdd = 0;
 
+  public gameTheme: any;
+
   private _audioService = AudioService.getInstance();
 
   async start (canvas: HTMLCanvasElement) {
     if (this._started) {
       return;
     }
+
     this._canvas = canvas;
     this._started = true;
-    await this._factory.load();
+    await this._factory.load(this.gameTheme);
 
     this._resizeGameCanvas();
 
@@ -54,7 +57,7 @@ export class Game {
 
     Road.getSpeed = this._getSpeed;
 
-    this._playerCar = this._factory.createPlayerCar(this._getCanvasWidth() / 2,  this._getCanvasHeight() - 140);
+    this._playerCar = this._factory.createPlayerCar(this._getCanvasWidth() / 2,  this._getCanvasHeight() - 140, this.gameTheme.myCarLink);
 
     this._addEventListeners();
     this._gameTimer = setInterval(this._updateGame, STEP_TIME)
@@ -69,6 +72,16 @@ export class Game {
     clearInterval(this._gameTimer);
     this._started = false;
     this.events.emit(GameEvents.gameOver);
+  }
+
+  public changeTheme(theme){
+    this.gameTheme = theme;
+    this._factory.load(this.gameTheme);
+    this._playerCar = this._factory.updatePlayerCar(this._playerCar, this.gameTheme.myCarLink);
+
+    this._roads.forEach(road => {
+      road.UpdateImage(this.gameTheme.roadLink); //
+    });
   }
 
   private _updateGame = () => {
@@ -94,7 +107,6 @@ export class Game {
       this.stop();
       return;
     }
-
     this._drawGameObjects();
   }
 
@@ -113,27 +125,28 @@ export class Game {
       + 2 * (+(this._step > 1000))
       + 3 * (+(this._step > 2000));
 
+
     if (Random.probability(0.002 * hardLevel)) {
-      this._gameObjects.push(this._factory.createCoin(x, y));
+      this._gameObjects.push(this._factory.createCoin(x, y, this.gameTheme.coinLink));
     } else if (Random.probability(0.0001 * hardLevel)) {
-      this._gameObjects.push(this._factory.createLive(x, y));
+      this._gameObjects.push(this._factory.createLive(x, y, this.gameTheme.liveLink));
     } else if (Random.probability(0.0009 * hardLevel)) {
-      this._gameObjects.push(this._factory.createGrayCar(x, y));
+      this._gameObjects.push(this._factory.createGrayCar(x, y, this.gameTheme.greyCarLink));
     } else if (Random.probability(0.0004 * hardLevel)) {
-      this._gameObjects.push(this._factory.createTrack(x, y));
+      this._gameObjects.push(this._factory.createTrack(x, y, this.gameTheme.truckCarLink));
     } else if (Random.probability(0.0002 * hardLevel)) {
-      this._gameObjects.push(this._factory.createPoliceCar(x, y));
+      this._gameObjects.push(this._factory.createPoliceCar(x, y, this.gameTheme.policeCarLink));
     }
   }
 
   private _updateGameObjects () {
     this._roads.forEach(road => {
-      road.Update();
+      road.Update(this._getSpeed()); //
       if (road.y > this._getCanvasHeight()) {
         road.y -= this._roads.length * road.image.height;
       }
     });
-    this._gameObjects.forEach(gameObject => gameObject.Update());
+    this._gameObjects.forEach(gameObject => gameObject.Update(this._getSpeed()));
 
     for (let i = 0; i < this._gameObjects.length; i++) {
       const gameObject = this._gameObjects[i];
@@ -205,13 +218,13 @@ export class Game {
     this._canvas.width = window.innerWidth;
     this._canvas.height = window.innerHeight;
 
-    const roadHeight = this._factory.getRoadHeight();
+    const roadHeight = this._factory.getRoadHeight(this.gameTheme.roadLink);
     if (this._getCanvasHeight() > roadHeight * (this._roads.length - 1) ) {
       let totalRoadsHeight = this._roads.reduce((sum, road) => sum + road.image.height, 0);
       let totalNewRoadsHeight = 0;
       const maxRoadY = Math.max(0, ...this._roads.map(road => road.y)) - roadHeight;
       while (totalRoadsHeight < this._getCanvasHeight() + roadHeight) {
-        const road = this._factory.createRoad(maxRoadY + totalNewRoadsHeight);
+        const road = this._factory.createRoad(maxRoadY + totalNewRoadsHeight, this.gameTheme.roadLink);
         this._roads.push(road);
         totalRoadsHeight += roadHeight;
         totalNewRoadsHeight += roadHeight;

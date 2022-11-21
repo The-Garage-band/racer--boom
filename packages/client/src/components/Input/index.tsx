@@ -6,6 +6,8 @@ import {
   FormHelperText,
 } from '@mui/material'
 
+import { useTheme } from '@mui/material/styles';
+
 interface InputProps {
   label: string
   type: 'text' | 'password' | 'email' | 'tel' | 'file'
@@ -29,9 +31,13 @@ export default function Input({
   Icon,
   sx,
 }: InputProps) {
+
+  const theme = useTheme();
+
   return (
     <FormControl variant="outlined" fullWidth sx={sx}>
-      <InputLabel htmlFor="input-login">{label}</InputLabel>
+      <InputLabel htmlFor="input-login" style={{
+        backgroundColor: theme.palette.background.default}}>{label}</InputLabel>
       <OutlinedInput
         id={name}
         type={type}
