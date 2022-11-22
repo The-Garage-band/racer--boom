@@ -57,7 +57,7 @@ export class Game {
 
     Road.getSpeed = this._getSpeed;
 
-    this._playerCar = this._factory.createPlayerCar(this._getCanvasWidth() / 2,  this._getCanvasHeight() - 140, this.gameTheme.myCarLink);
+    this._playerCar = this._factory.createPlayerCar(this._getCanvasWidth() / 2,  this._getCanvasHeight() - 140);
 
     this._addEventListeners();
     this._gameTimer = setInterval(this._updateGame, STEP_TIME)
@@ -74,10 +74,10 @@ export class Game {
     this.events.emit(GameEvents.gameOver);
   }
 
-  public changeTheme(theme){
+  async changeTheme(theme){
     this.gameTheme = theme;
-    this._factory.load(this.gameTheme);
-    this._playerCar = this._factory.updatePlayerCar(this._playerCar, this.gameTheme.myCarLink);
+    await this._factory.load(this.gameTheme);
+    this._playerCar = this._factory.updatePlayerCar(this._playerCar);
 
     this._roads.forEach(road => {
       road.UpdateImage(this.gameTheme.roadLink); //
@@ -127,15 +127,15 @@ export class Game {
 
 
     if (Random.probability(0.002 * hardLevel)) {
-      this._gameObjects.push(this._factory.createCoin(x, y, this.gameTheme.coinLink));
+      this._gameObjects.push(this._factory.createCoin(x, y));
     } else if (Random.probability(0.0001 * hardLevel)) {
-      this._gameObjects.push(this._factory.createLive(x, y, this.gameTheme.liveLink));
+      this._gameObjects.push(this._factory.createLive(x, y));
     } else if (Random.probability(0.0009 * hardLevel)) {
-      this._gameObjects.push(this._factory.createGrayCar(x, y, this.gameTheme.greyCarLink));
+      this._gameObjects.push(this._factory.createGrayCar(x, y));
     } else if (Random.probability(0.0004 * hardLevel)) {
-      this._gameObjects.push(this._factory.createTrack(x, y, this.gameTheme.truckCarLink));
+      this._gameObjects.push(this._factory.createTrack(x, y));
     } else if (Random.probability(0.0002 * hardLevel)) {
-      this._gameObjects.push(this._factory.createPoliceCar(x, y, this.gameTheme.policeCarLink));
+      this._gameObjects.push(this._factory.createPoliceCar(x, y));
     }
   }
 
@@ -218,13 +218,13 @@ export class Game {
     this._canvas.width = window.innerWidth;
     this._canvas.height = window.innerHeight;
 
-    const roadHeight = this._factory.getRoadHeight(this.gameTheme.roadLink);
+    const roadHeight = this._factory.getRoadHeight();
     if (this._getCanvasHeight() > roadHeight * (this._roads.length - 1) ) {
       let totalRoadsHeight = this._roads.reduce((sum, road) => sum + road.image.height, 0);
       let totalNewRoadsHeight = 0;
       const maxRoadY = Math.max(0, ...this._roads.map(road => road.y)) - roadHeight;
       while (totalRoadsHeight < this._getCanvasHeight() + roadHeight) {
-        const road = this._factory.createRoad(maxRoadY + totalNewRoadsHeight, this.gameTheme.roadLink);
+        const road = this._factory.createRoad(maxRoadY + totalNewRoadsHeight);
         this._roads.push(road);
         totalRoadsHeight += roadHeight;
         totalNewRoadsHeight += roadHeight;
