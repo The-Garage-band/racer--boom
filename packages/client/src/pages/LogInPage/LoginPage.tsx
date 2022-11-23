@@ -36,7 +36,7 @@ const LoginPage = () => {
     try {
       const response = OAuthGetServiceId().then(response => {
         const serviceId = response.data.service_id;
-        const urlForAccept = `https://oauth.yandex.ru/authorize?client_id=${serviceId}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+        const urlForAccept = `https://oauth.yandex.ru/authorize?client_id=${serviceId}&response_type=code&redirect_uri=${REDIRECT_URI}`;
         window.location.replace(urlForAccept);
       });
     } catch (e) {
