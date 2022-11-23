@@ -10,6 +10,8 @@ export const PATH_GET_USER = '/auth/user'
 export const PATH_AVATAR = '/user/profile/avatar'
 export const PATH_UPDATE_PROFILE = '/user/profile'
 export const PATH_GET_PROFILE = '/user'
+export const PATH_GET_SERVICE_ID = '/oauth/yandex/service-id'
+export const PATH_LOGIN_YANDEX = '/oauth/yandex'
 
 // REGEX
 export const REGEX_LOGIN = '^[-A-Za-z0-9_-]{3,16}$'

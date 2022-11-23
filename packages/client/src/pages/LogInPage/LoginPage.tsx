@@ -5,7 +5,7 @@ import { useNavigate, Link } from 'react-router-dom'
 
 import PageLayout from '@/hocs/page-layout'
 import Input from '@/components/Input'
-import { login, ILogIn } from '@/API/Auth'
+import { login, ILogIn, OAuthGetServiceId } from '@/API/Auth'
 
 import validationSchema from './validation_schema'
 
@@ -30,6 +30,19 @@ const LoginPage = () => {
           console.error(message.reason)
         }),
   })
+
+  const clickOnOAuthLogin = () => {
+    const REDIRECT_URI = `${window.location.protocol}//${window.location.host}`;
+    try {
+      const response = OAuthGetServiceId().then(response => {
+        const serviceId = response.data.service_id;
+        const urlForAccept = `https://oauth.yandex.ru/authorize?client_id=${serviceId}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+        window.location.replace(urlForAccept);
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <PageLayout>
@@ -78,6 +91,11 @@ const LoginPage = () => {
           fullWidth
           sx={{ marginBottom: '1rem' }}>
           Регистрация
+        </Button>
+        <Button
+            variant="outlined"
+            fullWidth
+            onClick={clickOnOAuthLogin}>Войти с Яндекс
         </Button>
       </form>
     </PageLayout>

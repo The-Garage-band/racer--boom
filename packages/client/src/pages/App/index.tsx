@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Route, Routes, useNavigate } from 'react-router-dom'
+import { Route, Routes, useNavigate, useLocation } from 'react-router-dom'
 
 import SignUpPage from '@/pages/SignUpPage'
 import LogInPage from '@/pages/LogInPage'
@@ -22,11 +22,34 @@ import { FullscreenButtonComponent } from '@/components/FullscreenButtonComponen
 import fetchUser, { getUserData } from '@/store/slices/GetUserSlice'
 
 import { useAppDispatch, useAppSelector } from '@/hooks'
+import { OAuthLogin } from '@/API/Auth'
 
 const App = () => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const { data, isLoading } = useAppSelector(getUserData)
+
+  const location = useLocation()
+  useEffect(() => {
+    if (location.search.split('code').length > 0) {
+      let code = location.search.split('=')
+      // @ts-ignore
+      if (!code || code == '') {
+        return
+      }
+
+      OAuthLogin({
+        code: code[1],
+        redirect_uri: `${window.location.protocol}//${window.location.host}`,
+      }).then(response => {
+        dispatch(fetchUser()).then(({ payload }) => {
+          if (payload.id) {
+            navigate('/home')
+          }
+        })
+      })
+    }
+  }, [location])
 
   useEffect(() => {
     dispatch(fetchUser()).then(({ payload }) => {
@@ -75,11 +98,10 @@ const App = () => {
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <footer>
-        <FullscreenButtonComponent/>
+        <FullscreenButtonComponent />
       </footer>
       <AlertStack />
     </ErrorBoundaryComponent>
-
   )
 }
 

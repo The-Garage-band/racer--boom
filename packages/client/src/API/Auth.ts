@@ -1,4 +1,4 @@
-import { PATH_LOGIN, PATH_LOGOUT, PATH_SIGNUP } from '../constants'
+import { PATH_LOGIN, PATH_LOGOUT, PATH_SIGNUP, PATH_GET_SERVICE_ID, PATH_LOGIN_YANDEX } from '../constants'
 import { AxiosInstance } from './AxiosInstance'
 
 interface ILogIn {
@@ -31,5 +31,12 @@ const logout = () => AxiosInstance.post(PATH_LOGOUT)
 const signup = <T>(data: T) =>
   AxiosInstance.post<Record<string, number>>(PATH_SIGNUP, data)
 
-export { login, logout, signup }
+const OAuthGetServiceId = () => {
+  const REDIRECT_URI = `${window.location.protocol}//${window.location.host}`;
+  const getUrl = `${PATH_GET_SERVICE_ID}?redirect_uri=${REDIRECT_URI}`;
+  return AxiosInstance.get(getUrl);
+};
+const OAuthLogin = <T>(data: T) => AxiosInstance.post(PATH_LOGIN_YANDEX, data);
+
+export { login, logout, signup, OAuthLogin, OAuthGetServiceId }
 export type { ILogIn, ISignUp, IUser }
