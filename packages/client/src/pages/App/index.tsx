@@ -32,7 +32,7 @@ const App = () => {
   const location = useLocation()
   useEffect(() => {
     if (location.search.split('code').length > 0) {
-      let code = location.search.split('=')
+      const code = location.search.split('=')
       // @ts-ignore
       if (!code || code == '') {
         return
