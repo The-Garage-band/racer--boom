@@ -89,8 +89,7 @@ const ForumDialogPage: React.FC = () => {
                         gap="5px"
                         className="msg-item">
                   <span>
-                    {row.userName},
-                    {/*<span  className="msg-time">{row.time}</span>{' '}*/}
+                    {row.userName}, <span  className="msg-time">{(new Date(row.creationDate)).toLocaleString()}</span>{' '}
                   </span>
                       <span>{row.text}</span>
                     </Grid>

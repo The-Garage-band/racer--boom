@@ -5,6 +5,7 @@ export type ForumMessage = {
   theme_id: number,
   text: string,
   userName: string,
+  creationDate: Date,
 };
 
 export type ForumTheme = {
