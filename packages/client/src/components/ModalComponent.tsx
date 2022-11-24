@@ -1,25 +1,23 @@
-import { Dialog, Button, DialogTitle, DialogActions } from '@mui/material'
+import { Dialog, DialogTitle } from '@mui/material'
 import { FC, ReactElement } from 'react'
 
 type ModalComponentProps = {
   show: boolean
+  dialogTitle: string
   handleClose: () => void
   children?: ReactElement
 }
 
 export const ModalComponent: FC<ModalComponentProps> = ({
+  dialogTitle,
   handleClose,
   children,
   show,
 }) => {
   return (
     <Dialog onClose={handleClose} open={show}>
-      <DialogTitle>Создать новую тему</DialogTitle>
+      <DialogTitle>{dialogTitle}</DialogTitle>
       {children}
-      <DialogActions>
-        <Button onClick={handleClose}>Назад</Button>
-        <Button onClick={handleClose}>Создать</Button>
-      </DialogActions>
     </Dialog>
   )
 }

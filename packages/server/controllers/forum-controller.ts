@@ -1,4 +1,5 @@
 import type {Request, Response} from "express";
+import {literal} from "sequelize";
 import {ForumMessage, ForumTheme} from "../models";
 
 class ForumController {
@@ -30,7 +31,12 @@ class ForumController {
   }
 
   public readAllThemes = async (_request: Request, response: Response) => {
-    const themes = await ForumTheme.findAll();
+    const themes = await ForumTheme.findAll({
+      attributes: ['id', 'name',
+        [literal('(SELECT count(*) from "forum_message" where "forum_message"."theme_id" = "ForumTheme"."id")'), 'countAnswer']
+      ],
+      group: ['id', 'name']
+    });
 
     response.send(themes);
 }

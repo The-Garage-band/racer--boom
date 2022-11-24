@@ -1,16 +1,22 @@
 import axios from "axios";
 
-type ForumMessage = {
+export type ForumMessage = {
   id: number,
   theme_id: number,
   text: string,
   userName: string,
 };
 
-type ForumTheme = {
+export type ForumTheme = {
   id: number,
   name: string,
   messages: ForumMessage[],
+};
+
+export type Forums = {
+  id: number,
+  name: string,
+  countAnswer: number,
 };
 
 class ForumApi {
@@ -22,13 +28,13 @@ class ForumApi {
     },
   });
 
-  public getThemes: () => Promise<ForumTheme[]> = async () =>  {
+  public getThemes: () => Promise<Forums[]> = async () =>  {
     const { data } = await this.axiosInstance.get('/forum');
 
     return data;
   }
 
-  public getMessages: (id: number) => Promise<ForumMessage[]> = async (id: number) => {
+  public getMessages: (id: number) => Promise<ForumTheme> = async (id: number) => {
     const { data } = await this.axiosInstance.get(`/forum/${id}`);
 
     return data;
