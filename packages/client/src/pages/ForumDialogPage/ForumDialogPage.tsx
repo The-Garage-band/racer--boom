@@ -44,8 +44,8 @@ const ForumDialogPage: React.FC = () => {
   };
   const handleKeyPressOnInput = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.charCode == 13) {
-      let target = e.target as HTMLInputElement
-      let text: string = target.value;
+      const target = e.target as HTMLInputElement
+      const text: string = target.value;
       handleSendMessage(text);
       target.value = '';
     }
