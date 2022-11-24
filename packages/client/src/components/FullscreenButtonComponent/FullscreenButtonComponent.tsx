@@ -21,7 +21,7 @@ export const FullscreenButtonComponent: FC = () => {
 
   return (
       <div className="fullscreen-block">
-        <img src={btnEnabled ? fullscreenIconOff : fullscreenIconOn}
+        <img src={!btnEnabled ? fullscreenIconOff : fullscreenIconOn}
              onClick={onToggle}/>
       </div>
   );
