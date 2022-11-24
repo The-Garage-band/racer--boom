@@ -11,6 +11,7 @@ export type ForumMessage = {
 export type ForumTheme = {
   id: number,
   name: string,
+  creationUser: number,
   messages: ForumMessage[],
 };
 
@@ -18,6 +19,8 @@ export type Forums = {
   id: number,
   name: string,
   countAnswer: number,
+  creationUser: number,
+  creationDate: Date
 };
 
 class ForumApi {
@@ -41,8 +44,14 @@ class ForumApi {
     return data;
   }
 
-  public createTheme: (name: string) => Promise<ForumTheme> = async (name: string) => {
-    const { data } = await  this.axiosInstance.post('/forum', { name });
+  public createTheme: (name: string, creationUser:number) => Promise<ForumTheme> = async (name: string, creationUser:number) => {
+    const { data } = await  this.axiosInstance.post('/forum', { name, creationUser });
+
+    return data;
+  }
+
+  public deleteTheme: (id:number) => Promise<ForumTheme> = async (id:number) => {
+    const { data } = await  this.axiosInstance.delete(`/forum/${id}`);
 
     return data;
   }

@@ -6,4 +6,5 @@ export const forumRouter: Router = express.Router();
 forumRouter.get('/', forumController.readAllThemes);
 forumRouter.post('/', forumController.createTheme);
 forumRouter.get('/:id', forumController.readTheme);
+forumRouter.delete('/:id', forumController.deleteTheme);
 forumRouter.post('/:id', forumController.createMessage);

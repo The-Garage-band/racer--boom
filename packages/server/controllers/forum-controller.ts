@@ -6,12 +6,25 @@ class ForumController {
   public createTheme = async (request: Request, response: Response) => {
     console.log(request.body);
     const name: string = request.body.name;
+    const creationUser: number = request.body.creationUser;
 
     const theme = await ForumTheme.build();
     theme.name = name;
+    theme.creationUser = creationUser;
     await theme.save();
 
     response.send(theme);
+  }
+
+  public deleteTheme = async (request: Request, response: Response) => {
+    const id = request.params.id;
+    const theme = await ForumTheme.findOne({where: {id}});
+    if (theme) {
+      await ForumTheme.destroy({where: {id}});
+      response.send();
+    }
+
+    response.status(404).send();
   }
 
   public readTheme = async (request: Request, response: Response) => {
@@ -32,10 +45,10 @@ class ForumController {
 
   public readAllThemes = async (_request: Request, response: Response) => {
     const themes = await ForumTheme.findAll({
-      attributes: ['id', 'name',
+      attributes: ['id', 'name', 'creationUser', 'creationDate',
         [literal('(SELECT count(*) from "forum_message" where "forum_message"."theme_id" = "ForumTheme"."id")'), 'countAnswer']
       ],
-      group: ['id', 'name']
+      group: ['id', 'name', 'creationUser', 'creationDate']
     });
 
     response.send(themes);

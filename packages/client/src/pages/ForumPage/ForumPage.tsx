@@ -2,6 +2,7 @@ import {Grid, Box, Button, IconButton, TextField} from '@mui/material';
 import {Table, TableBody, TableCell, TableRow, TableHead} from '@mui/material';
 import {DialogContent, DialogActions, DialogContentText} from '@mui/material';
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
+import DeleteIcon from '@mui/icons-material/Delete';
 import PageLayout from '@/hocs/page-layout';
 import {ModalComponent} from '@/components/ModalComponent';
 import {FC, useEffect} from 'react';
@@ -12,13 +13,21 @@ import {forumApi, Forums} from '@/API/ForumApi';
 import '@/pages/ForumPage/ForumPage.less';
 import '@/styles/table.less';
 import '@/styles/page.less';
+import {useAppSelector} from '@/hooks';
+import {getUserData} from '@/store/slices/GetUserSlice';
 
-interface TModalCreateTheme {
-  handleClose: () => void
+interface TModalThemeCreate {
+  handleClose: () => void,
+  idUser: number
 }
 
-const ContentModal: FC<TModalCreateTheme> = (props: TModalCreateTheme) => {
-  const {handleClose} = props;
+interface TModalThemeDelete {
+  handleClose: () => void,
+  idForDelete : number
+}
+
+const ContentModalThemeCreate: FC<TModalThemeCreate> = (props: TModalThemeCreate) => {
+  const {handleClose, idUser} = props;
   const [value, setValue] = React.useState('Без темы');
 
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -26,7 +35,7 @@ const ContentModal: FC<TModalCreateTheme> = (props: TModalCreateTheme) => {
   };
 
   const handleOk = () => {
-    forumApi.createTheme(value).then(() => {
+    forumApi.createTheme(value, idUser).then(() => {
       handleClose();
     });
   };
@@ -57,12 +66,49 @@ const ContentModal: FC<TModalCreateTheme> = (props: TModalCreateTheme) => {
   );
 };
 
+const ContentModalThemeDelete: FC<TModalThemeDelete> = (props: TModalThemeDelete) => {
+  const {handleClose, idForDelete} = props;
+
+  const handleOk = () => {
+    forumApi.deleteTheme(idForDelete).then(() => {
+      handleClose();
+    });
+  };
+
+  return (
+      <div>
+        <DialogContent>
+          <DialogContentText>
+            <i>Вы уверены что хотите удалить эту тему?</i>
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button type="submit" onClick={handleOk}>Да</Button>
+          <Button type="submit" onClick={handleClose}>Нет</Button>
+        </DialogActions>
+      </div>
+  );
+};
+
 const ForumPage: FC = () => {
+  const {data} = useAppSelector(getUserData);
   const navigate = useNavigate();
   const [openModal, setOpen] = React.useState(false);
+  const [openModalCreate, setOpenModalCreate] = React.useState(false);
+  const [openModalDelete, setOpenModalDelete] = React.useState(0);
   const [listThemes, setListThemes] = React.useState<Forums[]>([]);
 
-  const handleClickOpen = () => setOpen(true);
+  const handleClickOnModalThemeCreate = () => {
+    setOpenModalCreate(true);
+    setOpenModalDelete(0);
+    setOpen(true);
+  };
+  const handleClickOnModalThemeDelete = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, id: number) => {
+    e.stopPropagation();
+    setOpenModalCreate(false);
+    setOpenModalDelete(id);
+    setOpen(true);
+  };
   const handleClose = () => setOpen(false);
   const handleNavigateToDialog = (dialogId: number) => {
     navigate(`/forum/${dialogId}`, {state: {dialogId}});
@@ -74,10 +120,9 @@ const ForumPage: FC = () => {
   };
 
   useEffect(() => {
-    getListThemes();
-  }, []);
-  useEffect(() => {
-    getListThemes();
+    if (!openModal) {
+      getListThemes();
+    }
   }, [openModal]);
 
   return (
@@ -106,7 +151,7 @@ const ForumPage: FC = () => {
                     aria-label="add"
                     color="primary"
                     title="Добавить тему"
-                    onClick={handleClickOpen}
+                    onClick={handleClickOnModalThemeCreate}
                     sx={{marginBottom: '50px', alignItems: 'flex-end'}}>
                   <ControlPointIcon fontSize="large"/>
                 </IconButton>
@@ -134,8 +179,31 @@ const ForumPage: FC = () => {
                             key={index}
                             onClick={() => handleNavigateToDialog(row.id)}>
                           <TableCell component="td" scope="row"
-                                     sx={{width: 100}}>
-                            {row.name}
+                                     sx={{width: 100}} className="theme--info">
+                            <Grid
+                                container
+                                direction="row"
+                                justifyContent="flex-start"
+                                alignContent="center">
+                              {row.name}
+                              {data.id == row.creationUser &&
+                              <IconButton
+                                  aria-label="add"
+                                  color="primary"
+                                  title="Добавить тему"
+                                  onClick={(e) =>
+                                      handleClickOnModalThemeDelete(e, row.id)}
+                                  sx={{
+                                    alignItems: 'flex-end',
+                                  }}>
+                                <DeleteIcon fontSize="small"/>
+                              </IconButton>
+                              }
+                            </Grid>
+                            <span
+                                className="theme--info-date">Создана: {(new Date(
+                                row.creationDate)).toLocaleString()}</span>
+
                           </TableCell>
                           <TableCell component="td" scope="row" align="center">
                             {row.countAnswer}
@@ -149,8 +217,11 @@ const ForumPage: FC = () => {
           </Grid>
         </Grid>
         <ModalComponent show={openModal} handleClose={handleClose}
-                        dialogTitle="Создать новую тему">
-          <ContentModal handleClose={handleClose}/>
+          dialogTitle={openModalCreate ? 'Создать новую тему' : 'Удалить'}>
+          {openModalCreate ?
+              (<ContentModalThemeCreate handleClose={handleClose} idUser={data.id}/>) :
+              (<ContentModalThemeDelete handleClose={handleClose} idForDelete={openModalDelete}/>)
+          }
         </ModalComponent>
       </PageLayout>
   );
