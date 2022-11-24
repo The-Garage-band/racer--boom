@@ -111,32 +111,40 @@ const ForumPage: FC = () => {
                   <ControlPointIcon fontSize="large"/>
                 </IconButton>
               </Grid>
-              <Table className="table table-unborder">
-                <TableHead>
-                  <TableRow>
-                    <TableCell align="left" sx={{width: '70%'}}>
-                      Тема
-                    </TableCell>
-                    <TableCell align="center">Ответы</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {listThemes.map((row, index) => (
-                      <TableRow
-                          hover={true}
-                          role="checkbox"
-                          key={index}
-                          onClick={() => handleNavigateToDialog(row.id)}>
-                        <TableCell component="td" scope="row" sx={{width: 100}}>
-                          {row.name}
-                        </TableCell>
-                        <TableCell component="td" scope="row" align="center">
-                          {row.countAnswer}
-                        </TableCell>
-                      </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
+              <Grid
+                  container
+                  className="theme-list"
+                  direction="row"
+                  justifyContent="flex-start"
+                  alignContent="flex-start">
+                <Table className="table table-unborder" stickyHeader>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell align="left" sx={{width: '70%'}}>
+                        Тема
+                      </TableCell>
+                      <TableCell align="center">Ответы</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {listThemes.map((row, index) => (
+                        <TableRow
+                            hover={true}
+                            role="checkbox"
+                            key={index}
+                            onClick={() => handleNavigateToDialog(row.id)}>
+                          <TableCell component="td" scope="row"
+                                     sx={{width: 100}}>
+                            {row.name}
+                          </TableCell>
+                          <TableCell component="td" scope="row" align="center">
+                            {row.countAnswer}
+                          </TableCell>
+                        </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </Grid>
             </Box>
           </Grid>
         </Grid>
