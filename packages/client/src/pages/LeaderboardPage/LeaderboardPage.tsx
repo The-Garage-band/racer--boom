@@ -49,7 +49,7 @@ const LeaderboardPage: FC = () => {
         justifyContent="center"
         alignItems="stretch"
         id="leaderboard"
-        className="page__content-img">
+        className="page__content-img" style ={{backgroundImage: `url(${theme.leaderBgImage})`}}>
         <Grid container item direction="row" justifyContent="flex-end">
           <Link to="/home">
             <Button variant="contained">Назад</Button>

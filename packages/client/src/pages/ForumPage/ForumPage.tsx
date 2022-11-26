@@ -86,7 +86,7 @@ const ForumPage: FC = () => {
         justifyContent="center"
         alignItems="stretch"
         className="page__content-img"
-        id="forum">
+        id="forum" style ={{backgroundImage: `url(${theme.forumBgImage})`}}>
         <Grid container item direction="row" justifyContent="flex-end">
           <Link to="/home">
             <Button variant="contained">Назад</Button>

@@ -76,7 +76,7 @@ const ForumDialogPage: FC = () => {
         justifyContent="center"
         alignItems="stretch"
         className="page__content-img"
-        id="forum-dialog">
+        id="forum-dialog" style ={{backgroundImage: `url(${theme.forumBgImage})`}}>
         <Grid container item direction="row" justifyContent="flex-end">
           <Link to="/forum">
             <Button variant="contained">Назад</Button>

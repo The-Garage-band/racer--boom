@@ -40,6 +40,8 @@ const themeDefault = responsiveFontSizes(
     liveLink: '/public/game/live.png',
     roadLink: '/public/game/doroga.jpg',
 
+    forumBgImage: 'public/msg.png',
+    leaderBgImage: 'public/crown.png',
     bgCar: 'public/bg-car.png',
     logo: 'public/logo.png',
     audioSoundOff: 'public/audio/audio-sound-off.png',
@@ -87,6 +89,8 @@ const lightTheme = responsiveFontSizes(
     liveLink: '/public/light-game/live.png',
     roadLink: '/public/light-game/doroga.jpg',
 
+    forumBgImage: 'public/msg.png',
+    leaderBgImage: 'public/crown.png',
     bgCar: 'public/light-theme/light-bg-car.png',
     logo: 'public/light-theme/logo-light.png',
     audioSoundOff: 'public/light-theme/audio-sound-off-light.png',
