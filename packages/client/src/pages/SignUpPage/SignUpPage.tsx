@@ -43,6 +43,8 @@ const SignUpPage = () => {
         }),
   })
 
+  const theme = useTheme();
+
   return (
     <PageLayout>
       <form className="form" onSubmit={formik.handleSubmit} autoComplete="off" 

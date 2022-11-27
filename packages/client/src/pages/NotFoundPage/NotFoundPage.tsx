@@ -6,6 +6,9 @@ import { useTheme } from '@mui/material/styles';
 import './NotFoundPage.less'
 
 const NotFoundPage: FC = () => {
+
+  const theme = useTheme();
+
   return (
     <div id="page-not-found" style={{backgroundColor: theme.palette.background.default}}>
       <img
