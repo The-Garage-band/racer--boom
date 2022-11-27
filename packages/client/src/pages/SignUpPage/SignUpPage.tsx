@@ -45,32 +45,16 @@ const SignUpPage = () => {
 
   const theme = useTheme();
 
-  const formStyle = {};
-
-  if (theme.backgroudOpacity){
-    formStyle.backgroundColor = theme.backgroudOpacity;
-  }
-
-  if (theme.borderColor){
-    formStyle.borderColor = theme.borderColor;
-  }
-
-  if (theme.borderWidht){
-    formStyle.borderWidht = theme.borderWidht;
-  }
-
-  if (theme.borderStyle){
-    formStyle.borderStyle = theme.borderStyle;
-  }
-
-  if (theme.boxShadow){
-    formStyle.boxShadow = theme.boxShadow;
-  }
-
   return (
     <PageLayout>
       <form className="form" onSubmit={formik.handleSubmit} autoComplete="off" 
-        style={formStyle}>
+        style={{
+          backgroundColor: theme.backgroudOpacity, 
+          borderColor: theme.borderColor, 
+          borderWidth: theme.borderWidht, 
+          borderStyle: theme.borderStyle, 
+          boxShadow: theme.boxShadow
+        }}>
         <h1 className="form__title">Регистрация</h1>
         <Input
           label="Имя"
