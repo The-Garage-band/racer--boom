@@ -52,9 +52,11 @@ const App = () => {
     setDataTheme(theme);
   }
 
-  function setDataTheme(theme: string | null){
-    document.documentElement.dataset.theme = theme;
-    localStorage.setItem("racer--boom-theme", theme);
+  function setDataTheme(theme: string | undefined){
+    if (theme){
+      document.documentElement.dataset.theme = theme;
+      localStorage.setItem("racer--boom-theme", theme);
+    }
   }
 
   useEffect(() => {
