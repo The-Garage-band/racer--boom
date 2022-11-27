@@ -20,7 +20,7 @@ export class Road {
     }
   }
 
-  Update(speed: float): void {
+  Update(speed: number): void {
     this.y += speed;
   }
 }

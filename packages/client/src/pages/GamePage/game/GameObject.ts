@@ -26,7 +26,7 @@ export class GameObject {
     this.image = image;
   }
 
-  Update(speed: float): void {
+  Update(speed: number): void {
     if (!this.isPlayer) {
       this.y += speed;
     }
