@@ -2,7 +2,38 @@ import { createTheme, responsiveFontSizes } from '@mui/material/styles'
 
 declare module '@mui/material/styles' {
 
+  interface CustomTheme {
+    name?: string;
+    
+    textShadow?: string;
+    backgroudOpacity?: string;
+    borderColor?: string;
+    borderWidht?: string;
+    borderStyle?: string;
+    boxShadow?: string;
+
+    truckCarLink?: string;
+    myCarLink?: string;
+    greyCarLink?: string;
+    policeCarLink?: string;
+    coinLink?: string;
+    liveLink?: string;
+    roadLink?: string;
+
+    forumBgImage?: string;
+    leaderBgImage?: string;
+    bgCar?: string;
+    logo?: string;
+    audioSoundOff?: string;
+    audioSoundOn?: string;
+    audioSoundNext?: string;
+    fullscreenIconOff?: string;
+    fullscreenIconOn?: string;
+  }
+
   interface Theme extends CustomTheme {
+    name?: string;
+
     textShadow?: string;
     backgroudOpacity?: string;
     borderColor?: string;
