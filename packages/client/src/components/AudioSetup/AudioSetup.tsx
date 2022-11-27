@@ -119,10 +119,10 @@ export const AudioSetup: FC = () => {
         className={`collapse-content ${
           collapsed ? 'collapse-content-active' : ''
         }`} style={{
-          backgroundColor: theme.palette.background.opacity, 
-          borderColor: theme.shape.borderColor,
-          borderStyle: theme.shape.borderStyle, 
-          boxShadow: theme.shape.boxShadow
+          backgroundColor: theme.backgroudOpacity, 
+          borderColor: theme.borderColor,
+          borderStyle: theme.borderStyle, 
+          boxShadow: theme.boxShadow
         }}>
         <input
           className="volume"
@@ -132,7 +132,7 @@ export const AudioSetup: FC = () => {
           max={MAX_VOLUME_INPUT_VALUE}
           value={volume} 
           style={{
-            backgroundColor: theme.palette.background.opacity
+            backgroundColor: theme.backgroudOpacity
           }}
         />
         <span className="volume-value">{volume}%</span>
