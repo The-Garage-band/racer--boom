@@ -13,7 +13,7 @@ export class GameObjectFactory {
 
   async load (gameTheme: gameThemeType) {
 
-    let resources = [];
+    let resources: string = [];
     if (gameTheme){
       resources = [
         gameTheme.roadLink,
