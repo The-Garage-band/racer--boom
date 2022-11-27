@@ -45,7 +45,7 @@ const SignUpPage = () => {
 
   const theme = useTheme();
 
-  let formStyle = {};
+  const formStyle = {};
 
   if (theme.backgroudOpacity){
     formStyle.backgroundColor = theme.backgroudOpacity;
