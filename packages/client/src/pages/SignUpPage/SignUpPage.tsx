@@ -15,7 +15,7 @@ import validationSchema from './validation_schema'
 import { useFormik } from 'formik'
 import { signup, ISignUp } from '@/API/Auth'
 
-import { useTheme } from '@mui/material/styles';
+import { useTheme, Theme } from '@mui/material';
 
 const SignUpPage = () => {
   const navigate = useNavigate()
@@ -43,7 +43,7 @@ const SignUpPage = () => {
         }),
   })
 
-  const theme = useTheme();
+  const theme: Theme = useTheme()
 
   return (
     <PageLayout>

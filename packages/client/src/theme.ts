@@ -2,7 +2,8 @@ import { createTheme, responsiveFontSizes } from '@mui/material/styles'
 
 //https://mui.com/material-ui/customization/theming/
 
-const themeDefault = createTheme({
+const themeDefault = responsiveFontSizes(
+  createTheme({
     name: 'dark',
     palette: {
       primary: {
@@ -49,9 +50,10 @@ const themeDefault = createTheme({
     audioSoundNext: 'public/audio/audio-sound-next.png',
     fullscreenIconOff: 'public/fullscreen/fullscreen-icon-off.png',
     fullscreenIconOn: 'public/fullscreen/fullscreen-icon-on.png',
-  });
+  })
+)
 
-const lightTheme = createTheme({
+const lightTheme = responsiveFontSizes( createTheme({
     name: 'light',
     palette: {
       primary: {
@@ -98,7 +100,7 @@ const lightTheme = createTheme({
     audioSoundNext: 'public/light-theme/audio-sound-next-light.png',
     fullscreenIconOff: 'public/light-theme/fullscreen-icon-off-light.png',
     fullscreenIconOn: 'public/light-theme/fullscreen-icon-on-light.png',
-  });
-
+  })
+)
 
 export { themeDefault, lightTheme };
