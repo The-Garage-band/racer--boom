@@ -1,15 +1,19 @@
 import {Road} from "./Road";
 import {GameObject} from "./GameObject";
 
+type gameThemeType = {
+  [key: string]: any; // 👈️ variable keys
+};
+
 export class GameObjectFactory {
 
   private readonly _resources = new Map<string, HTMLImageElement>();
 
   private _gameTheme: any 
 
-  async load (gameTheme: object | null) {
+  async load (gameTheme: gameThemeType) {
 
-    const resources = [];
+    let resources = [];
     if (gameTheme){
       resources = [
         gameTheme.roadLink,
