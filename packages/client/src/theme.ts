@@ -60,6 +60,8 @@ declare module '@mui/material/styles' {
     fullscreenIconOn?: string;
   }
   interface ThemeOptions extends CustomTheme {
+    name?: string;
+    
     textShadow?: string;
     backgroudOpacity?: string;
     borderColor?: string;
