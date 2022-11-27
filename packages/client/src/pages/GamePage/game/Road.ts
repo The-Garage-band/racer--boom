@@ -14,7 +14,7 @@ export class Road {
     this.image = image;
   }
 
-  UpdateImage(roadImageLink): void {
+  UpdateImage(roadImageLink: string): void {
     if (roadImageLink){
       this.image.src = roadImageLink;
     }
