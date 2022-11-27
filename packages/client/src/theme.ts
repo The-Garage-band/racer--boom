@@ -20,7 +20,6 @@ const themeDefault = responsiveFontSizes(
       background: {
         default: '#141E30', //#98acd6 141E30
         paper: '#141E30', //#98acd6 141E30
-        
       },
     },
     shape: {
@@ -77,7 +76,7 @@ const lightTheme = responsiveFontSizes(
     shape: {
       borderRadius: 8,
     },
-    
+
     textShadow: '0px 0px 0px',
     backgroudOpacity: 'rgba(128, 128, 128, 0.81)',
     borderColor: '#ffffff',
