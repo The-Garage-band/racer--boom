@@ -84,11 +84,11 @@ const ForumDialogPage: FC = () => {
         <Grid item sx={{ flex: 1 }}>
           <Box className="form form__full-size form__transparent" 
             style={{
-              backgroundColor: theme.palette.background.opacity, 
-              borderColor: theme.shape.borderColor, 
-              borderWidth: theme.shape.borderWidht, 
-              borderStyle: theme.shape.borderStyle, 
-              boxShadow: theme.shape.boxShadow
+              backgroundColor: theme.backgroudOpacity, 
+              borderColor: theme.borderColor, 
+              borderWidth: theme.borderWidht, 
+              borderStyle: theme.borderStyle, 
+              boxShadow: theme.boxShadow
             }}>
             <h1 className="form__title">{dialogTitle}</h1>
             <Grid

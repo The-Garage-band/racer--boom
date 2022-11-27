@@ -17,19 +17,19 @@ export const EndGamePage: FC = () => {
         <main>
             <Button component={Link} to="/game" id="start-button" className="button"
                 style={{
-                    borderColor: theme.shape.borderColor, 
-                    borderWidth: theme.shape.borderWidht, 
-                    boxShadow: theme.shape.boxShadow,
+                    borderColor: theme.borderColor, 
+                    borderWidth: theme.borderWidht, 
+                    boxShadow: theme.boxShadow,
                     color: theme.palette.text.secondary,
-                    textShadow: theme.palette.text.textShadow 
+                    textShadow: theme.textShadow 
                 }}>
                 Заново
             </Button>
             <div className="stats" 
                 style={{
                   borderColor: theme.palette.text.secondary, 
-                  borderWidth: theme.shape.borderWidht, 
-                  boxShadow: theme.shape.boxShadow
+                  borderWidth: theme.borderWidht, 
+                  boxShadow: theme.boxShadow
                 }}>
                 <ul>
                     <li>Счёт: <b className="value">{gameContext.data.score}</b></li>
@@ -42,28 +42,28 @@ export const EndGamePage: FC = () => {
         <footer>
             <Button component={Link} to="/forum" id="forum-button" className="button" 
                 style={{
-                  borderColor: theme.shape.borderColor, 
-                  borderWidth: theme.shape.borderWidht, 
-                  boxShadow: theme.shape.boxShadow,
-                  textShadow: theme.palette.text.textShadow 
+                  borderColor: theme.borderColor, 
+                  borderWidth: theme.borderWidht, 
+                  boxShadow: theme.boxShadow,
+                  textShadow: theme.textShadow 
                 }}>
                 Форум
             </Button>
             <Button component={Link} to="/leaderboard" id="leaderboard-button" className="button" 
                 style={{
-                  borderColor: theme.shape.borderColor, 
-                  borderWidth: theme.shape.borderWidht, 
-                  boxShadow: theme.shape.boxShadow,
-                  textShadow: theme.palette.text.textShadow 
+                  borderColor: theme.borderColor, 
+                  borderWidth: theme.borderWidht, 
+                  boxShadow: theme.boxShadow,
+                  textShadow: theme.textShadow 
                 }}>
                 Рейтинг
             </Button>
             <Button component={Link} to="/profile" id="profile-button" className="button" 
                 style={{
-                  borderColor: theme.shape.borderColor, 
-                  borderWidth: theme.shape.borderWidht, 
-                  boxShadow: theme.shape.boxShadow,
-                  textShadow: theme.palette.text.textShadow 
+                  borderColor: theme.borderColor, 
+                  borderWidth: theme.borderWidht, 
+                  boxShadow: theme.boxShadow,
+                  textShadow: theme.textShadow 
                 }}>
                 Профиль
             </Button>

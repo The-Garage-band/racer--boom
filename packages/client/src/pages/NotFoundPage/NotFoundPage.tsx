@@ -24,7 +24,7 @@ const NotFoundPage: FC = () => {
         id="car-animation-right"
       />
 
-      <h1 style={{textShadow: theme.palette.text.textShadow }}>404</h1>
+      <h1 style={{textShadow: theme.textShadow }}>404</h1>
 
       <h2>Страница не найдена</h2>
 

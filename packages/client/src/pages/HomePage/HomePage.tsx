@@ -26,11 +26,11 @@ export const HomePage: FC = () => {
 
       <Button component={Link} to="/game" id="start-button" className="button" 
         style={{
-          borderColor: theme.shape.borderColor, 
-          borderWidth: theme.shape.borderWidht, 
-          boxShadow: theme.shape.boxShadow,
+          borderColor: theme.borderColor, 
+          borderWidth: theme.borderWidht, 
+          boxShadow: theme.boxShadow,
           color: theme.palette.text.secondary,
-          textShadow: theme.palette.text.textShadow 
+          textShadow: theme.textShadow 
         }}>
         Старт
       </Button>
@@ -41,10 +41,10 @@ export const HomePage: FC = () => {
           id="forum-button"
           className="button" 
           style={{
-            borderColor: theme.shape.borderColor, 
-            borderWidth: theme.shape.borderWidht, 
-            boxShadow: theme.shape.boxShadow,
-            textShadow: theme.palette.text.textShadow
+            borderColor: theme.borderColor, 
+            borderWidth: theme.borderWidht, 
+            boxShadow: theme.boxShadow,
+            textShadow: theme.textShadow
           }}>
           Форум
         </Button>
@@ -54,10 +54,10 @@ export const HomePage: FC = () => {
           id="leaderboard-button"
           className="button"
           style={{
-            borderColor: theme.shape.borderColor, 
-            borderWidth: theme.shape.borderWidht, 
-            boxShadow: theme.shape.boxShadow,
-            textShadow: theme.palette.text.textShadow 
+            borderColor: theme.borderColor, 
+            borderWidth: theme.borderWidht, 
+            boxShadow: theme.boxShadow,
+            textShadow: theme.textShadow 
           }}>
           Рейтинг
         </Button>
@@ -67,10 +67,10 @@ export const HomePage: FC = () => {
           id="profile-button"
           className="button" 
           style={{
-            borderColor: theme.shape.borderColor, 
-            borderWidth: theme.shape.borderWidht, 
-            boxShadow: theme.shape.boxShadow,
-            textShadow: theme.palette.text.textShadow 
+            borderColor: theme.borderColor, 
+            borderWidth: theme.borderWidht, 
+            boxShadow: theme.boxShadow,
+            textShadow: theme.textShadow 
           }}>
           Профиль
         </Button>
@@ -79,10 +79,10 @@ export const HomePage: FC = () => {
           to="/logout"
           id="logout-button"
           className="button" style={{
-            borderColor: theme.shape.borderColor, 
-            borderWidth: theme.shape.borderWidht, 
-            boxShadow: theme.shape.boxShadow,
-            textShadow: theme.palette.text.textShadow 
+            borderColor: theme.borderColor, 
+            borderWidth: theme.borderWidht, 
+            boxShadow: theme.boxShadow,
+            textShadow: theme.textShadow 
           }}>
           Выйти
         </Button>

@@ -15,22 +15,25 @@ const themeDefault = responsiveFontSizes(
       text: {
         primary: '#ffffff',
         secondary: '#ffffff', //#ffffff
-        disabled: 'rgba(255,255,255,0.38)',
-        textShadow: '1px 1px 2px #15fff1'
+        disabled: 'rgba(255,255,255,0.38)',        
       },
       background: {
         default: '#141E30', //#98acd6 141E30
         paper: '#141E30', //#98acd6 141E30
-        opacity: 'rgba(20, 30, 48, 0.81)'
+        
       },
     },
     shape: {
       borderRadius: 8,
-      borderColor: '#ffffff',
-      borderWidht: '2px',
-      borderStyle: 'solid',
-      boxShadow: '0px 4px 53px rgb(60 193 193 / 51%), inset 0px 4px 100px rgb(60 193 193 / 20%)'
     },
+
+    textShadow: '1px 1px 2px #15fff1',
+    backgroudOpacity: 'rgba(20, 30, 48, 0.81)',
+    borderColor: '#ffffff',
+    borderWidht: '2px',
+    borderStyle: 'solid',
+    boxShadow: '0px 4px 53px rgb(60 193 193 / 51%), inset 0px 4px 100px rgb(60 193 193 / 20%)',
+
     truckCarLink: '/public/game/grey-car.png',
     myCarLink: '/public/game/my-car.png',
     greyCarLink: '/public/game/grey-car.png',
@@ -65,21 +68,23 @@ const lightTheme = responsiveFontSizes(
         primary: '#333333',
         secondary: '#fad201', //#ffffff
         disabled: 'rgba(100,100,100,0.38)',
-        textShadow: '0px 0px 0px'
       },
       background: {
         default: '#808080', //#98acd6 141E30
         paper: '#808080', //#98acd6 141E30
-        opacity: 'rgba(128, 128, 128, 0.81)'
       },
     },
     shape: {
       borderRadius: 8,
-      borderColor: '#ffffff',
-      borderWidht: '5px',
-      borderStyle: 'dashed',
-      boxShadow: '0px 0px 0px',
     },
+    
+    textShadow: '0px 0px 0px',
+    backgroudOpacity: 'rgba(128, 128, 128, 0.81)',
+    borderColor: '#ffffff',
+    borderWidht: '5px',
+    borderStyle: 'dashed',
+    boxShadow: '0px 0px 0px',
+
     truckCarLink: '/public/light-game/truck.png',
     myCarLink: '/public/light-game/my-car.png',
     greyCarLink: '/public/light-game/grey-car.png',

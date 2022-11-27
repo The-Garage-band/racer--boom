@@ -31,7 +31,7 @@ const ErrorPage: FC<ErrorPageProps> = ({
         id="car-animation-right"
       />
 
-      <h1 style={{textShadow: theme.palette.text.textShadow }}>{caption}</h1>
+      <h1 style={{textShadow: theme.textShadow }}>{caption}</h1>
 
       <h2>{description}</h2>
 

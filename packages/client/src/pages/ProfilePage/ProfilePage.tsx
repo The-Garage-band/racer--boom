@@ -71,11 +71,11 @@ const ProfilePage = () => {
     <PageLayout>
       <form className="form" onSubmit={formik.handleSubmit} autoComplete="off" 
         style={{
-          backgroundColor: theme.palette.background.opacity, 
-          borderColor: theme.shape.borderColor, 
-          borderWidth: theme.shape.borderWidht, 
-          borderStyle: theme.shape.borderStyle, 
-          boxShadow: theme.shape.boxShadow
+          backgroundColor: theme.backgroudOpacity, 
+          borderColor: theme.borderColor, 
+          borderWidth: theme.borderWidht, 
+          borderStyle: theme.borderStyle, 
+          boxShadow: theme.boxShadow
         }}>
         <h1 className="form__title">Профиль</h1>
         <Avatar
