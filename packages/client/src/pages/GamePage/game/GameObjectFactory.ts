@@ -7,7 +7,7 @@ export class GameObjectFactory {
 
   private _gameTheme: any 
 
-  async load (gameTheme) {
+  async load (gameTheme: object | null) {
 
     const resources = [
       gameTheme.roadLink,
@@ -43,7 +43,7 @@ export class GameObjectFactory {
     const roads: Road[] = [];
     const roadHeight = this._getImage(imageLink).height;
     while (totalRoadsHeight < canvasHeight + roadHeight) {
-      const road = this.createRoad(totalRoadsHeight - roadHeight, imageLink);
+      const road = this.createRoad(totalRoadsHeight - roadHeight);
       roads.push(road);
       totalRoadsHeight += roadHeight;
     }
