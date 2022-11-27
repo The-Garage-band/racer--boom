@@ -35,15 +35,18 @@ export class Game {
   public coins = 0;
   private _speedAdd = 0;
 
+  public gameTheme: any;
+
   private _audioService = AudioService.getInstance();
 
   async start (canvas: HTMLCanvasElement) {
     if (this._started) {
       return;
     }
+
     this._canvas = canvas;
     this._started = true;
-    await this._factory.load();
+    await this._factory.load(this.gameTheme);
 
     this._resizeGameCanvas();
 
@@ -71,6 +74,16 @@ export class Game {
     this.events.emit(GameEvents.gameOver);
   }
 
+  async changeTheme(theme){
+    this.gameTheme = theme;
+    await this._factory.load(this.gameTheme);
+    this._playerCar = this._factory.updatePlayerCar(this._playerCar);
+
+    this._roads.forEach(road => {
+      road.UpdateImage(this.gameTheme.roadLink); //
+    });
+  }
+
   private _updateGame = () => {
     if (!this._started) {
       this.stop();
@@ -94,7 +107,6 @@ export class Game {
       this.stop();
       return;
     }
-
     this._drawGameObjects();
   }
 
@@ -113,6 +125,7 @@ export class Game {
       + 2 * (+(this._step > 1000))
       + 3 * (+(this._step > 2000));
 
+
     if (Random.probability(0.002 * hardLevel)) {
       this._gameObjects.push(this._factory.createCoin(x, y));
     } else if (Random.probability(0.0001 * hardLevel)) {
@@ -128,12 +141,12 @@ export class Game {
 
   private _updateGameObjects () {
     this._roads.forEach(road => {
-      road.Update();
+      road.Update(this._getSpeed()); //
       if (road.y > this._getCanvasHeight()) {
         road.y -= this._roads.length * road.image.height;
       }
     });
-    this._gameObjects.forEach(gameObject => gameObject.Update());
+    this._gameObjects.forEach(gameObject => gameObject.Update(this._getSpeed()));
 
     for (let i = 0; i < this._gameObjects.length; i++) {
       const gameObject = this._gameObjects[i];

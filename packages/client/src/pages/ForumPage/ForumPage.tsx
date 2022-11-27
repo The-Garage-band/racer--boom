@@ -18,6 +18,7 @@ import { FC } from 'react'
 import ControlPointIcon from '@mui/icons-material/ControlPoint'
 import { useNavigate, Link } from 'react-router-dom'
 import * as React from 'react'
+import { useTheme } from '@mui/material/styles';
 
 import '@/pages/ForumPage/ForumPage.less'
 import '@/styles/table.less'
@@ -36,6 +37,7 @@ function createData(params: TCreateDataParams) {
 
 class ContentModal extends React.PureComponent {
   render() {
+
     return (
       <DialogContent>
         <DialogContentText>
@@ -74,6 +76,8 @@ const ForumPage: FC = () => {
     navigate(`/forum/${dialogId}`, { state: { dialogId, dialogTitle } })
   }
 
+  const theme = useTheme();
+
   return (
     <PageLayout>
       <Grid
@@ -82,14 +86,21 @@ const ForumPage: FC = () => {
         justifyContent="center"
         alignItems="stretch"
         className="page__content-img"
-        id="forum">
+        id="forum" style ={{backgroundImage: `url(${theme.forumBgImage})`}}>
         <Grid container item direction="row" justifyContent="flex-end">
           <Link to="/home">
             <Button variant="contained">Назад</Button>
           </Link>
         </Grid>
         <Grid item sx={{ flex: 1 }}>
-          <Box className="form form__full-size form__transparent">
+          <Box className="form form__full-size form__transparent"  
+            style={{
+              backgroundColor: theme.palette.background.opacity, 
+              borderColor: theme.shape.borderColor, 
+              borderWidth: theme.shape.borderWidht, 
+              borderStyle: theme.shape.borderStyle, 
+              boxShadow: theme.shape.boxShadow
+            }}>
             <Grid
               container
               direction="row"
@@ -107,11 +118,11 @@ const ForumPage: FC = () => {
             <Table className="table table-unborder">
               <TableHead>
                 <TableRow>
-                  <TableCell align="left" sx={{ width: '70%' }}>
+                  <TableCell align="left" sx={{ width: '70%' }} style={{color: theme.palette.text.secondary}}>
                     Форумы
                   </TableCell>
-                  <TableCell align="center">Темы</TableCell>
-                  <TableCell align="center">Ответы</TableCell>
+                  <TableCell align="center" style={{color: theme.palette.text.secondary}}>Темы</TableCell>
+                  <TableCell align="center" style={{color: theme.palette.text.secondary}}>Ответы</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>

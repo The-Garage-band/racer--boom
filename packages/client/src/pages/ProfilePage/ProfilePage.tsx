@@ -20,6 +20,8 @@ import fetchUser, { getUserData } from '@/store/slices/GetUserSlice'
 import { addAlert } from '@/store/slices/GetAlertSlice'
 import { useAppDispatch, useAppSelector } from '@/hooks'
 
+import { useTheme } from '@mui/material/styles';
+
 const ProfilePage = () => {
   const dispatch = useAppDispatch()
   const { data } = useAppSelector(getUserData)
@@ -65,7 +67,14 @@ const ProfilePage = () => {
 
   return (
     <PageLayout>
-      <form className="form" onSubmit={formik.handleSubmit} autoComplete="off">
+      <form className="form" onSubmit={formik.handleSubmit} autoComplete="off" 
+        style={{
+          backgroundColor: theme.palette.background.opacity, 
+          borderColor: theme.shape.borderColor, 
+          borderWidth: theme.shape.borderWidht, 
+          borderStyle: theme.shape.borderStyle, 
+          boxShadow: theme.shape.boxShadow
+        }}>
         <h1 className="form__title">Профиль</h1>
         <Avatar
           name="avatar"

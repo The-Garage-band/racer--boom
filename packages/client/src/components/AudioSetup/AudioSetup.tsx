@@ -1,9 +1,8 @@
 import { FC, useState, MouseEvent, useEffect, ChangeEvent, useRef } from 'react'
 import { AudioService } from '@/services'
 import './AudioSetup.less'
-import audioSoundOff from 'public/audio/audio-sound-off.png'
-import audioSoundOn from 'public/audio/audio-sound-on.png'
-import audioSoundNext from 'public/audio/audio-sound-next.png'
+
+import { useTheme } from '@mui/material/styles';
 
 const MAX_VOLUME_INPUT_VALUE = 100
 const MAX_PROGRESS_INPUT_VALUE = 500
@@ -38,6 +37,8 @@ export const AudioSetup: FC = () => {
 
   const soundNameContainer = useRef<HTMLDivElement>(null)
   const soundNameValue = useRef<HTMLParagraphElement>(null)
+
+  const theme = useTheme();
 
   useEffect(() => AudioService.getInstance().start(), [])
   useEffect(() => {
@@ -107,28 +108,36 @@ export const AudioSetup: FC = () => {
   return (
     <div className="audio-setup">
       <button className="toggle button" onClick={onToggle}>
-        <img src={soundEnabled ? audioSoundOn : audioSoundOff} alt="" />
+        <img src={soundEnabled ? theme.audioSoundOn : theme.audioSoundOff} alt="" />
       </button>
       <button
         className={`collapse button ${collapsed ? 'collapse-active' : ''}`}
         onClick={onCollapse}>
-        <img src={audioSoundNext} />
+        <img src={theme.audioSoundNext} />
       </button>
       <div
         className={`collapse-content ${
           collapsed ? 'collapse-content-active' : ''
-        }`}>
+        }`} style={{
+          backgroundColor: theme.palette.background.opacity, 
+          borderColor: theme.shape.borderColor,
+          borderStyle: theme.shape.borderStyle, 
+          boxShadow: theme.shape.boxShadow
+        }}>
         <input
           className="volume"
           onChange={onChangeVolume}
           type="range"
           min="0"
           max={MAX_VOLUME_INPUT_VALUE}
-          value={volume}
+          value={volume} 
+          style={{
+            backgroundColor: theme.palette.background.opacity
+          }}
         />
         <span className="volume-value">{volume}%</span>
         <button className="next button" onClick={onNext}>
-          <img src={audioSoundNext} />
+          <img src={theme.audioSoundNext} />
         </button>
         <span className="current-time">
           {getFormattedTimeString(currentTime)}

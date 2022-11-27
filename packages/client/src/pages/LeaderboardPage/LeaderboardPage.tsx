@@ -12,6 +12,8 @@ import { Link } from 'react-router-dom'
 import PageLayout from '@/hocs/page-layout'
 import { FC } from 'react'
 
+import { useTheme } from '@mui/material/styles';
+
 import '@/pages/LeaderboardPage/LeaderboardPage.less'
 import '@/styles/table.less'
 import '@/styles/page.less'
@@ -36,6 +38,8 @@ const LeaderboardPage: FC = () => {
     createData({ name: 'username 7', point: 10 }),
   ]
 
+  const theme = useTheme();
+
   return (
     <PageLayout>
       <Grid
@@ -44,15 +48,22 @@ const LeaderboardPage: FC = () => {
         justifyContent="center"
         alignItems="stretch"
         id="leaderboard"
-        className="page__content-img">
+        className="page__content-img" style={{backgroundImage: `url(${theme.leaderBgImage})`}}>
         <Grid container item direction="row" justifyContent="flex-end">
           <Link to="/home">
             <Button variant="contained">Назад</Button>
           </Link>
         </Grid>
         <Grid item>
-          <Box className="form form__full-size form__transparent">
-            <h1 className="form__title">Список лидеров</h1>
+          <Box className="form form__full-size form__transparent" 
+            style={{
+              backgroundColor: theme.palette.background.opacity, 
+              borderColor: theme.shape.borderColor, 
+              borderWidth: theme.shape.borderWidht, 
+              borderStyle: theme.shape.borderStyle, 
+              boxShadow: theme.shape.boxShadow
+            }}>
+            <h1 className="form__title" style={{color: theme.palette.text.secondary}}>Список лидеров</h1>
             <Table className="table table-unborder">
               <TableBody>
                 {rows.map((row, index) => (

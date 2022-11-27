@@ -2,6 +2,7 @@ import { useFormik } from 'formik'
 import { Button } from '@mui/material'
 import { EmailOutlined, LockOutlined } from '@mui/icons-material'
 import { useNavigate, Link } from 'react-router-dom'
+import { useTheme } from '@mui/material/styles';
 
 import PageLayout from '@/hocs/page-layout'
 import Input from '@/components/Input'
@@ -11,6 +12,7 @@ import validationSchema from './validation_schema'
 
 const LoginPage = () => {
   const navigate = useNavigate()
+  const theme = useTheme();
 
   const formik = useFormik({
     initialValues: {
@@ -33,8 +35,15 @@ const LoginPage = () => {
 
   return (
     <PageLayout>
-      <form className="form" onSubmit={formik.handleSubmit} autoComplete="off">
-        <h1 className="form__title">Авторизация</h1>
+      <form className="form" onSubmit={formik.handleSubmit} autoComplete="off" 
+        style={{
+          backgroundColor: theme.palette.background.opacity, 
+          borderColor: theme.shape.borderColor, 
+          borderWidth: theme.shape.borderWidht, 
+          borderStyle: theme.shape.borderStyle, 
+          boxShadow: theme.shape.boxShadow
+        }}>
+        <h1 className="form__title" style={{color: theme.palette.text.secondary}}>Авторизация</h1>
         <Input
           label="Логин"
           type="text"

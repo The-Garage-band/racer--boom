@@ -14,7 +14,13 @@ export class Road {
     this.image = image;
   }
 
-  Update(): void {
-    this.y += Road.getSpeed();
+  UpdateImage(roadImageLink): void {
+    if (roadImageLink){
+      this.image.src = roadImageLink;
+    }
+  }
+
+  Update(speed: float): void {
+    this.y += speed;
   }
 }
