@@ -52,7 +52,7 @@ const App = () => {
     setDataTheme(theme);
   }
 
-  function setDataTheme(theme: string){
+  function setDataTheme(theme: string | null){
     document.documentElement.dataset.theme = theme;
     localStorage.setItem("racer--boom-theme", theme);
   }
