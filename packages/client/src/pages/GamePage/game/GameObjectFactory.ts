@@ -9,15 +9,18 @@ export class GameObjectFactory {
 
   async load (gameTheme: object | null) {
 
-    const resources = [
-      gameTheme.roadLink,
-      gameTheme.myCarLink,
-      gameTheme.truckCarLink,
-      gameTheme.greyCarLink,
-      gameTheme.policeCarLink,
-      gameTheme.coinLink,
-      gameTheme.liveLink
-    ];
+    const resources = [];
+    if (gameTheme){
+      resources = [
+        gameTheme.roadLink,
+        gameTheme.myCarLink,
+        gameTheme.truckCarLink,
+        gameTheme.greyCarLink,
+        gameTheme.policeCarLink,
+        gameTheme.coinLink,
+        gameTheme.liveLink
+      ];
+    }
 
     this._gameTheme = gameTheme;
 
