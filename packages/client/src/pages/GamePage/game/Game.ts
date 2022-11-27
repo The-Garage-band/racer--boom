@@ -74,7 +74,7 @@ export class Game {
     this.events.emit(GameEvents.gameOver);
   }
 
-  async changeTheme(theme){
+  async changeTheme(theme: object | null){
     this.gameTheme = theme;
     await this._factory.load(this.gameTheme);
     this._playerCar = this._factory.updatePlayerCar(this._playerCar);
@@ -179,7 +179,7 @@ export class Game {
       }
     }
 
-    this._playerCar.Update();
+    this._playerCar.Update(this._getSpeed());
   }
 
   _deleteGameObjects () {
