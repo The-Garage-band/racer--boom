@@ -10,31 +10,19 @@ import {
 } from '@mui/material'
 import { Link } from 'react-router-dom'
 import PageLayout from '@/hocs/page-layout'
-import { FC } from 'react'
+import {FC, useEffect, useState} from 'react'
 
 import '@/pages/LeaderboardPage/LeaderboardPage.less'
 import '@/styles/table.less'
 import '@/styles/page.less'
-
-interface TCreateDataParams {
-  name: string
-  point: number
-  avatar?: string
-}
-function createData(params: TCreateDataParams) {
-  return { ...params }
-}
+import {ILeaderboard, getLeaderboardList} from "@/API/Leaderboard";
 
 const LeaderboardPage: FC = () => {
-  const rows = [
-    createData({ name: 'username 1', point: 7000000 }),
-    createData({ name: 'username 2', point: 600000 }),
-    createData({ name: 'username 3', point: 50000 }),
-    createData({ name: 'username 4', point: 40000 }),
-    createData({ name: 'username 5', point: 3000 }),
-    createData({ name: 'username 6', point: 200 }),
-    createData({ name: 'username 7', point: 10 }),
-  ]
+  const [rows, setRows] = useState<ILeaderboard[]>([]);
+  useEffect(() => {
+    getLeaderboardList(7)
+        .then((fetchedRows) => setRows(fetchedRows));
+  }, []);
 
   return (
     <PageLayout>
@@ -68,7 +56,7 @@ const LeaderboardPage: FC = () => {
                       <Avatar src={row.avatar} sx={{ width: 80, height: 80 }} />
                     </TableCell>
                     <TableCell component="td" scope="row" align="left">
-                      {row.name}
+                      {row.name || 'Без имени'}
                     </TableCell>
                     <TableCell component="td" scope="row" align="right">
                       {row.point}

@@ -74,7 +74,7 @@ const LoginPage = () => {
         <Button
           variant="outlined"
           component={Link}
-          to={'/home'}
+          to={'/sign_up'}
           fullWidth
           sx={{ marginBottom: '1rem' }}>
           Регистрация

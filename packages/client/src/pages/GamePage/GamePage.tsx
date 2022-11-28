@@ -7,6 +7,9 @@ import './GamePage.less'
 
 import {Game, GameEvents} from "./game";
 import {GameContext} from "@/hocs";
+import {addLeaderboardItem} from "@/API/Leaderboard";
+import {useAppSelector} from "@/hooks";
+import {getUserData} from "@/store/slices/GetUserSlice";
 
 type TGamePageProps = {
     health: number,
@@ -20,7 +23,15 @@ export const GamePage: FC<TGamePageProps> = (props) => {
     const navigate = useNavigate();
     const gameContext = useContext(GameContext);
 
-    const onGameOver = () => navigate('/end-game');
+    const { data } = useAppSelector(getUserData);
+    const onGameOver = () => {
+        addLeaderboardItem({
+            point: gameContext.data.score,
+            name: data.display_name,
+            avatar: data.avatar,
+        });
+        navigate('/end-game');
+    }
 
     useEffect(() => {
         const game = new Game();

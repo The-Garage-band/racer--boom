@@ -22,11 +22,7 @@ import { FullscreenButtonComponent } from '@/components/FullscreenButtonComponen
 import fetchUser, { getUserData } from '@/store/slices/GetUserSlice'
 
 import { useAppDispatch, useAppSelector } from '@/hooks'
-import {forumApi} from "@/API/ForumApi";
-
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-window['forumApi'] = forumApi;
+import EndGamePage from "@/pages/EndGamePage";
 
 const App = () => {
   const navigate = useNavigate()
@@ -64,7 +60,7 @@ const App = () => {
             <ProtectedRoute
               isAllowed={!!data.id}
               isLoading={isLoading}
-              redirectPath="/forum"
+              redirectPath="/log_in"
             />
           }>
           <Route path="/logout" element={<LogOutPage />} />
@@ -75,6 +71,7 @@ const App = () => {
           <Route path="/leaderboard" element={<LeaderboardPage />} />
           <Route path="/forum" element={<ForumPage />} />
           <Route path="/forum/:id" element={<ForumDialogPage />} />
+            <Route path="/end-game" element={<EndGamePage />} />
         </Route>
         <Route path="/" element={<Loader />} />
         <Route path="*" element={<NotFoundPage />} />
