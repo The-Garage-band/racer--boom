@@ -3,7 +3,7 @@ import {AudioService} from "@/services";
 
 import {GameObject} from "./GameObject";
 import {Road} from "./Road";
-import {GameObjectFactory, gameThemeType} from "./GameObjectFactory";
+import {GameObjectFactory} from "./GameObjectFactory";
 import {drawGameObject, drawRoad} from "./drawGameObject";
 import {Random} from "@/utils";
 
