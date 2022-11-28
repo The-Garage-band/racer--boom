@@ -28,11 +28,7 @@ import { ThemeProvider } from '@mui/material/styles'
 import '@/styles/themes.less'
 
 import { useAppDispatch, useAppSelector } from '@/hooks'
-import {forumApi} from "@/API/ForumApi";
-
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-window['forumApi'] = forumApi;
+import EndGamePage from "@/pages/EndGamePage";
 
 const App = () => {
   const navigate = useNavigate()
