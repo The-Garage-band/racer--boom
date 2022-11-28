@@ -9,7 +9,7 @@ export class GameObjectFactory {
 
   private readonly _resources = new Map<string, HTMLImageElement>();
 
-  private _gameTheme: object
+  private _gameTheme: any 
 
   async load (gameTheme: gameThemeType) {
 
