@@ -4,7 +4,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "npm run build:client && npm run build:ssr",
+    "build:client": "tsc && vite build",
+    "build:ssr": "vite build --outDir dist/server --ssr src/server-render.tsx",
     "preview": "vite preview",
     "lint": "eslint .",
     "format": "prettier --write .",
@@ -26,11 +28,11 @@
     "prettier": "^2.7.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-native": "^0.70.6",
     "react-redux": "^8.0.4",
     "react-router": "^6.4.1",
     "react-router-dom": "^6.4.1",
     "redaxios": "^0.5.1",
-    "yup": "^0.32.11",
     "workbox-build": "6.1.2",
     "workbox-cacheable-response": "6.1.2",
     "workbox-cli": "6.1.2",
@@ -39,7 +41,8 @@
     "workbox-precaching": "6.1.2",
     "workbox-routing": "^6.1.5",
     "workbox-strategies": "^6.1.5",
-    "workbox-window": "6.1.2"
+    "workbox-window": "6.1.2",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@testing-library/react": "^13.3.0",
