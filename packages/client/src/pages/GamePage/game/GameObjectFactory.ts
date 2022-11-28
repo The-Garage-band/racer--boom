@@ -1,15 +1,15 @@
 import {Road} from "./Road";
 import {GameObject} from "./GameObject";
 
-type gameThemeType = {
-  [key: string]: any; // 👈️ variable keys
-};
+export interface gameThemeType {
+  [key: string]: any;
+}
 
 export class GameObjectFactory {
 
   private readonly _resources = new Map<string, HTMLImageElement>();
 
-  private _gameTheme: any 
+  private _gameTheme: gameThemeType 
 
   async load (gameTheme: gameThemeType) {
 
@@ -46,9 +46,9 @@ export class GameObjectFactory {
     return this._resources.get(resource) as HTMLImageElement;
   }
 
-  createRoads (canvasHeight: number, totalRoadsHeight: number, imageLink: string): Road[] {
+  createRoads (canvasHeight: number, totalRoadsHeight: number): Road[] {
     const roads: Road[] = [];
-    const roadHeight = this._getImage(imageLink).height;
+    const roadHeight = this._getImage(this._gameTheme.roadLink).height;
     while (totalRoadsHeight < canvasHeight + roadHeight) {
       const road = this.createRoad(totalRoadsHeight - roadHeight);
       roads.push(road);

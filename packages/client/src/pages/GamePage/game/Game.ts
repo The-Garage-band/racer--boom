@@ -3,7 +3,7 @@ import {AudioService} from "@/services";
 
 import {GameObject} from "./GameObject";
 import {Road} from "./Road";
-import {GameObjectFactory} from "./GameObjectFactory";
+import {GameObjectFactory, gameThemeType} from "./GameObjectFactory";
 import {drawGameObject, drawRoad} from "./drawGameObject";
 import {Random} from "@/utils";
 
@@ -35,7 +35,7 @@ export class Game {
   public coins = 0;
   private _speedAdd = 0;
 
-  public gameTheme: any;
+  public gameTheme: gameThemeType;
 
   private _audioService = AudioService.getInstance();
 

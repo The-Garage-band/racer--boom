@@ -1,5 +1,39 @@
 import { createTheme, responsiveFontSizes } from '@mui/material/styles'
 
+import truckCarImageDark from '/public/game/grey-car.png';
+import myCarImageDark from '/public/game/my-car.png';
+import greyCarImageDark from '/public/game/grey-car.png';
+import policeCarImageDark from '/public/game/police-car.png';
+import coinImageDark from '/public/game/coin.png';
+import liveImageDark from '/public/game/live.png';
+import roadImageDark from '/public/game/doroga.png';
+import forumBgImageDark from 'public/msg.png';
+import leaderBgImageDark from 'public/crown.png';
+import bgCarImageDark from 'public/bg-car.png';
+import logoImageDark from 'public/logo.png';
+import audioSoundOffImageDark from 'public/audio/audio-sound-off.png';
+import audioSoundOnImageDark from 'public/audio/audio-sound-on.png';
+import audioSoundNextImageDark from 'public/audio/audio-sound-next.png';
+import fullscreenIconOffImageDark from 'public/fullscreen/fullscreen-icon-off.png';
+import fullscreenIconOnImageDark from 'public/fullscreen/fullscreen-icon-on.png';
+
+import truckCarImageLight from '/public/light-game/truck.png';
+import myCarImageLight from '/public/light-game/my-car.png';
+import greyCarImageLight from '/public/light-game/grey-car.png';
+import policeCarImageLight from '/public/light-game/police-car.png';
+import coinImageLight from '/public/light-game/coin.png';
+import liveImageLight from '/public/light-game/live.png';
+import roadImageLight from '/public/light-game/doroga.png';
+import forumBgImageLight from 'public/msg.png';
+import leaderBgImageLight from 'public/crown.png';
+import bgCarImageLight from 'public/light-theme/light-bg-car.png';
+import logoImageLight from 'public/light-theme/logo-light.png';
+import audioSoundOffImageLight from 'public/light-theme/audio-sound-off-light.png';
+import audioSoundOnImageLight from 'public/light-theme/audio-sound-on-light.png';
+import audioSoundNextImageLight from 'public/light-theme/audio-sound-next-light.png';
+import fullscreenIconOffImageLight from 'public/light-theme/fullscreen-icon-off-light.png';
+import fullscreenIconOnImageLight from 'public/light-theme/fullscreen-icon-on-light.png';
+
 declare module '@mui/material/styles' {
 
   interface CustomTheme {
@@ -122,23 +156,23 @@ const themeDefault = responsiveFontSizes(
     borderStyle: 'solid',
     boxShadow: '0px 4px 53px rgb(60 193 193 / 51%), inset 0px 4px 100px rgb(60 193 193 / 20%)',
 
-    truckCarLink: '/public/game/grey-car.png',
-    myCarLink: '/public/game/my-car.png',
-    greyCarLink: '/public/game/grey-car.png',
-    policeCarLink: '/public/game/police-car.png',
-    coinLink: '/public/game/coin.png',
-    liveLink: '/public/game/live.png',
-    roadLink: '/public/game/doroga.jpg',
+    truckCarLink: truckCarImageDark,
+    myCarLink: myCarImageDark,
+    greyCarLink: greyCarImageDark,
+    policeCarLink: policeCarImageDark,
+    coinLink: coinImageDark,
+    liveLink: liveImageDark,
+    roadLink: roadImageDark,
 
-    forumBgImage: 'public/msg.png',
-    leaderBgImage: 'public/crown.png',
-    bgCar: 'public/bg-car.png',
-    logo: 'public/logo.png',
-    audioSoundOff: 'public/audio/audio-sound-off.png',
-    audioSoundOn: 'public/audio/audio-sound-on.png',
-    audioSoundNext: 'public/audio/audio-sound-next.png',
-    fullscreenIconOff: 'public/fullscreen/fullscreen-icon-off.png',
-    fullscreenIconOn: 'public/fullscreen/fullscreen-icon-on.png',
+    forumBgImage: forumBgImageDark,
+    leaderBgImage: leaderBgImageDark,
+    bgCar: bgCarImageDark,
+    logo: logoImageDark,
+    audioSoundOff: audioSoundOffImageDark,
+    audioSoundOn: audioSoundOnImageDark,
+    audioSoundNext: audioSoundNextImageDark,
+    fullscreenIconOff: fullscreenIconOffImageDark,
+    fullscreenIconOn: fullscreenIconOnImageDark,
   })
 )
 
@@ -170,25 +204,25 @@ const lightTheme = responsiveFontSizes( createTheme({
     borderColor: '#ffffff',
     borderWidht: '5px',
     borderStyle: 'dashed',
-    boxShadow: '0px 0px 0px',
+    boxShadow: '0px 0px 0px',    
 
-    truckCarLink: '/public/light-game/truck.png',
-    myCarLink: '/public/light-game/my-car.png',
-    greyCarLink: '/public/light-game/grey-car.png',
-    policeCarLink: '/public/light-game/police-car.png',
-    coinLink: '/public/light-game/coin.png',
-    liveLink: '/public/light-game/live.png',
-    roadLink: '/public/light-game/doroga.jpg',
+    truckCarLink: truckCarImageLight,
+    myCarLink: myCarImageLight,
+    greyCarLink: greyCarImageLight,
+    policeCarLink: policeCarImageLight,
+    coinLink: coinImageLight,
+    liveLink: liveImageLight,
+    roadLink: roadImageLight,
 
-    forumBgImage: 'public/msg.png',
-    leaderBgImage: 'public/crown.png',
-    bgCar: 'public/light-theme/light-bg-car.png',
-    logo: 'public/light-theme/logo-light.png',
-    audioSoundOff: 'public/light-theme/audio-sound-off-light.png',
-    audioSoundOn: 'public/light-theme/audio-sound-on-light.png',
-    audioSoundNext: 'public/light-theme/audio-sound-next-light.png',
-    fullscreenIconOff: 'public/light-theme/fullscreen-icon-off-light.png',
-    fullscreenIconOn: 'public/light-theme/fullscreen-icon-on-light.png',
+    forumBgImage: forumBgImageLight,
+    leaderBgImage: leaderBgImageLight,
+    bgCar: bgCarImageLight,
+    logo: logoImageLight,
+    audioSoundOff: audioSoundOffImageLight,
+    audioSoundOn: audioSoundOnImageLight,
+    audioSoundNext: audioSoundNextImageLight,
+    fullscreenIconOff: fullscreenIconOffImageLight,
+    fullscreenIconOn: fullscreenIconOnImageLight,
   })
 )
 

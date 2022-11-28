@@ -17,7 +17,7 @@ type TGamePageProps = {
 let game: Game;
 let gameTheme = {};
 
-const themeObserver = new MutationObserver(mutationList => {
+const themeObserver = new MutationObserver(function(){
     if (game && gameTheme){
         game.changeTheme(gameTheme);
     }
