@@ -15,6 +15,8 @@ import validationSchema from './validation_schema'
 import { useFormik } from 'formik'
 import { signup, ISignUp } from '@/API/Auth'
 
+import { useTheme, Theme } from '@mui/material';
+
 const SignUpPage = () => {
   const navigate = useNavigate()
 
@@ -41,9 +43,18 @@ const SignUpPage = () => {
         }),
   })
 
+  const theme: Theme = useTheme()
+
   return (
     <PageLayout>
-      <form className="form" onSubmit={formik.handleSubmit} autoComplete="off">
+      <form className="form" onSubmit={formik.handleSubmit} autoComplete="off" 
+        style={{
+          backgroundColor: theme.backgroudOpacity, 
+          borderColor: theme.borderColor, 
+          borderWidth: theme.borderWidht, 
+          borderStyle: theme.borderStyle, 
+          boxShadow: theme.boxShadow
+        }}>
         <h1 className="form__title">Регистрация</h1>
         <Input
           label="Имя"
