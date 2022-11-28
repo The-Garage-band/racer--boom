@@ -1,6 +1,8 @@
 // URLS
 export const URL_API = 'https://ya-praktikum.tech/api/v2'
 
+export const TEAM_NAME = 'garage-band';
+
 // PATH
 export const PATH_SIGNUP = '/auth/signup'
 export const PATH_LOGIN = '/auth/signin'
@@ -10,6 +12,9 @@ export const PATH_GET_USER = '/auth/user'
 export const PATH_AVATAR = '/user/profile/avatar'
 export const PATH_UPDATE_PROFILE = '/user/profile'
 export const PATH_GET_PROFILE = '/user'
+
+export const PATH_LEADERBOARD = '/leaderboard';
+export const PATH_CURRENT_LEADERBOARD = `${PATH_LEADERBOARD}/${TEAM_NAME}`;
 
 // REGEX
 export const REGEX_LOGIN = '^[-A-Za-z0-9_-]{3,16}$'
