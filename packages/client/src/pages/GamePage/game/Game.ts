@@ -35,7 +35,7 @@ export class Game {
   public coins = 0;
   private _speedAdd = 0;
 
-  public gameTheme: gameThemeType;
+  public gameTheme: object;
 
   private _audioService = AudioService.getInstance();
 
