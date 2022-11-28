@@ -28,7 +28,6 @@ import { ThemeProvider } from '@mui/material/styles'
 import '@/styles/themes.less'
 
 import { useAppDispatch, useAppSelector } from '@/hooks'
-import EndGamePage from "@/pages/EndGamePage";
 
 const App = () => {
   const navigate = useNavigate()
