@@ -33,6 +33,14 @@ class ForumController {
     const theme = await ForumTheme.findOne({where: {id}});
     if (theme) {
       const messages = await theme.getMessages();
+      messages.sort((a: ForumMessage, b:ForumMessage) => {
+        const bForumMessage:ForumMessage = b.dataValues;
+        const bForumMessageId = bForumMessage.id;
+        const aForumMessage:ForumMessage = a.dataValues;
+        const aForumMessageId = aForumMessage.id;
+        return parseFloat(`${aForumMessageId}`) - parseFloat(`${bForumMessageId}`)
+      } );
+
       response.send({
         id: theme.id,
         name: theme.name,
