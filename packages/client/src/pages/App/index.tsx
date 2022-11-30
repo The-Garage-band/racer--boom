@@ -12,6 +12,7 @@ import HomePage from '@/pages/HomePage'
 import ForumDialogPage from '@/pages/ForumDialogPage'
 import NotFoundPage from '@/pages/NotFoundPage'
 import EndGamePage from '@/pages/EndGamePage'
+import OAuthPage from '@/pages/OAuthPage'
 
 import Loader from '@/pages/Loader'
 import { AudioSetup } from '@/components/AudioSetup/AudioSetup'
@@ -102,6 +103,7 @@ const App = () => {
           </Route>
           <Route path="/" element={<Loader />} />
           <Route path="*" element={<NotFoundPage />} />
+          <Route path="/oauth" element={<OAuthPage />} />
         </Routes>
         <footer>
           <FullscreenButtonComponent/>
