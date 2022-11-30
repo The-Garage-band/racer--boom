@@ -32,7 +32,7 @@ const signup = <T>(data: T) =>
   AxiosInstance.post<Record<string, number>>(PATH_SIGNUP, data)
 
 const OAuthGetServiceId = () => {
-  const REDIRECT_URI = `${window.location.protocol}//${window.location.host}`;
+  const REDIRECT_URI = `${window.location.protocol}//${window.location.host}/oauth`;
   const getUrl = `${PATH_GET_SERVICE_ID}?redirect_uri=${REDIRECT_URI}`;
   return AxiosInstance.get(getUrl);
 };

@@ -32,7 +32,7 @@ const LoginPage = () => {
   })
 
   const clickOnOAuthLogin = () => {
-    const REDIRECT_URI = `${window.location.protocol}//${window.location.host}`;
+    const REDIRECT_URI = `${window.location.protocol}//${window.location.host}/oauth`;
     try {
       const response = OAuthGetServiceId().then(response => {
         const serviceId = response.data.service_id;

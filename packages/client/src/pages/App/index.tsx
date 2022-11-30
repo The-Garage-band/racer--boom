@@ -40,7 +40,7 @@ const App = () => {
 
       OAuthLogin({
         code: code[1],
-        redirect_uri: `${window.location.protocol}//${window.location.host}`,
+        redirect_uri: `${window.location.protocol}//${window.location.host}/oauth`,
       }).then(response => {
         dispatch(fetchUser()).then(({ payload }) => {
           if (payload.id) {
