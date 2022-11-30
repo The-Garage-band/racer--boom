@@ -21,6 +21,7 @@ class ForumController {
     const theme = await ForumTheme.findOne({where: {id}});
     if (theme) {
       await ForumTheme.destroy({where: {id}});
+      await ForumMessage.destroy({where: {theme_id: id}});
       response.send();
     }
 
@@ -95,6 +96,26 @@ class ForumController {
 
     response.status(404).send();
   };
+
+  public deleteMessage = async (request: Request, response: Response) => {
+    const id = request.params.id;
+    const theme = await ForumMessage.findOne({where: {id}});
+    if (theme) {
+      await ForumMessage.destroy({where: {id}});
+      response.send();
+    }
+
+    response.status(404).send();
+  };
+
+  public editMessage = async (request: Request, response: Response) => {
+    const id = request.params.id;
+    const text: string = request.body.text;
+
+    const theme = await ForumMessage.update({text}, {where: {id}});
+    response.send(theme);
+  };
+
 }
 
 export const forumController = new ForumController();
