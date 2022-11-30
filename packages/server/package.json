@@ -5,7 +5,7 @@
   "scripts": {
     "build": "tsc --p ./tsconfig.prod.json",
     "preview": "node ./dist/index.js",
-    "dev": "NODE_ENV=development nodemon index.ts",
+    "dev": "nodemon index.ts",
     "lint": "eslint .",
     "format": "prettier --write .",
     "test": "jest ."
@@ -20,7 +20,10 @@
     "pg": "^8.8.0",
     "prettier": "^2.7.1",
     "react-redux": "^8.0.4",
-    "redaxios": "^0.5.1"
+    "redaxios": "^0.5.1",
+    "reflect-metadata": "^0.1.13",
+    "sequelize": "^6.25.5",
+    "sequelize-typescript": "^2.1.5"
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",
