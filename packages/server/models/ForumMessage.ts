@@ -3,8 +3,9 @@ import {ForumTheme} from "./ForumTheme";
 
 @Table({
   tableName: 'forum_message',
-  timestamps: false,
-  createdAt: true,
+  timestamps: true,
+  createdAt: 'creationDate',
+  updatedAt: false
 })
 export class ForumMessage extends Model<ForumMessage> {
   @AutoIncrement

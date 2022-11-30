@@ -16,6 +16,7 @@ export const createClientAndConnect = async () => {
   };
 
   const sequelize = new Sequelize(sequelizeOptions);
+  //sequelize.sync({ force: true })
   sequelize.addModels([ForumTheme, ForumMessage]);
 
   await sequelize.sync();

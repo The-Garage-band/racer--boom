@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button } from '@mui/material'
 import { useNavigate, Link } from 'react-router-dom'
+import { useTheme } from '@mui/material/styles';
 
 import PageLayout from '@/hocs/page-layout'
 
@@ -32,9 +33,18 @@ const LogOutPage = () => {
         }),
   })
 
+  const theme = useTheme();
+
   return (
     <PageLayout>
-      <form className="form" onSubmit={formik.handleSubmit} autoComplete="off">
+      <form className="form" onSubmit={formik.handleSubmit} autoComplete="off" 
+        style={{
+          backgroundColor: theme.backgroudOpacity, 
+          borderColor: theme.borderColor, 
+          borderWidth: theme.borderWidht, 
+          borderStyle: theme.borderStyle, 
+          boxShadow: theme.boxShadow
+        }}>
         <h1 className="form__title">Вы уверены, что хотите выйти?</h1>
         <Button
           variant="contained"

@@ -1,3 +1,23 @@
 #forum {
   background-image: url(/msg.png);
 }
+
+.theme-list {
+  height: 550px;
+  overflow: hidden;
+  overflow-y: auto;
+  flex: none;
+
+  .theme--info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+
+    &-date {
+      font-size: 10px;
+      font-style: italic;
+      color: #c7c7c7;
+    }
+  }
+}
