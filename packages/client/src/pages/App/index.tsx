@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Route, Routes, useNavigate, useLocation } from 'react-router-dom'
+import { Route, Routes, useNavigate } from 'react-router-dom'
 
 import SignUpPage from '@/pages/SignUpPage'
 import LogInPage from '@/pages/LogInPage'
@@ -22,34 +22,16 @@ import { FullscreenButtonComponent } from '@/components/FullscreenButtonComponen
 import fetchUser, { getUserData } from '@/store/slices/GetUserSlice'
 
 import { useAppDispatch, useAppSelector } from '@/hooks'
-import { OAuthLogin } from '@/API/Auth'
+import {forumApi} from "@/API/ForumApi";
+
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+window['forumApi'] = forumApi;
 
 const App = () => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const { data, isLoading } = useAppSelector(getUserData)
-
-  const location = useLocation()
-  useEffect(() => {
-    if (location.search.split('code').length > 0) {
-      const code = location.search.split('=')
-      // @ts-ignore
-      if (!code || code == '') {
-        return
-      }
-
-      OAuthLogin({
-        code: code[1],
-        redirect_uri: `${window.location.protocol}//${window.location.host}/oauth`,
-      }).then(response => {
-        dispatch(fetchUser()).then(({ payload }) => {
-          if (payload.id) {
-            navigate('/home')
-          }
-        })
-      })
-    }
-  }, [location])
 
   useEffect(() => {
     dispatch(fetchUser()).then(({ payload }) => {
@@ -60,48 +42,49 @@ const App = () => {
   }, [data.id])
 
   return (
-    <ErrorBoundaryComponent>
-      <AlertStack />
-      <header>
-        <AudioSetup />
-      </header>
-      <Routes>
-        <Route
-          element={
-            <ProtectedRoute
-              isAllowed={!data.id}
-              isLoading={isLoading}
-              redirectPath="/home"
-            />
-          }>
-          <Route path="/sign_up" element={<SignUpPage />} />
-          <Route path="/log_in" element={<LogInPage />} />
-        </Route>
-        <Route
-          element={
-            <ProtectedRoute
-              isAllowed={!!data.id}
-              isLoading={isLoading}
-              redirectPath="/log_in"
-            />
-          }>
-          <Route path="/logout" element={<LogOutPage />} />
-          <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/game" element={<GamePage health={3} />} />
-          <Route path="/" element={<HomePage />} />
-          <Route path="/home" element={<HomePage />} />
-          <Route path="/leaderboard" element={<LeaderboardPage />} />
-          <Route path="/forum" element={<ForumPage />} />
-          <Route path="/forum/:id" element={<ForumDialogPage />} />
-        </Route>
-        <Route path="/" element={<Loader />} />
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
-      <footer>
-        <FullscreenButtonComponent />
-      </footer>
-      <AlertStack />
-    </ErrorBoundaryComponent>
+      <ErrorBoundaryComponent>
+        <AlertStack />
+        <header>
+          <AudioSetup />
+        </header>
+        <Routes>
+          <Route
+              element={
+                <ProtectedRoute
+                    isAllowed={!data.id}
+                    isLoading={isLoading}
+                    redirectPath="/home"
+                />
+              }>
+            <Route path="/sign_up" element={<SignUpPage />} />
+            <Route path="/log_in" element={<LogInPage />} />
+          </Route>
+          <Route
+              element={
+                <ProtectedRoute
+                    isAllowed={!!data.id}
+                    isLoading={isLoading}
+                    redirectPath="/forum"
+                />
+              }>
+            <Route path="/logout" element={<LogOutPage />} />
+            <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/game" element={<GamePage health={3} />} />
+            <Route path="/" element={<HomePage />} />
+            <Route path="/home" element={<HomePage />} />
+            <Route path="/leaderboard" element={<LeaderboardPage />} />
+            <Route path="/forum" element={<ForumPage />} />
+            <Route path="/forum/:id" element={<ForumDialogPage />} />
+          </Route>
+          <Route path="/" element={<Loader />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+        <footer>
+          <FullscreenButtonComponent/>
+        </footer>
+        <AlertStack />
+      </ErrorBoundaryComponent>
+
   )
 }
 
