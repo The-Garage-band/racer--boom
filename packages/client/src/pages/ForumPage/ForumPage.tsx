@@ -9,12 +9,14 @@ import {FC, useEffect} from 'react';
 import {useNavigate, Link} from 'react-router-dom';
 import * as React from 'react';
 import {forumApi, Forums} from '@/API/ForumApi';
+import {useAppSelector} from '@/hooks';
+import {getUserData} from '@/store/slices/GetUserSlice';
+import { useTheme } from '@mui/material/styles';
 
 import '@/pages/ForumPage/ForumPage.less';
 import '@/styles/table.less';
 import '@/styles/page.less';
-import {useAppSelector} from '@/hooks';
-import {getUserData} from '@/store/slices/GetUserSlice';
+
 
 interface TModalThemeCreate {
   handleClose: () => void,
@@ -125,6 +127,8 @@ const ForumPage: FC = () => {
     }
   }, [openModal]);
 
+  const theme = useTheme();
+
   return (
       <PageLayout>
         <Grid
@@ -133,14 +137,20 @@ const ForumPage: FC = () => {
             justifyContent="center"
             alignItems="stretch"
             className="page__content-img"
-            id="forum">
+            id="forum" style ={{backgroundImage: `url(${theme.forumBgImage})`}}>
           <Grid container item direction="row" justifyContent="flex-end">
             <Link to="/home">
               <Button variant="contained">Назад</Button>
             </Link>
           </Grid>
           <Grid item sx={{flex: 1}}>
-            <Box className="form form__full-size form__transparent">
+            <Box className="form form__full-size form__transparent" style={{
+              backgroundColor: theme.backgroudOpacity, 
+              borderColor: theme.borderColor, 
+              borderWidth: theme.borderWidht, 
+              borderStyle: theme.borderStyle, 
+              boxShadow: theme.boxShadow
+            }}>
               <Grid
                   container
                   direction="row"
@@ -165,10 +175,10 @@ const ForumPage: FC = () => {
                 <Table className="table table-unborder" stickyHeader>
                   <TableHead>
                     <TableRow>
-                      <TableCell align="left" sx={{width: '70%'}}>
+                      <TableCell align="left" sx={{width: '70%'}} style={{color: theme.palette.text.secondary}}>
                         Тема
                       </TableCell>
-                      <TableCell align="center">Ответы</TableCell>
+                      <TableCell align="center" style={{color: theme.palette.text.secondary}}>Ответы</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>

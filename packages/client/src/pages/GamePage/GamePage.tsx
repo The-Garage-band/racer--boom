@@ -7,10 +7,24 @@ import './GamePage.less'
 
 import {Game, GameEvents} from "./game";
 import {GameContext} from "@/hocs";
+import {addLeaderboardItem} from "@/API/Leaderboard";
+import {useAppSelector} from "@/hooks";
+import {getUserData} from "@/store/slices/GetUserSlice";
+
+import { useTheme } from '@mui/material/styles';
 
 type TGamePageProps = {
     health: number,
 }
+
+let game: Game;
+let gameTheme = {};
+
+const themeObserver = new MutationObserver(function(){
+    if (game && gameTheme){
+        game.changeTheme(gameTheme);
+    }
+});
 
 export const GamePage: FC<TGamePageProps> = (props) => {
     const [health, setHealth] = useState(props.health);
@@ -20,10 +34,21 @@ export const GamePage: FC<TGamePageProps> = (props) => {
     const navigate = useNavigate();
     const gameContext = useContext(GameContext);
 
-    const onGameOver = () => navigate('/end-game');
+    const { data } = useAppSelector(getUserData);
+    const onGameOver = () => {
+        addLeaderboardItem({
+            point: gameContext.data.score,
+            name: data.display_name,
+            avatar: data.avatar,
+        });
+        navigate('/end-game');
+    }
+
+    const theme = useTheme();  
+    gameTheme = theme; 
 
     useEffect(() => {
-        const game = new Game();
+        game = new Game();
 
         if (canvas.current) {
             game.events.on(GameEvents.updateScore, setScore);
@@ -31,12 +56,23 @@ export const GamePage: FC<TGamePageProps> = (props) => {
             game.events.on(GameEvents.updateCoins, setCoins);
             game.events.once(GameEvents.gameOver, onGameOver);
             game.lives = health;
+            game.gameTheme = theme;
             gameContext.data.healthCollected = 0;
             game.start(canvas.current);
+
+            themeObserver.observe(document.documentElement, { attributes: true })
         }
 
         return () => {
             if (!canvas.current) {
+                game.events.removeListener(GameEvents.updateScore, setScore);
+                game.events.removeListener(GameEvents.updateLives, setHealth);
+                game.events.removeListener(GameEvents.updateCoins, setCoins);
+                game.events.removeListener(GameEvents.gameOver, onGameOver);
+                if (themeObserver){
+                    themeObserver.disconnect();
+                }
+                game.stop();
                 return;
             }
             game.events.removeListener(GameEvents.updateScore, setScore);

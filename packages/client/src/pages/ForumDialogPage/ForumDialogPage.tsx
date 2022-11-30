@@ -6,6 +6,8 @@ import AddReactionIcon from '@mui/icons-material/AddReaction';
 import {useAppSelector} from '@/hooks';
 import {getUserData} from '@/store/slices/GetUserSlice';
 import {forumApi, ForumMessage} from '@/API/ForumApi';
+import { useTheme } from '@mui/material/styles';
+
 
 import '@/pages/ForumDialogPage/ForumDialogPage.less';
 import '@/styles/page.less';
@@ -54,6 +56,8 @@ const ForumDialogPage: React.FC = () => {
     getListMessages();
   }, []);
 
+  const theme = useTheme();
+
   return (
       <PageLayout>
         <Grid
@@ -62,14 +66,21 @@ const ForumDialogPage: React.FC = () => {
             justifyContent="center"
             alignItems="stretch"
             className="page__content-img"
-            id="forum-dialog">
+            id="forum-dialog" style ={{backgroundImage: `url(${theme.forumBgImage})`}}>
           <Grid container item direction="row" justifyContent="flex-end">
             <Link to="/forum">
               <Button variant="contained">Назад</Button>
             </Link>
           </Grid>
           <Grid item sx={{flex: 1}}>
-            <Box className="form form__full-size form__transparent">
+            <Box className="form form__full-size form__transparent"
+             style={{
+              backgroundColor: theme.backgroudOpacity, 
+              borderColor: theme.borderColor, 
+              borderWidth: theme.borderWidht, 
+              borderStyle: theme.borderStyle, 
+              boxShadow: theme.boxShadow
+            }}>
               <h1 className="form__title">{dialogTitle}</h1>
               <Grid
                   container
