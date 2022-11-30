@@ -1,6 +1,6 @@
-import type {Request, Response} from "express";
-import {literal} from "sequelize";
-import {ForumMessage, ForumTheme} from "../models";
+import type {Request, Response} from 'express';
+import {literal} from 'sequelize';
+import {ForumMessage, ForumTheme} from '../models';
 
 class ForumController {
   public createTheme = async (request: Request, response: Response) => {
@@ -14,7 +14,7 @@ class ForumController {
     await theme.save();
 
     response.send(theme);
-  }
+  };
 
   public deleteTheme = async (request: Request, response: Response) => {
     const id = request.params.id;
@@ -25,7 +25,15 @@ class ForumController {
     }
 
     response.status(404).send();
-  }
+  };
+
+  public editTheme = async (request: Request, response: Response) => {
+    const id = request.params.id;
+    const name: string = request.body.name;
+
+    const theme = await ForumTheme.update({name}, {where: {id}});
+    response.send(theme);
+  };
 
   public readTheme = async (request: Request, response: Response) => {
     const id = request.params.id;
@@ -33,13 +41,14 @@ class ForumController {
     const theme = await ForumTheme.findOne({where: {id}});
     if (theme) {
       const messages = await theme.getMessages();
-      messages.sort((a: ForumMessage, b:ForumMessage) => {
-        const bForumMessage:ForumMessage = b.dataValues;
+      messages.sort((a: ForumMessage, b: ForumMessage) => {
+        const bForumMessage: ForumMessage = b.dataValues;
         const bForumMessageId = bForumMessage.id;
-        const aForumMessage:ForumMessage = a.dataValues;
+        const aForumMessage: ForumMessage = a.dataValues;
         const aForumMessageId = aForumMessage.id;
-        return parseFloat(`${aForumMessageId}`) - parseFloat(`${bForumMessageId}`)
-      } );
+        return parseFloat(`${aForumMessageId}`) -
+            parseFloat(`${bForumMessageId}`);
+      });
 
       response.send({
         id: theme.id,
@@ -49,18 +58,22 @@ class ForumController {
     }
 
     response.status(404).send();
-  }
+  };
 
   public readAllThemes = async (_request: Request, response: Response) => {
     const themes = await ForumTheme.findAll({
-      attributes: ['id', 'name', 'creationUser', 'creationDate',
-        [literal('(SELECT count(*) from "forum_message" where "forum_message"."theme_id" = "ForumTheme"."id")'), 'countAnswer']
+      attributes: [
+        'id', 'name', 'creationUser', 'creationDate',
+        [
+          literal(
+              '(SELECT count(*) from "forum_message" where "forum_message"."theme_id" = "ForumTheme"."id")'),
+          'countAnswer'],
       ],
-      group: ['id', 'name', 'creationUser', 'creationDate']
+      group: ['id', 'name', 'creationUser', 'creationDate'],
     });
 
     response.send(themes);
-}
+  };
 
   public createMessage = async (request: Request, response: Response) => {
     const id = parseInt(request.params.id);
@@ -81,8 +94,7 @@ class ForumController {
     }
 
     response.status(404).send();
-  }
+  };
 }
-
 
 export const forumController = new ForumController();

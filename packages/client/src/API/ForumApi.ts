@@ -57,6 +57,12 @@ class ForumApi {
     return data;
   }
 
+  public editTheme: (id:number, name: string) => Promise<ForumTheme> = async (id:number, name: string) => {
+    const { data } = await  this.axiosInstance.put(`/forum/${id}`, {name});
+
+    return data;
+  }
+
   public createMessage: (id: number, text: string, userName: string) => Promise<ForumMessage>
     = async (id: number, text: string, userName: string) => {
     const { data } = await this.axiosInstance.post(`/forum/${id}`, {
