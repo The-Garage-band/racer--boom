@@ -3,8 +3,10 @@ import type {NonAttribute} from "sequelize";
 import {ForumMessage} from "./ForumMessage";
 
 @Table({
-  timestamps: false,
   tableName: 'forum_theme',
+  timestamps: true,
+  createdAt: 'creationDate',
+  updatedAt: false
 })
 export class ForumTheme extends Model<ForumTheme> {
   @AutoIncrement
@@ -14,6 +16,9 @@ export class ForumTheme extends Model<ForumTheme> {
 
   @Column(DataType.TEXT)
   public name: string | undefined;
+
+  @Column(DataType.INTEGER)
+  public creationUser: number | undefined;
 
   @HasMany(() => ForumMessage)
   public messages: ForumMessage[] | undefined;
