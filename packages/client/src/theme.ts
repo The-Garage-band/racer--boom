@@ -191,8 +191,8 @@ const lightTheme = responsiveFontSizes( createTheme({
         disabled: 'rgba(100,100,100,0.38)',
       },
       background: {
-        default: '#808080', //#98acd6 141E30
-        paper: '#808080', //#98acd6 141E30
+        default: '#999999', //#98acd6 141E30
+        paper: '#999999', //#98acd6 141E30
       },
     },
     shape: {
@@ -200,7 +200,7 @@ const lightTheme = responsiveFontSizes( createTheme({
     },
 
     textShadow: '0px 0px 0px',
-    backgroudOpacity: 'rgba(128, 128, 128, 0.81)',
+    backgroudOpacity: 'rgba(153, 153, 153, 0.81)',
     borderColor: '#ffffff',
     borderWidht: '5px',
     borderStyle: 'dashed',
