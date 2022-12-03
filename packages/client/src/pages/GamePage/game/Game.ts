@@ -114,9 +114,24 @@ export class Game {
     const x = Random.randomInt(30, this._getCanvasWidth() - 60);
     const y = Random.randomInt(-600, -100);
 
-    if (this._gameObjects.some(gameObject => gameObject.containPoint(x, y, 120))) {
+    //if (this._gameObjects.some(gameObject => gameObject.containPoint(x, y, 120))) {
+    //  return;
+    //}
+
+    let isAdd = true;
+    const increase = this._getObjIncrease();
+    this._gameObjects.forEach(function(item){
+      if ((item.y < y + item.image.height * increase) && (item.y + item.image.height * increase > y) ){
+        if ((item.x < x + item.image.width * increase) && (item.x + item.image.width * increase > x) ){
+          isAdd = false;
+        }
+      }
+    });
+
+    if (!isAdd){
       return;
     }
+
 
     const hardLevel = 10
       + (+(this._step > 20))
