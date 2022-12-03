@@ -186,7 +186,7 @@ const lightTheme = responsiveFontSizes( createTheme({
         main: '#555555',
       },
       text: {
-        primary: '#333333',
+        primary: '#ffffff',
         secondary: '#fad201', //#ffffff
         disabled: 'rgba(100,100,100,0.38)',
       },
