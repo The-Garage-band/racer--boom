@@ -37,6 +37,7 @@ jobs:
           passphrase: ${{ secrets.PASSPHRASE }}
           command_timeout: 35m
           script: |
+            cd app
             pwd
             ls -la
             docker-compose --version
