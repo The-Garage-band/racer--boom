@@ -2,43 +2,43 @@ name: Publish
 on: [push]
 
 jobs:
-publish:
-  runs-on: ubuntu-latest
+  publish:
+    runs-on: ubuntu-latest
 
-  steps:
-    - uses: actions/checkout@v2.2.0
-    - name: Install SSH key
-      uses: shimataro/ssh-key-action@v2
-      with:
-        key: ${{ secrets.DEPLOY_SERVER_KEY }}
-        known_hosts: unnecessary
-
-    - name: Adding know host
-      run: ssh-keyscan -p ${{ secrets.DEPLOY_SERVER_PORT }} -H ${{ secrets.DEPLOY_SERVER_HOST }} >> ~/.ssh/known_host
-
-    - name: copy file via ssh password
-    - uses: actions/checkout@master
-        uses: appleboy/scp-action@master
+    steps:
+      - uses: actions/checkout@v2.2.0
+      - name: Install SSH key
+        uses: shimataro/ssh-key-action@v2
         with:
-        host: ${{ secrets.DEPLOY_SERVER_HOST }}
-        port: ${{ secrets.DEPLOY_SERVER_PORT }}
-        username: ${{ secrets.DEPLOY_SERVER_USERNAME }}
-        key: ${{ secrets.DEPLOY_SERVER_KEY }}
-        passphrase: ${{ secrets.PASSPHRASE }}
-        source: "docker-compose.yml"
-        target: "/"
+          key: ${{ secrets.DEPLOY_SERVER_KEY }}
+          known_hosts: unnecessary
 
-    - name: Run Docker
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.DEPLOY_SERVER_HOST }}
-        port: ${{ secrets.DEPLOY_SERVER_PORT }}
-        username: ${{ secrets.DEPLOY_SERVER_USERNAME }}
-        key: ${{ secrets.DEPLOY_SERVER_KEY }}
-        passphrase: ${{ secrets.PASSPHRASE }}
-        command_timeout: 35m
-        script: |
-          pwd
-          ls -la
-          docker-compose --version
-          sudo docker-compose up -d --build
+      - name: Adding know host
+        run: ssh-keyscan -p ${{ secrets.DEPLOY_SERVER_PORT }} -H ${{ secrets.DEPLOY_SERVER_HOST }} >> ~/.ssh/known_host
+
+      - name: copy file via ssh password
+      - uses: actions/checkout@master
+          uses: appleboy/scp-action@master
+          with:
+          host: ${{ secrets.DEPLOY_SERVER_HOST }}
+          port: ${{ secrets.DEPLOY_SERVER_PORT }}
+          username: ${{ secrets.DEPLOY_SERVER_USERNAME }}
+          key: ${{ secrets.DEPLOY_SERVER_KEY }}
+          passphrase: ${{ secrets.PASSPHRASE }}
+          source: "docker-compose.yml"
+          target: "/"
+
+      - name: Run Docker
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.DEPLOY_SERVER_HOST }}
+          port: ${{ secrets.DEPLOY_SERVER_PORT }}
+          username: ${{ secrets.DEPLOY_SERVER_USERNAME }}
+          key: ${{ secrets.DEPLOY_SERVER_KEY }}
+          passphrase: ${{ secrets.PASSPHRASE }}
+          command_timeout: 35m
+          script: |
+            pwd
+            ls -la
+            docker-compose --version
+            sudo docker-compose up -d --build
