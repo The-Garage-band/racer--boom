@@ -1,7 +1,8 @@
 name: Publish
 on:
   push:
-    branches: [GARAGE-32]
+    branches:
+      - GARAGE-32
     paths:
       - docker-compose.yml
 
