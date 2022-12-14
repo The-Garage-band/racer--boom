@@ -1,10 +1,11 @@
 name: Publish
-on:
-  push:
-    branches:
-      - GARAGE-32
-    paths:
-      - docker-compose.yml
+on: [push]
+#on:
+#  push:
+#    branches:
+#      - GARAGE-32
+#    paths:
+#      - docker-compose.yml
 
 jobs:
   publish:
