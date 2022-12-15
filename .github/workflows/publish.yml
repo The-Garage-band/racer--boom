@@ -44,4 +44,4 @@ jobs:
             pwd
             ls -la
             docker-compose --version
-            sudo docker-compose up --enf-file ./.env.sample -d --build
+            sudo docker-compose --env-file ./.env.sample up -d --build
