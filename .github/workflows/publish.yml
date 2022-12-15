@@ -28,7 +28,7 @@ jobs:
           key: ${{ secrets.DEPLOY_SERVER_KEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
           source: "."
-          target: "home/xaru/"
+          target: "app"
 
       - name: Run Docker
         uses: appleboy/ssh-action@master
