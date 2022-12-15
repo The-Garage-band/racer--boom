@@ -12,6 +12,9 @@ export default {
     '^@/(.*)$': '<rootDir>/src/$1',
     '^public/(.*)$': '<rootDir>/public/$1',
   },
+  setupFilesAfterEnv: [
+    '<rootDir>/src/setupTests.ts'
+  ],
   globals: {
     __SERVER_PORT__: process.env.SERVER_PORT,
   },

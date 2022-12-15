@@ -1,14 +1,14 @@
 import App from './App'
-import { render } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 
-// const appContent = 'Логин'
+describe('Start test', () => {
+  test('Example test', async () => {
+    render(<App />)
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-global.fetch = jest.fn(() =>
-  Promise.resolve({ json: () => Promise.resolve('hey') })
-)
+    const authElement = await screen.findByText(/логин/i);
 
-test('Example test', async () => {
-  render(<App />)
-})
+    expect(authElement).toBeInTheDocument()
+  })
+});
+
+
