@@ -5,7 +5,7 @@ services:
         container_name: prakticum-client
         image: prakticum-client
         build:
-            context: ../packages/client
+            context: .
             dockerfile: Dockerfile.client
             args:
               CLIENT_PORT: ${CLIENT_PORT}
@@ -19,7 +19,7 @@ services:
         container_name: prakticum-server
         image: prackicum-server
         build:
-            context: ../packages/server
+            context: .
             dockerfile: Dockerfile.server
             args:
               SERVER_PORT: ${SERVER_PORT}
