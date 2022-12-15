@@ -11,10 +11,10 @@ jobs:
         uses: shimataro/ssh-key-action@v2
         with:
           key: ${{ secrets.DEPLOY_SERVER_KEY }}
-          known_hosts: unnecessary
+          known_hosts: 'unnecessary'
 
       - name: Adding know host
-        run: ssh-keyscan -p ${{ secrets.DEPLOY_SERVER_PORT }} -H ${{ secrets.DEPLOY_SERVER_HOST }} >> ~/.ssh/known_host
+        run: ssh-keyscan -p ${{ secrets.DEPLOY_SERVER_PORT }} -H ${{ secrets.DEPLOY_SERVER_HOST }} >> ~/.ssh/known_hosts
 
       - name: Deploy with rsync
         run: rsync -avz -e "ssh -p ${{ secrets.DEPLOY_SERVER_PORT }}" . ${{ secrets.DEPLOY_SERVER_USERNAME }}@${{ secrets.DEPLOY_SERVER_HOST }}:~/
