@@ -12,7 +12,10 @@ RUN yarn install --frozen-lockfile
 
 COPY . .
 
-RUN yarn lerna bootstrap
+# Add lerna
+#RUN yarn lerna bootstrap
+RUN npm i lerna @angular/cli -g --loglevel notice
+
 RUN rm -rf /app/packages/server/dist/ && yarn build --scope=client
 
 
