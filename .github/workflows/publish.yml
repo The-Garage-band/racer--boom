@@ -44,4 +44,4 @@ jobs:
             pwd
             ls -la
             docker-compose --version
-            sudo docker-compose --env-file ./.env.sample up -d --force-recreate --renew-anon-volumes
+            sudo docker-compose --env-file ./.env.sample up -d --build --force-recreate --renew-anon-volumes 

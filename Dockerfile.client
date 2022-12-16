@@ -9,12 +9,12 @@ FROM base as builder
 
 COPY package.json yarn.lock
 RUN yarn install --frozen-lockfile
+RUN yarn install lerna 
 
 COPY . .
 
 # Add lerna
-#RUN yarn lerna bootstrap
-RUN npm i lerna bootstrap
+RUN yarn lerna bootstrap
 
 RUN rm -rf /app/packages/server/dist/ && yarn build --scope=client
 
