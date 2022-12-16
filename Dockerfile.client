@@ -14,7 +14,7 @@ COPY . .
 
 # Add lerna
 #RUN yarn lerna bootstrap
-RUN npm i lerna @angular/cli -g --loglevel notice
+RUN npm i lerna bootstrap
 
 RUN rm -rf /app/packages/server/dist/ && yarn build --scope=client
 
