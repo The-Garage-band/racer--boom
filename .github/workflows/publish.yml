@@ -40,8 +40,5 @@ jobs:
           passphrase: ${{ secrets.PASSPHRASE }}
           command_timeout: 35m
           script: |
-            cd app
-            pwd
-            ls -la
-            docker-compose --version
-            sudo docker-compose --env-file ./.env.sample up -d --build
+            cd /home/${{ secrets.DEPLOY_SERVER_USERNAME }}/app
+            docker-compose --env-file ./.env.sample up -d --build
