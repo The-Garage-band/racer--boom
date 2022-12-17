@@ -4,7 +4,7 @@ import {ForumMessage, ForumTheme} from "./models";
 
 // @ts-ignore
 const { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_PORT } =
-  process.env.NODE_ENV
+  process.env
 
 export const createClientAndConnect = async () => {
   console.log(POSTGRES_USER,POSTGRES_PASSWORD,POSTGRES_DB,POSTGRES_PORT);
