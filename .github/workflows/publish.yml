@@ -35,6 +35,7 @@ jobs:
             cd ..
             sudo rm -R app
             mkdir app
+            cat .env.sample > .env
 
 #      - name: Deploy with rsync
 #        run: sudo rsync -e "ssh -o StrictHostKeyChecking=no" -vz . ${{ secrets.DEPLOY_SERVER_USERNAME }}@${{ secrets.DEPLOY_SERVER_HOST }}:~/app
