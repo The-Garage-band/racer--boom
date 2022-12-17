@@ -33,7 +33,7 @@ jobs:
           passphrase: ${{ secrets.PASSPHRASE }}
           source: "."
           target: "app"
-          overwrite: true
+          rm: true
 
 
       - name: Run Docker
