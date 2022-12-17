@@ -2,8 +2,9 @@ import type {SequelizeOptions} from "sequelize-typescript";
 import {Sequelize} from "sequelize-typescript";
 import {ForumMessage, ForumTheme} from "./models";
 
+// @ts-ignore
 const { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_PORT } =
-  process.env
+  process.env.NODE_ENV
 
 export const createClientAndConnect = async () => {
   const sequelizeOptions: SequelizeOptions = {
