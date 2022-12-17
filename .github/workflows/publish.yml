@@ -26,15 +26,14 @@ jobs:
       - name: copy file via ssh password
         uses: appleboy/scp-action@master
         with:
-          host: 158.160.15.125
-          port: 22
+          host: ${{ secrets.DEPLOY_SERVER_HOST }}
+          port: ${{ secrets.DEPLOY_SERVER_PORT }}
           username: ${{ secrets.DEPLOY_SERVER_USERNAME }}
           key: ${{ secrets.DEPLOY_SERVER_KEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
           source: "."
           target: "app"
-#          rm: true
-
+          rm: true
 
       - name: Run Docker
         uses: appleboy/ssh-action@master
