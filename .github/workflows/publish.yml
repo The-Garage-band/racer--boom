@@ -33,7 +33,6 @@ jobs:
           passphrase: ${{ secrets.PASSPHRASE }}
           source: "."
           target: "app"
-          rm: true
 
       - name: Run Docker
         uses: appleboy/ssh-action@master
