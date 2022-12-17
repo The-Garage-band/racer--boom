@@ -23,5 +23,8 @@
     "@evilmartians/lefthook": "^1.1.1",
     "lefthook": "^1.1.1",
     "lerna": "^5.4.3"
+  },
+  "dependencies": {
+    "vite-plugin-pwa": "^0.13.3"
   }
 }

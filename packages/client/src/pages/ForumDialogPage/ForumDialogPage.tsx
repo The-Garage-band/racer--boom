@@ -177,7 +177,7 @@ const ForumDialogPage: React.FC = () => {
                     {row.userName},
                     <span className="msg-time">{(new Date(
                         row.creationDate)).toLocaleString()}</span>
-                    {data.first_name == row.userName &&
+                    {(data.display_name == row.userName || data.first_name == row.userName) &&
                     <IconButton
                         aria-label="add"
                         color="primary"
@@ -190,7 +190,7 @@ const ForumDialogPage: React.FC = () => {
                       <EditIcon fontSize="small"/>
                     </IconButton>
                     }
-                    {data.first_name == row.userName &&
+                    {(data.display_name == row.userName || data.first_name == row.userName) &&
                     <IconButton
                         aria-label="add"
                         color="primary"

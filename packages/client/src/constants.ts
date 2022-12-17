@@ -12,6 +12,8 @@ export const PATH_GET_USER = '/auth/user'
 export const PATH_AVATAR = '/user/profile/avatar'
 export const PATH_UPDATE_PROFILE = '/user/profile'
 export const PATH_GET_PROFILE = '/user'
+export const PATH_GET_SERVICE_ID = '/oauth/yandex/service-id'
+export const PATH_LOGIN_YANDEX = '/oauth/yandex'
 
 export const PATH_LEADERBOARD = '/leaderboard';
 export const PATH_CURRENT_LEADERBOARD = `${PATH_LEADERBOARD}/${TEAM_NAME}`;
