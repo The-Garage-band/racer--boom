@@ -21,7 +21,7 @@ jobs:
         run: ssh-keyscan -p ${{ secrets.DEPLOY_SERVER_PORT }} -H ${{ secrets.DEPLOY_SERVER_HOST }} >> ~/.ssh/known_hosts
 
       - name: Deploy with rsync
-        run: sudo rsync -avz -e "ssh -p ${{ secrets.DEPLOY_SERVER_PORT }}" .root@${{ secrets.DEPLOY_SERVER_HOST }}:~/app
+        run: sudo rsync -avz -e "ssh -p ${{ secrets.DEPLOY_SERVER_PORT }}" . root@${{ secrets.DEPLOY_SERVER_HOST }}:~/app
 
 #      - name: copy file via ssh password
 #        uses: appleboy/scp-action@master
