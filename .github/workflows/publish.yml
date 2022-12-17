@@ -31,7 +31,7 @@ jobs:
           command_timeout: 35m
           script: |
             cd app
-            docker-compose --env-file ./.env.sample down
+            sudo docker-compose down
             cd ..
             sudo rm -R app
             mkdir app
@@ -62,4 +62,4 @@ jobs:
           script: |
             cd app
             cat .env.sample > .env
-            docker-compose --env-file ./.env.sample up -d --build
+            docker-compose up -d --build
