@@ -1,5 +1,9 @@
 name: Publish
 on: [push]
+#on:
+#  push:
+#    branches:
+#      - main
 
 jobs:
   publish:
@@ -40,6 +44,6 @@ jobs:
           passphrase: ${{ secrets.PASSPHRASE }}
           command_timeout: 35m
           script: |
-            cd /home/${{ secrets.DEPLOY_SERVER_USERNAME }}/app
+            cd app
             docker-compose down
             docker-compose --env-file ./.env.sample up -d --build
