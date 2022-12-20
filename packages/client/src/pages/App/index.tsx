@@ -68,7 +68,7 @@ const App = () => {
       <ErrorBoundaryComponent>
         <AlertStack />
         <header>
-          {/* <AudioSetup /> */}
+          <AudioSetup />
           <button className={'select-theme ' + theme} onClick={toggleTheme}>Переключить тему</button>
         </header>
         <Routes>
