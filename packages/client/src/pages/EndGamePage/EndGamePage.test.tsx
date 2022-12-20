@@ -1,8 +1,10 @@
+import React from "react";
 import { EndGamePage } from "./EndGamePage";
 
 import { render, screen } from '@testing-library/react';
 
 import {BrowserRouter as Router} from 'react-router-dom';
+
 
 describe('End game page test series', () => {
 

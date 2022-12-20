@@ -1,7 +1,7 @@
+import React from 'react'
 import LoginPage from './LoginPage';
-import AlertStack from '@/components/AlertStack';
 
-import { fireEvent, render, screen } from '@testing-library/react'
+import { fireEvent, screen } from '@testing-library/react'
 import { act } from 'react-dom/test-utils';
 import {BrowserRouter as Router} from 'react-router-dom';
 
