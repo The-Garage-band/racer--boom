@@ -20,8 +20,6 @@ createServer({
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(bodyParser.json());
 
-  app.use(vite.middlewares);
-
   app.use('/forum', forumRouter);
 
   const ssr = (req: Request, res: Response) => ssrController(vite, req, res);
@@ -30,16 +28,19 @@ createServer({
     '/',
     '/forum',
     '/log_in',
-    'sign_up',
-    'logout',
-    'profile',
-    'game',
-    'home',
-    'leaderboard',
-    'end-game',
+    '/sign_up',
+    '/logout',
+    '/profile',
+    '/game',
+    '/home',
+    '/leaderboard',
+    '/end-game',
   ];
   clientRoutes.forEach(route => app.get(route, ssr));
 
+  app.use(vite.middlewares);
+
+  app.use('/assets', express.static(path.join(__dirname, '../../client/dist/assets')));
   app.use('/', express.static(path.join(__dirname, '../../client/dist')));
 
   return app;
