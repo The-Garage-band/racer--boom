@@ -31,10 +31,7 @@ const LoginPage = () => {
             navigate('/game')
           }
         })
-        .catch(error => {
-          const message = JSON.parse(error.request.responseText)
-          console.error(message.reason)
-
+        .catch(() => {
           dispatch(addAlert({
             message: 'Не правильный логин или пароль',
             type: 'error',

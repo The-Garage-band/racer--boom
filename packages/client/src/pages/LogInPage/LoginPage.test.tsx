@@ -1,18 +1,20 @@
 import LoginPage from './LoginPage';
+import AlertStack from '@/components/AlertStack';
 
 import { fireEvent, render, screen } from '@testing-library/react'
 import { act } from 'react-dom/test-utils';
-
 import {BrowserRouter as Router} from 'react-router-dom';
 
-describe('Input test series', () => {
+import { renderWithProviders } from '@/utils/test-utils';
+
+describe('Login page test series', () => {
 
   beforeEach(() => {
-    render(
+    renderWithProviders(
       <Router>
         <LoginPage />
       </Router>
-    );
+    )
   });
 
   test('Should submit button is disabled', async () => {
@@ -35,7 +37,8 @@ describe('Input test series', () => {
     expect(passwordError).toBeVisible();
   });
 
-  test('Should be show button', async () => {
+  test('Should be button disabled', async () => {
+
     const authButton = await screen.findByText(/авторизация/i, {selector: 'button'});
     const loginInput = await screen.findByTestId('input-login');
     const passwordInput = await screen.findByTestId('input-password');
@@ -46,8 +49,7 @@ describe('Input test series', () => {
       fireEvent.submit(authButton);
     });
 
-    // Надо как-то понять, что запрос ушел
-
+    expect(authButton).toBeDisabled();
   });
 
 });
