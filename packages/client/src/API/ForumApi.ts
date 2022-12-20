@@ -23,10 +23,17 @@ export type Forums = {
   creationDate: Date
 };
 
+function getBaseUrl (): string {
+  if (typeof window === 'undefined') {
+    return '';
+  }
+
+  return `${window.location.protocol}//${window.location.hostname}:3001/`;
+}
+
 class ForumApi {
   private axiosInstance = axios?.create({
-    // baseURL: 'http://localhost:3001',
-    baseURL: `${window.location.protocol}//${window.location.hostname}:3001/`,
+    baseURL: getBaseUrl(),
     headers: {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*',
