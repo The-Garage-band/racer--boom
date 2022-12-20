@@ -88,7 +88,7 @@ const App = () => {
               <ProtectedRoute
                 isAllowed={!!data.id}
                 isLoading={isLoading}
-                redirectPath="/forum"
+                redirectPath="/log_in"
               />
             }>
             <Route path="/logout" element={<LogOutPage />} />

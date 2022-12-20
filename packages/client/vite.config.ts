@@ -46,7 +46,16 @@ export default defineConfig({
       '@/': `${path.resolve(__dirname, 'src')}/`,
       'public/': `${path.resolve(__dirname, 'public')}/`,
     },
+    dedupe: [
+      "react",
+      "react-dom"
+    ],
   },
+  ssr: {
+    target: 'node',
+    format: 'cjs',
+  },
+  assetsInclude: ['*.png'],
   plugins: [
     react(),
     VitePWA(pwaOptions),

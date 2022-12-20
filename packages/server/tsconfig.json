@@ -20,13 +20,17 @@
     "noUnusedLocals": true,
     "forceConsistentCasingInFileNames": true,
     "importsNotUsedAsValues": "error",
-    "lib": ["es2019", "esnext.asynciterable"],
+    "lib": ["es2019", "esnext.asynciterable", "DOM", "DOM.Iterable", "ESNext"],
     "types": ["node", "jest"],
     "baseUrl": ".",
     "paths": {
       "*": ["types/*"]
     },
-    "outDir": "dist"
+    "outDir": "dist",
+    "rootDirs": [
+      "./../.."
+    ],
+    "jsx": "react"
   },
   "exclude": ["node_modules", "dist/**/*"]
 }

@@ -5,7 +5,7 @@ export class DataStorage<T extends Record<string, any>> {
   constructor(namespace: string, initialData: T) {
     this._data = {} as T
     this._namespace = namespace
-    if (localStorage) {
+    if (typeof window !== "undefined" && window.localStorage) {
       Object.entries(initialData).forEach(([key, value]: [keyof T, any]) => {
         const storageValue = localStorage.getItem(
           `${this._namespace}.${key.toString()}`
