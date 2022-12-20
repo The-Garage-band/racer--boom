@@ -2,12 +2,14 @@ import type {SequelizeOptions} from "sequelize-typescript";
 import {Sequelize} from "sequelize-typescript";
 import {ForumMessage, ForumTheme} from "./models";
 
-const { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_PORT } =
+// @ts-ignore
+const { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_PORT, APP_HOST } =
   process.env
 
 export const createClientAndConnect = async () => {
+  console.log(process.env)
   const sequelizeOptions: SequelizeOptions = {
-    host: 'localhost',
+    host: APP_HOST,
     port: Number(POSTGRES_PORT),
     username: POSTGRES_USER,
     password: POSTGRES_PASSWORD,
