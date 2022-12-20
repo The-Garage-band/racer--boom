@@ -30,12 +30,19 @@ import '@/styles/themes.less'
 
 import { useAppDispatch, useAppSelector } from '@/hooks'
 
+const getDefaultTheme = () => {
+  if (typeof window === 'undefined') {
+    return null;
+  }
+  return localStorage.getItem("racer--boom-theme");
+}
+
 const App = () => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const { data, isLoading } = useAppSelector(getUserData);
 
-  const defaultTheme = localStorage.getItem("racer--boom-theme");
+  const defaultTheme = getDefaultTheme();
   const [theme, setTheme] = useState(defaultTheme);
 
   setDataTheme(theme);
@@ -70,6 +77,7 @@ const App = () => {
         <header>
           {/* <AudioSetup /> */}
           <button className={'select-theme ' + theme} onClick={toggleTheme}>Переключить тему</button>
+          <AudioSetup/>
         </header>
         <Routes>
           <Route
