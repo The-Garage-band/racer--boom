@@ -19,12 +19,15 @@ type TGamePageProps = {
 
 let game: Game;
 let gameTheme = {};
+let themeObserver: MutationObserver | undefined = undefined;
 
-const themeObserver = new MutationObserver(function(){
-    if (game && gameTheme){
-        game.changeTheme(gameTheme);
-    }
-});
+if (typeof window !== 'undefined' && window.MutationObserver) {
+    themeObserver = new MutationObserver(function(){
+        if (game && gameTheme){
+            game.changeTheme(gameTheme);
+        }
+    });
+}
 
 export const GamePage: FC<TGamePageProps> = (props) => {
     const [health, setHealth] = useState(props.health);
@@ -60,7 +63,9 @@ export const GamePage: FC<TGamePageProps> = (props) => {
             gameContext.data.healthCollected = 0;
             game.start(canvas.current);
 
-            themeObserver.observe(document.documentElement, { attributes: true })
+            if (themeObserver) {
+                themeObserver.observe(document.documentElement, { attributes: true })
+            }
         }
 
         return () => {
