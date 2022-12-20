@@ -88,6 +88,7 @@ const LoginPage = () => {
         <Button
           variant="contained"
           type="submit"
+          name="button-auth"
           disabled={formik.isSubmitting || !formik.dirty}
           fullWidth
           sx={{ marginBottom: '1rem' }}>

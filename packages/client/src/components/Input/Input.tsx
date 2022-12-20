@@ -46,6 +46,7 @@ export default function Input({
         value={value}
         onChange={onChange}
         error={error}
+        inputProps={{ 'data-testid': `input-${name}` }}
         startAdornment={
           <InputAdornment position="start">
             <Icon color="secondary" />
