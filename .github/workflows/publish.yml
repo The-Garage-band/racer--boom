@@ -1,0 +1,65 @@
+name: Publish on Yandex
+#on: [push]
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2.2.0
+      - name: Install SSH key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.DEPLOY_SERVER_KEY }}
+          known_hosts: 'unnecessary'
+
+      - name: Adding know host
+        run: ssh-keyscan -p ${{ secrets.DEPLOY_SERVER_PORT }} -H ${{ secrets.DEPLOY_SERVER_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Create folder
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.DEPLOY_SERVER_HOST }}
+          port: ${{ secrets.DEPLOY_SERVER_PORT }}
+          username: ${{ secrets.DEPLOY_SERVER_USERNAME }}
+          key: ${{ secrets.DEPLOY_SERVER_KEY }}
+          passphrase: ${{ secrets.PASSPHRASE }}
+          command_timeout: 35m
+          script: |
+            cd app
+            sudo docker-compose down
+            cd ..
+            sudo rm -R app
+            mkdir app
+
+#      - name: Deploy with rsync
+#        run: sudo rsync -e "ssh -o StrictHostKeyChecking=no" -vz . ${{ secrets.DEPLOY_SERVER_USERNAME }}@${{ secrets.DEPLOY_SERVER_HOST }}:~/app
+
+      - name: copy file via ssh password
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.DEPLOY_SERVER_HOST }}
+          port: ${{ secrets.DEPLOY_SERVER_PORT }}
+          username: ${{ secrets.DEPLOY_SERVER_USERNAME }}
+          key: ${{ secrets.DEPLOY_SERVER_KEY }}
+          passphrase: ${{ secrets.PASSPHRASE }}
+          source: "."
+          target: "app"
+
+      - name: Run Docker
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.DEPLOY_SERVER_HOST }}
+          port: ${{ secrets.DEPLOY_SERVER_PORT }}
+          username: ${{ secrets.DEPLOY_SERVER_USERNAME }}
+          key: ${{ secrets.DEPLOY_SERVER_KEY }}
+          passphrase: ${{ secrets.PASSPHRASE }}
+          command_timeout: 35m
+          script: |
+            cd app
+            cat .env.sample > .env
+            docker-compose up -d --build

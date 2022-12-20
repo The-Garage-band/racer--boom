@@ -4,7 +4,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "npm run build:client && npm run build:ssr",
+    "build:client": "tsc && vite build",
+    "build:ssr": "vite build --outDir dist/server --ssr src/server-render.tsx",
     "preview": "vite preview",
     "lint": "eslint .",
     "format": "prettier --write .",
@@ -26,6 +28,7 @@
     "prettier": "^2.7.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-native": "^0.70.6",
     "react-redux": "^8.0.4",
     "react-router": "^6.4.1",
     "react-router-dom": "^6.4.1",

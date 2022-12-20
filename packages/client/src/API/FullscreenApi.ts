@@ -14,6 +14,10 @@ interface DocumentElementWithFullscreen extends HTMLElement {
 }
 
 export function isFullScreen(): boolean {
+  if (typeof window === 'undefined') {
+    return false;
+  }
+
   const doc: DocumentWithFullscreen = document;
   return !!((doc.fullScreenElement && doc.fullScreenElement !== null)
       || doc.mozFullScreen

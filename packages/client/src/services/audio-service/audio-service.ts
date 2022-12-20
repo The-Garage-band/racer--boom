@@ -22,7 +22,7 @@ const INITIAL_DATA: AudioServiceStorageData = {
 
 export class AudioService {
   private static __instance?: AudioService
-  private _audio: HTMLAudioElement
+  private _audio: HTMLAudioElement | undefined = undefined;
   private _soundQueue: string[]
   private _storage: DataStorage<AudioServiceStorageData>
   private _currentSoundIndex = 0
@@ -47,23 +47,27 @@ export class AudioService {
       this._soundQueue = Random.shuffleArray(SOUNDS)
     }
 
-    let audio = document.querySelector<HTMLAudioElement>(`#${AUDIO_ELEMENT_ID}`)
-    if (!audio) {
-      audio = new Audio()
-      audio.id = AUDIO_ELEMENT_ID
-      audio.crossOrigin = "anonymous"
-      audio.onended = this.next
-      document.head.appendChild(audio)
+    if (typeof window !== 'undefined' && window.document) {
+      let audio = document.querySelector<HTMLAudioElement>(`#${AUDIO_ELEMENT_ID}`)
+      if (!audio) {
+        audio = new Audio()
+        audio.id = AUDIO_ELEMENT_ID
+        audio.crossOrigin = "anonymous"
+        audio.onended = this.next
+        document.head.appendChild(audio)
+      }
+      this._audio = audio
+      this._audio.autoplay = true
+      this._audio.src = `sounds/${this._soundQueue[this._currentSoundIndex]}.mp3`
+      this.updateVolume(this._storage.get('volume'))
     }
-    this._audio = audio
-    this._audio.autoplay = true
-    this._audio.src = `sounds/${this._soundQueue[this._currentSoundIndex]}.mp3`
-    this.updateVolume(this._storage.get('volume'))
   }
 
   public off() {
     this._storage.set('enabled', false)
-    this._audio.pause()
+    if (this._audio) {
+      this._audio.pause();
+    }
   }
 
   public on() {
@@ -78,12 +82,14 @@ export class AudioService {
   }
 
   public updateVolume(value: number) {
-    this._audio.volume = value
+    if (this._audio) {
+      this._audio.volume = value
+    }
     this._storage.set('volume', value)
   }
 
   public isEnabled(): boolean {
-    return this._storage.get('enabled')
+    return this._storage.get<boolean>('enabled') && !!this._audio;
   }
 
   public get volume(): number {
@@ -91,15 +97,27 @@ export class AudioService {
   }
 
   public get progress(): number {
-    const progress = this._audio.currentTime / this._audio.duration
-    return Number.isNaN(progress) ? 0 : progress
+    if (this._audio) {
+      const progress = this._audio.currentTime / this._audio.duration
+      return Number.isNaN(progress) ? 0 : progress
+    }
+    else {
+      return 0;
+    }
   }
 
   public get duration(): number {
+    if (!this._audio) {
+      return 0;
+    }
+
     return this._audio.duration
   }
 
   public get currentTime(): number {
+    if (!this._audio) {
+      return 0;
+    }
     return this._audio.currentTime
   }
 
@@ -108,6 +126,10 @@ export class AudioService {
   }
 
   public updateProgress(newProgress: number) {
+    if (!this._audio) {
+      return;
+    }
+
     this._audio.currentTime = newProgress * this._audio.duration
     if (this._audio.currentTime >= this._audio.duration) {
       this.next()
@@ -116,6 +138,9 @@ export class AudioService {
 
   public next = () => {
     if (!this.isEnabled()) return
+    if (!this._audio) {
+      return;
+    }
     this._audio.pause()
 
     this._currentSoundIndex =
@@ -137,7 +162,9 @@ export class AudioService {
   }
 
   private _play = () => {
-    this._audio.play()?.catch(() => setTimeout(this._play, 100))
+    if (this._audio) {
+      this._audio.play()?.catch(() => setTimeout(this._play, 100))
+    }
   }
 
   public playEffect (source: string) {
