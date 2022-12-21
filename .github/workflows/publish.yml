@@ -58,7 +58,7 @@ jobs:
           username: ${{ secrets.DEPLOY_SERVER_USERNAME }}
           key: ${{ secrets.DEPLOY_SERVER_KEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
-          command_timeout: 35m
+          command_timeout: 135m
           script: |
             cd app
             cat .env.sample > .env
