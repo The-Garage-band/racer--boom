@@ -22,7 +22,7 @@ export default function PageLayout(props: {
   const theme = useTheme();
 
   return (
-    <div className="page" style={{backgroundColor: theme.palette.background.default}}>
+    <main className="page" style={{backgroundColor: theme.palette.background.default}}>
       <div className="page__logo">
         <img src={theme.logo} alt="" />
       </div>
@@ -31,6 +31,6 @@ export default function PageLayout(props: {
         <img className="page-decoration__right" src={theme.bgCar} alt="" />
       </div>
       <div className="page__content">{props.children}</div>
-    </div>
+    </main>
   )
 }

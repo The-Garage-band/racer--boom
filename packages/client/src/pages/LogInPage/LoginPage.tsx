@@ -8,11 +8,15 @@ import PageLayout from '@/hocs/page-layout'
 import Input from '@/components/Input'
 import { login, ILogIn, OAuthGetServiceId } from '@/API/Auth'
 
+import { useAppDispatch } from '@/hooks'
+import { addAlert } from '@/store/slices/GetAlertSlice'
+
 import validationSchema from './validation_schema'
 
 const LoginPage = () => {
   const navigate = useNavigate()
   const theme = useTheme();
+  const dispatch = useAppDispatch();
 
   const formik = useFormik({
     initialValues: {
@@ -27,9 +31,12 @@ const LoginPage = () => {
             navigate('/game')
           }
         })
-        .catch(error => {
-          const message = JSON.parse(error.request.responseText)
-          console.error(message.reason)
+        .catch(() => {
+          dispatch(addAlert({
+            message: 'Не правильный логин или пароль',
+            type: 'error',
+            duration: 5000
+          }))
         }),
   })
 
@@ -88,6 +95,7 @@ const LoginPage = () => {
         <Button
           variant="contained"
           type="submit"
+          name="button-auth"
           disabled={formik.isSubmitting || !formik.dirty}
           fullWidth
           sx={{ marginBottom: '1rem' }}>

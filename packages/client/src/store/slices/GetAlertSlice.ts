@@ -2,7 +2,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { RootState } from '../store'
 
-import type { IAlert } from '@/components/Alert';
+import type { IAlert } from '@/components/Alert/Alert';
 
 const initialState: IAlert = {
   message: '',

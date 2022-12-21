@@ -109,9 +109,9 @@ const App = () => {
             <Route path="/forum/:id" element={<ForumDialogPage />} />
             <Route path="/end-game" element={<EndGamePage />} />
           </Route>
+          <Route path="/oauth" element={<OAuthPage />} />
           <Route path="/" element={<Loader />} />
           <Route path="*" element={<NotFoundPage />} />
-          <Route path="/oauth" element={<OAuthPage />} />
         </Routes>
         <footer>
           <FullscreenButtonComponent/>
