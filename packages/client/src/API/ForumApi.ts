@@ -28,7 +28,7 @@ function getBaseUrl (): string {
     return '';
   }
 
-  return `${window.location.protocol}//${window.location.hostname}:3001/`;
+  return `${window.location.protocol}//${window.location.hostname}/`;
 }
 
 class ForumApi {

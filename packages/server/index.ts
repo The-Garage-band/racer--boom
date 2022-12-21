@@ -12,7 +12,7 @@ import {ssrController} from "./ssr";
 import * as path from "path";
 
 createServer({
-  server: { middlewareMode: true },
+  server: { middlewareMode: true, hmr: false },
   appType: 'custom'
 }).then((vite) => {
   const app = express()
