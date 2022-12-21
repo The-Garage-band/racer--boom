@@ -12,9 +12,9 @@ RUN yarn install --frozen-lockfile
 
 COPY . .
 
+RUN rm -rf ./packages/server/dist/
+RUN rm -rf ./packages/client/dist/
 RUN yarn bootstrap
-RUN rm -rf /app/packages/server/dist/
-RUN rm -rf /app/packages/client/dist/
 RUN yarn build
 
 
@@ -22,4 +22,4 @@ FROM node:$NODE_VERSION-buster-slim as production
 WORKDIR /app
 
 EXPOSE $SERVER_PORT
-CMD [ "node", "/app/packages/server/dist/index.js" ]
+CMD [ "node", "./packages/server/dist/index.js" ]
