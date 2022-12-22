@@ -34,6 +34,7 @@ const pwaOptions: Partial<VitePWAOptions> = {
 export default defineConfig({
   server: {
     port: Number(process.env.CLIENT_PORT) || 3000,
+    hmr: false,
   },
   define: {
     __SERVER_PORT__: process.env.SERVER_PORT,
